@@ -16,10 +16,8 @@ The app is deployed to **GitHub Pages** from this repository.
 
 ## Screenshot
 
-
-```markdown
 ![Periodic Table Screenshot](./public/periodic_table.png)
-```
+
 
 ---
 
