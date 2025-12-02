@@ -1,4 +1,6 @@
 ## Interactive Periodic Table
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://changzhiai.github.io/PeriodicTable/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 An interactive **periodic table of elements** built with **React**, **Vite**, and **Tailwind CSS**.
 
@@ -10,16 +12,17 @@ It supports:
 - **Lanthanoids (57–71)** and **Actinoids (89–103)** shown in separate rows, with clickable placeholders in the main table
 - A **detail modal** when you click any element
 
-The app is deployed to **GitHub Pages** from this repository.
+## Live Website
 
----
+**👉 [View Live Application](https://changzhiai.github.io/PeriodicTable/)**
+
+The application is automatically deployed via GitHub Actions on every push to the `main` branch.
+
 
 ## Screenshot
 
 ![Periodic Table Screenshot](./public/periodic_table.png)
 
-
----
 
 ## Getting Started
 
@@ -45,13 +48,8 @@ npm run build
 
 The static files are output to the `dist` folder.
 
----
 
 ## GitHub Pages Deployment
-
-This project is configured to deploy to GitHub Pages at:
-
-- `https://changzhiai.github.io/PeriodicTable/`
 
 Key settings:
 - `vite.config.js` has `base: '/PeriodicTable/'`.
@@ -59,9 +57,6 @@ Key settings:
   - Builds the app on pushes to `main`
   - Publishes the `dist` folder to GitHub Pages
 
-Once changes are committed and pushed to `main`, GitHub Pages will update automatically.
-
----
 
 ## Tech Stack
 
@@ -70,7 +65,6 @@ Once changes are committed and pushed to `main`, GitHub Pages will update automa
 - **Tailwind CSS v4** for styling
 - **lucide-react** for icons
 
----
 
 ## Contact
 
