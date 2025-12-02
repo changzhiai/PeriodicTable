@@ -1,16 +1,79 @@
-# React + Vite
+## Interactive Periodic Table
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive **periodic table of elements** built with **React**, **Vite**, and **Tailwind CSS**.
 
-Currently, two official plugins are available:
+It supports:
+- **Color‑coded groups** (alkali metals, noble gases, nonmetals, lanthanoids, actinoids, etc.)
+- **Filter by group** (using the colored chips above the table)
+- **Search by name, symbol, or atomic number**
+- Proper layout with **group numbers (1–18)** and **period numbers (1–7)**
+- **Lanthanoids (57–71)** and **Actinoids (89–103)** shown in separate rows, with clickable placeholders in the main table
+- A **detail modal** when you click any element
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The app is deployed to **GitHub Pages** from this repository.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Screenshot
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```markdown
+![Periodic Table Screenshot](./public/periodic_table.png)
+```
+
+---
+
+## Getting Started
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Run the dev server
+
+```bash
+npm run dev
+```
+
+Then open the URL Vite prints in the terminal (usually `http://localhost:5173`).
+
+### 3. Build for production
+
+```bash
+npm run build
+```
+
+The static files are output to the `dist` folder.
+
+---
+
+## GitHub Pages Deployment
+
+This project is configured to deploy to GitHub Pages at:
+
+- `https://changzhiai.github.io/PeriodicTable/`
+
+Key settings:
+- `vite.config.js` has `base: '/PeriodicTable/'`.
+- GitHub Actions workflow at `.github/workflows/deploy.yml`:
+  - Builds the app on pushes to `main`
+  - Publishes the `dist` folder to GitHub Pages
+
+Once changes are committed and pushed to `main`, GitHub Pages will update automatically.
+
+---
+
+## Tech Stack
+
+- **React** (functional components, hooks)
+- **Vite** (bundler/dev server)
+- **Tailwind CSS v4** for styling
+- **lucide-react** for icons
+
+---
+
+## Contact
+
+If you have questions or suggestions about this project, please contact: changzhiai@gmail.com
