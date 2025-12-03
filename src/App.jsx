@@ -188,7 +188,9 @@ const ElementCard = ({ element, onClick, isDimmed }) => {
         minWidth: '0'
       }}
     >
-      <span className="self-start text-[8px] sm:text-[10px] font-bold opacity-70 leading-none">{element.n}</span>
+      <span className="self-center sm:self-start text-[8px] sm:text-[10px] font-bold opacity-70 leading-none">
+        {element.n}
+      </span>
       <span className="text-sm sm:text-lg md:text-xl font-bold leading-none">{element.s}</span>
       <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
         {element.name}
@@ -323,7 +325,7 @@ export default function PeriodicTableApp() {
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-2 md:py-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+        <div className="max-w-7xl mx-auto px-4 py-2 md:py-2 flex flex-wrap items-center justify-between gap-2">
           {/* Left: title + inline group dropdown */}
           <div className="flex items-center gap-3 flex-wrap">
             <div className="bg-blue-600 p-1.5 rounded-lg text-white">
@@ -396,7 +398,7 @@ export default function PeriodicTableApp() {
           </div>
 
           {/* Right: search box */}
-          <div className="relative w-full md:w-96">
+          <div className="relative w-full [@media(min-width:460px)]:w-60 md:w-72">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
             <input 
               type="text" 
@@ -508,7 +510,7 @@ export default function PeriodicTableApp() {
                 setActiveSeries(newSeries);
                 if (newSeries) setActiveCategory(null); // Deselect category when series is selected
               }}
-              className={`relative border border-pink-400 bg-pink-200 text-pink-900 flex flex-col p-1 cursor-pointer transition-all duration-200 ${
+              className={`relative border border-pink-400 bg-pink-200 text-pink-900 flex flex-col items-center justify-between p-1 cursor-pointer transition-all duration-200 ${
                 searchTerm || (activeCategory && activeCategory !== 'lanthanide') || activeSeries === 'actinides'
                   ? 'opacity-20 scale-95 grayscale cursor-not-allowed' 
                   : (activeSeries === 'lanthanides' || activeCategory === 'lanthanide')
@@ -522,8 +524,17 @@ export default function PeriodicTableApp() {
                 minWidth: '0'
               }}
             >
-              <span className="self-start text-[8px] sm:text-[10px] font-bold opacity-70 leading-none">57-71</span>
-              <span className="flex-1 flex items-center justify-center text-[6px] sm:text-[8px] font-mono leading-tight text-center">Lanthanoids</span>
+              <span className="self-center sm:self-start text-[8px] sm:text-[10px] font-bold opacity-70 leading-none whitespace-nowrap">
+                57-71
+              </span>
+              {/* Symbol-like short label, always visible */}
+              <span className="text-sm sm:text-lg md:text-xl font-bold leading-none">
+                Ln
+              </span>
+              {/* Full name, shown like element names (hidden on very small screens) */}
+              <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
+                Lanthanoids
+              </span>
             </div>
 
             {/* Placeholder cell between Ra (88) and Rf (104) in row 7 */}
@@ -534,7 +545,7 @@ export default function PeriodicTableApp() {
                 setActiveSeries(newSeries);
                 if (newSeries) setActiveCategory(null); // Deselect category when series is selected
               }}
-              className={`relative border border-pink-500 bg-pink-300 text-pink-900 flex flex-col p-1 cursor-pointer transition-all duration-200 ${
+              className={`relative border border-pink-500 bg-pink-300 text-pink-900 flex flex-col items-center justify-between p-1 cursor-pointer transition-all duration-200 ${
                 searchTerm || (activeCategory && activeCategory !== 'actinide') || activeSeries === 'lanthanides'
                   ? 'opacity-20 scale-95 grayscale cursor-not-allowed' 
                   : (activeSeries === 'actinides' || activeCategory === 'actinide')
@@ -548,8 +559,17 @@ export default function PeriodicTableApp() {
                 minWidth: '0'
               }}
             >
-              <span className="self-start text-[8px] sm:text-[10px] font-bold opacity-70 leading-none">89-103</span>
-              <span className="flex-1 flex items-center justify-center text-[6px] sm:text-[8px] font-mono leading-tight text-center">Actinoids</span>
+              <span className="self-center sm:self-start text-[8px] sm:text-[10px] font-bold opacity-70 leading-none whitespace-nowrap">
+                89-103
+              </span>
+              {/* Symbol-like short label, always visible */}
+              <span className="text-sm sm:text-lg md:text-xl font-bold leading-none">
+                An
+              </span>
+              {/* Full name, shown like element names (hidden on very small screens) */}
+              <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
+                Actinoids
+              </span>
             </div>
           </div>
           
