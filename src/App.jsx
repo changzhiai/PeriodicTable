@@ -205,9 +205,9 @@ const DetailModal = ({ element, onClose }) => {
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-9 py-3 sm:p-4 bg-black/60 backdrop-blur-sm overflow-y-auto" onClick={onClose}>
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" onClick={onClose}>
       <div 
-        className="bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-[calc(100vw-4.5rem)] sm:max-w-[280px] md:max-w-sm [@media(orientation:landscape)]:max-w-[calc(100vw-4.5rem)] [@media(orientation:landscape)]:sm:max-w-md overflow-hidden animate-in fade-in zoom-in duration-200 max-h-[calc(100vh-1.5rem)] sm:max-h-[90vh] [@media(orientation:landscape)]:max-h-[calc(100vh-2rem)] overflow-y-auto"
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-[calc(100vw-4.5rem)] sm:max-w-[280px] md:max-w-sm [@media(orientation:landscape)]:max-w-[calc(100vw-4.5rem)] [@media(orientation:landscape)]:sm:max-w-md overflow-hidden animate-in fade-in zoom-in duration-200 max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] [@media(orientation:landscape)]:max-h-[calc(100dvh-2rem)] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
