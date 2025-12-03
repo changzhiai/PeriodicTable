@@ -176,7 +176,7 @@ const ElementCard = ({ element, onClick, isDimmed }) => {
     <div 
       onClick={() => onClick(element)}
       className={`
-        relative p-1 flex flex-col items-center justify-between cursor-pointer 
+        relative p-0.5 sm:p-1 flex flex-col items-center justify-between cursor-pointer 
         transition-all duration-200 border 
         ${colorClass} 
         ${isDimmed ? 'opacity-20 scale-95 grayscale' : 'opacity-100 hover:scale-110 hover:z-10 hover:shadow-lg'}
@@ -205,9 +205,9 @@ const DetailModal = ({ element, onClose }) => {
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-9 py-3 sm:p-4 bg-black/60 backdrop-blur-sm overflow-y-auto" onClick={onClose}>
       <div 
-        className="bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-xs sm:max-w-md overflow-hidden animate-in fade-in zoom-in duration-200 max-h-[90vh] overflow-y-auto"
+        className="bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-[calc(100vw-4.5rem)] sm:max-w-[280px] md:max-w-sm [@media(orientation:landscape)]:max-w-[calc(100vw-4.5rem)] [@media(orientation:landscape)]:sm:max-w-md overflow-hidden animate-in fade-in zoom-in duration-200 max-h-[calc(100vh-1.5rem)] sm:max-h-[90vh] [@media(orientation:landscape)]:max-h-[calc(100vh-2rem)] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
@@ -228,8 +228,8 @@ const DetailModal = ({ element, onClose }) => {
         </div>
 
         {/* Body */}
-        <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
-          <div className="grid grid-cols-2 gap-2 sm:gap-4">
+        <div className="p-3 sm:p-6 space-y-3 sm:space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 [@media(orientation:landscape)]:grid-cols-2 gap-3 sm:gap-4">
             <div className="bg-gray-50 p-2 sm:p-4 rounded-lg sm:rounded-xl border border-gray-100">
               <div className="text-gray-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1">Atomic Mass</div>
               <div className="text-base sm:text-xl font-mono text-gray-800">{element.m} <span className="text-xs sm:text-sm text-gray-400">u</span></div>
@@ -325,7 +325,7 @@ export default function PeriodicTableApp() {
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-2 md:py-2 flex flex-wrap items-center justify-between gap-2">
+        <div className="max-w-7xl mx-auto px-4 py-1 sm:py-2 md:py-2 flex flex-wrap items-center justify-between gap-2">
           {/* Left: title + inline group dropdown */}
           <div className="flex items-center gap-3 flex-wrap">
             <div className="bg-blue-600 p-1.5 rounded-lg text-white">
@@ -403,7 +403,7 @@ export default function PeriodicTableApp() {
             <input 
               type="text" 
               placeholder="Search elements" 
-              className="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
+              className="w-full pl-10 pr-4 py-1 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
@@ -426,13 +426,13 @@ export default function PeriodicTableApp() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 px-3 pt-2 pb-4 md:px-6 md:pt-3 md:pb-3 overflow-x-auto">
+      <main className="flex-1 px-1 sm:px-3 pt-1 sm:pt-2 pb-1 sm:pb-2 md:px-6 md:pt-3 md:pb-3 overflow-x-auto">
         <div className="w-full max-w-7xl mx-auto">
 
           {/* Group Number Labels - Top Row */}
-          <div className="relative mb-1 periodic-grid" style={{ 
+          <div className="relative mb-0.5 sm:mb-1 periodic-grid" style={{ 
             display: 'grid', 
-            gap: '0.25rem'
+            gap: 'clamp(0.125rem, 0.5vw, 0.25rem)'
           }}>
             {/* Empty cell for top-left corner */}
             <div></div>
@@ -450,7 +450,7 @@ export default function PeriodicTableApp() {
           {/* THE GRID with Period Labels */}
           <div className="relative periodic-grid" style={{ 
             display: 'grid', 
-            gap: '0.25rem' // tailwind gap-1
+            gap: 'clamp(0.125rem, 0.5vw, 0.25rem)' // Responsive gap: smaller on phones
           }}>
             
             {/* Period Labels - Left Side */}
@@ -508,7 +508,7 @@ export default function PeriodicTableApp() {
                 setActiveSeries(newSeries);
                 if (newSeries) setActiveCategory(null); // Deselect category when series is selected
               }}
-              className={`relative border border-pink-400 bg-pink-200 text-pink-900 flex flex-col items-center justify-between p-1 cursor-pointer transition-all duration-200 ${
+              className={`relative border border-pink-400 bg-pink-200 text-pink-900 flex flex-col items-center justify-between p-0.5 sm:p-1 cursor-pointer transition-all duration-200 ${
                 searchTerm || (activeCategory && activeCategory !== 'lanthanide') || activeSeries === 'actinides'
                   ? 'opacity-20 scale-95 grayscale cursor-not-allowed' 
                   : (activeSeries === 'lanthanides' || activeCategory === 'lanthanide')
@@ -543,7 +543,7 @@ export default function PeriodicTableApp() {
                 setActiveSeries(newSeries);
                 if (newSeries) setActiveCategory(null); // Deselect category when series is selected
               }}
-              className={`relative border border-pink-500 bg-pink-300 text-pink-900 flex flex-col items-center justify-between p-1 cursor-pointer transition-all duration-200 ${
+              className={`relative border border-pink-500 bg-pink-300 text-pink-900 flex flex-col items-center justify-between p-0.5 sm:p-1 cursor-pointer transition-all duration-200 ${
                 searchTerm || (activeCategory && activeCategory !== 'actinide') || activeSeries === 'lanthanides'
                   ? 'opacity-20 scale-95 grayscale cursor-not-allowed' 
                   : (activeSeries === 'actinides' || activeCategory === 'actinide')
@@ -572,9 +572,9 @@ export default function PeriodicTableApp() {
           </div>
           
           {/* Lanthanides Row (57-71) - positioned below row 6 */}
-          <div className="mt-2 relative periodic-grid" style={{ 
+          <div className="mt-1 sm:mt-2 relative periodic-grid" style={{ 
             display: 'grid', 
-            gap: '0.25rem'
+            gap: 'clamp(0.125rem, 0.5vw, 0.25rem)'
           }}>
             {/* Empty label column */}
             <div></div>
@@ -610,9 +610,9 @@ export default function PeriodicTableApp() {
           </div>
 
           {/* Actinides Row (89-103) - positioned below row 7 */}
-          <div className="mt-1 relative periodic-grid" style={{ 
+          <div className="mt-0.5 sm:mt-1 relative periodic-grid" style={{ 
             display: 'grid', 
-            gap: '0.25rem'
+            gap: 'clamp(0.125rem, 0.5vw, 0.25rem)'
           }}>
             {/* Empty label column */}
             <div></div>
