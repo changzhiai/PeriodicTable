@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* Responsive period label column - smaller on small screens */
+.periodic-grid {
+  grid-template-columns: 0.75rem repeat(18, minmax(0, 1fr)) !important;
+}
+
+@media (min-width: 640px) {
+  .periodic-grid {
+    grid-template-columns: 1.75rem repeat(18, minmax(0, 1fr)) !important;
+  }
+}

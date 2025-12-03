@@ -205,38 +205,38 @@ const DetailModal = ({ element, onClose }) => {
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
       <div 
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200"
+        className="bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-xs sm:max-w-md overflow-hidden animate-in fade-in zoom-in duration-200 max-h-[90vh] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className={`p-6 ${colorClass} flex justify-between items-start`}>
+        <div className={`p-3 sm:p-6 ${colorClass} flex justify-between items-start`}>
           <div>
-            <div className="flex items-baseline space-x-3">
-              <h2 className="text-4xl font-bold">{element.s}</h2>
-              <span className="text-xl opacity-75">#{element.n}</span>
+            <div className="flex items-baseline space-x-2 sm:space-x-3">
+              <h2 className="text-2xl sm:text-4xl font-bold">{element.s}</h2>
+              <span className="text-base sm:text-xl opacity-75">#{element.n}</span>
             </div>
-            <h3 className="text-2xl font-medium mt-1">{element.name}</h3>
-            <p className="opacity-80 font-medium uppercase tracking-wider text-sm mt-2">
+            <h3 className="text-lg sm:text-2xl font-medium mt-1">{element.name}</h3>
+            <p className="opacity-80 font-medium uppercase tracking-wider text-xs sm:text-sm mt-1 sm:mt-2">
               {categoryLabels[element.cat]}
             </p>
           </div>
-          <button onClick={onClose} className="p-2 bg-black/10 hover:bg-black/20 rounded-full transition-colors">
-            <X size={20} />
+          <button onClick={onClose} className="p-1.5 sm:p-2 bg-black/10 hover:bg-black/20 rounded-full transition-colors flex-shrink-0">
+            <X size={16} className="sm:w-5 sm:h-5" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="p-6 space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-              <div className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-1">Atomic Mass</div>
-              <div className="text-xl font-mono text-gray-800">{element.m} <span className="text-sm text-gray-400">u</span></div>
+        <div className="p-3 sm:p-6 space-y-4 sm:space-y-6">
+          <div className="grid grid-cols-2 gap-2 sm:gap-4">
+            <div className="bg-gray-50 p-2 sm:p-4 rounded-lg sm:rounded-xl border border-gray-100">
+              <div className="text-gray-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1">Atomic Mass</div>
+              <div className="text-base sm:text-xl font-mono text-gray-800">{element.m} <span className="text-xs sm:text-sm text-gray-400">u</span></div>
             </div>
-            <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-              <div className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-1">State</div>
-              <div className="text-xl text-gray-800 capitalize">
+            <div className="bg-gray-50 p-2 sm:p-4 rounded-lg sm:rounded-xl border border-gray-100">
+              <div className="text-gray-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1">State</div>
+              <div className="text-base sm:text-xl text-gray-800 capitalize">
                 {/* Simple state approximation based on category/temp */}
                 {element.cat === 'noble gas' ? 'Gas' : (element.s === 'Hg' || element.s === 'Br' ? 'Liquid' : 'Solid')}
               </div>
@@ -244,8 +244,8 @@ const DetailModal = ({ element, onClose }) => {
           </div>
 
           <div>
-             <div className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-2">Description</div>
-             <p className="text-gray-700 leading-relaxed">
+             <div className="text-gray-500 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-1 sm:mb-2">Description</div>
+             <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
                {element.summary || `${element.name} is a chemical element with the symbol ${element.s} and atomic number ${element.n}. It is classified as a ${element.cat}.`}
              </p>
           </div>
@@ -427,12 +427,11 @@ export default function PeriodicTableApp() {
 
       {/* Main Content */}
       <main className="flex-1 px-3 pt-2 pb-4 md:px-6 md:pt-3 md:pb-3 overflow-x-auto">
-        <div className="w-full max-w-7xl mx-auto md:min-w-[1000px]">
+        <div className="w-full max-w-7xl mx-auto">
 
           {/* Group Number Labels - Top Row */}
-          <div className="relative mb-1" style={{ 
+          <div className="relative mb-1 periodic-grid" style={{ 
             display: 'grid', 
-            gridTemplateColumns: '1.75rem repeat(18, minmax(0, 1fr))', 
             gap: '0.25rem'
           }}>
             {/* Empty cell for top-left corner */}
@@ -449,9 +448,8 @@ export default function PeriodicTableApp() {
           </div>
 
           {/* THE GRID with Period Labels */}
-          <div className="relative" style={{ 
+          <div className="relative periodic-grid" style={{ 
             display: 'grid', 
-            gridTemplateColumns: '1.75rem repeat(18, minmax(0, 1fr))', 
             gap: '0.25rem' // tailwind gap-1
           }}>
             
@@ -574,9 +572,8 @@ export default function PeriodicTableApp() {
           </div>
           
           {/* Lanthanides Row (57-71) - positioned below row 6 */}
-          <div className="mt-2 relative" style={{ 
+          <div className="mt-2 relative periodic-grid" style={{ 
             display: 'grid', 
-            gridTemplateColumns: '1.75rem repeat(18, minmax(0, 1fr))', 
             gap: '0.25rem'
           }}>
             {/* Empty label column */}
@@ -613,9 +610,8 @@ export default function PeriodicTableApp() {
           </div>
 
           {/* Actinides Row (89-103) - positioned below row 7 */}
-          <div className="mt-1 relative" style={{ 
+          <div className="mt-1 relative periodic-grid" style={{ 
             display: 'grid', 
-            gridTemplateColumns: '1.75rem repeat(18, minmax(0, 1fr))', 
             gap: '0.25rem'
           }}>
             {/* Empty label column */}
