@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Atom, X, FlaskConical, Filter } from 'lucide-react';
+import { Search, Atom, X, FlaskConical } from 'lucide-react';
 
 // --- FULL ELEMENT DATASET ---
 // Compressed structure for the example, expanded in logic
@@ -161,6 +161,14 @@ const categoryLabels = {
   'unknown': 'Unknown'
 };
 
+// Helper to extract just the background color class for use in small dots
+const getCategoryBgClass = (cat) => {
+  const classes = categoryColors[cat];
+  if (!classes) return '';
+  const bgClass = classes.split(' ').find(c => c.startsWith('bg-'));
+  return bgClass || '';
+};
+
 const ElementCard = ({ element, onClick, isDimmed }) => {
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
   
@@ -256,6 +264,7 @@ export default function PeriodicTableApp() {
   const [selectedElement, setSelectedElement] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeSeries, setActiveSeries] = useState(null); // 'lanthanides' or 'actinides'
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   
   // Filter logic
   const filteredElements = useMemo(() => {
@@ -314,14 +323,79 @@ export default function PeriodicTableApp() {
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-600 p-2 rounded-lg text-white">
-              <Atom size={24} />
+        <div className="max-w-7xl mx-auto px-4 py-2 md:py-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+          {/* Left: title + inline group dropdown */}
+          <div className="flex items-center gap-3 flex-wrap">
+            <div className="bg-blue-600 p-1.5 rounded-lg text-white">
+              <Atom size={22} />
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900">Periodic Table</h1>
+            <h1 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900">
+              Periodic Table
+            </h1>
+            <div className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600">
+              <div className="relative">
+                {/* Trigger */}
+                <button
+                  type="button"
+                  className="flex items-center gap-1.5 rounded-full border border-gray-300 bg-white px-2 py-0.5 text-[10px] md:text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onClick={() => setIsCategoryOpen((open) => !open)}
+                >
+                  <span
+                    className={`
+                      inline-block w-2.5 h-2.5 rounded-full border border-black/10
+                      ${activeCategory ? getCategoryBgClass(activeCategory) : 'bg-gray-200'}
+                    `}
+                  />
+                  <span className="truncate max-w-[6rem] md:max-w-[9rem]">
+                    {activeCategory ? categoryLabels[activeCategory] : 'All groups'}
+                  </span>
+                </button>
+
+                {/* Dropdown menu */}
+                {isCategoryOpen && (
+                  <div className="absolute z-50 mt-1 w-36 md:w-44 rounded-md border border-gray-200 bg-white shadow-lg py-0.5">
+                    <button
+                      type="button"
+                      className="flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs text-gray-700 hover:bg-gray-50"
+                      onClick={() => {
+                        setActiveCategory(null);
+                        setActiveSeries(null);
+                        setIsCategoryOpen(false);
+                      }}
+                    >
+                      <span className="inline-block w-2.5 h-2.5 rounded-full bg-gray-200 border border-black/10" />
+                      <span>All groups</span>
+                    </button>
+                    <div className="h-px bg-gray-100 my-0.5" />
+                    {uniqueCategories.map((cat) => (
+                      <button
+                        key={cat}
+                        type="button"
+                        className={`flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs hover:bg-gray-50 ${
+                          activeCategory === cat ? 'font-semibold text-gray-900' : 'text-gray-700'
+                        }`}
+                        onClick={() => {
+                          setActiveCategory(cat);
+                          setActiveSeries(null);
+                          setIsCategoryOpen(false);
+                        }}
+                      >
+                        <span
+                          className={`
+                            inline-block w-2.5 h-2.5 rounded-full border border-black/10
+                            ${getCategoryBgClass(cat)}
+                          `}
+                        />
+                        <span>{categoryLabels[cat]}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
+          {/* Right: search box */}
           <div className="relative w-full md:w-96">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
             <input 
@@ -350,37 +424,8 @@ export default function PeriodicTableApp() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 md:p-8 overflow-x-auto">
+      <main className="flex-1 px-3 pt-2 pb-4 md:px-6 md:pt-3 md:pb-3 overflow-x-auto">
         <div className="w-full max-w-7xl mx-auto md:min-w-[1000px]">
-          
-          {/* Legend / Filter Bar */}
-          <div className="mb-6 flex flex-wrap gap-2 justify-center">
-             <div className="flex items-center mr-4 text-sm font-medium text-gray-500">
-                <Filter size={16} className="mr-2" />
-                Filter by Group:
-             </div>
-             {uniqueCategories.map(cat => {
-               const colorClass = categoryColors[cat] || 'bg-gray-200 text-gray-900 border-gray-400';
-               return (
-                 <button
-                   key={cat}
-                   onClick={() => {
-                     setActiveCategory(activeCategory === cat ? null : cat);
-                     setActiveSeries(null); // Deselect series when category is selected
-                   }}
-                   className={`
-                     px-3 py-1 text-xs rounded-full border transition-all duration-200
-                     ${activeCategory === cat 
-                       ? 'ring-2 ring-offset-1 ring-blue-500 shadow-md transform scale-105 font-bold ' + colorClass
-                       : colorClass + ' opacity-80 hover:opacity-100 hover:scale-105'
-                     }
-                   `}
-                 >
-                   {categoryLabels[cat]}
-                 </button>
-               );
-             })}
-          </div>
 
           {/* Group Number Labels - Top Row */}
           <div className="relative mb-1" style={{ 
@@ -548,7 +593,7 @@ export default function PeriodicTableApp() {
           </div>
 
           {/* Actinides Row (89-103) - positioned below row 7 */}
-          <div className="mt-2 relative" style={{ 
+          <div className="mt-1 relative" style={{ 
             display: 'grid', 
             gridTemplateColumns: '1.75rem repeat(18, minmax(0, 1fr))', 
             gap: '0.25rem'
@@ -586,8 +631,6 @@ export default function PeriodicTableApp() {
             })}
           </div>
           
-          {/* Spacing for bottom rows */}
-          <div className="h-12"></div>
         </div>
       </main>
 
