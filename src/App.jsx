@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Search, Atom, X, FlaskConical } from 'lucide-react';
 
 // --- FULL ELEMENT DATASET ---
@@ -267,6 +268,33 @@ export default function PeriodicTableApp() {
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeSeries, setActiveSeries] = useState(null); // 'lanthanides' or 'actinides'
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const dropdownButtonRef = useRef(null);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
+  
+  // Calculate dropdown position when it opens or window resizes/scrolls
+  useEffect(() => {
+    const updatePosition = () => {
+      if (isCategoryOpen && dropdownButtonRef.current) {
+        const rect = dropdownButtonRef.current.getBoundingClientRect();
+        setDropdownPosition({
+          top: rect.bottom + 4, // 4px gap (mt-1 equivalent)
+          left: rect.left,
+          width: rect.width
+        });
+      }
+    };
+
+    if (isCategoryOpen) {
+      updatePosition();
+      window.addEventListener('scroll', updatePosition, true);
+      window.addEventListener('resize', updatePosition);
+      
+      return () => {
+        window.removeEventListener('scroll', updatePosition, true);
+        window.removeEventListener('resize', updatePosition);
+      };
+    }
+  }, [isCategoryOpen]);
   
   // Filter logic
   const filteredElements = useMemo(() => {
@@ -344,6 +372,7 @@ export default function PeriodicTableApp() {
               <div className="relative">
                 {/* Trigger */}
                 <button
+                  ref={dropdownButtonRef}
                   type="button"
                   className="flex items-center gap-1.5 rounded-full border border-gray-300 bg-white px-2 py-0.5 text-[10px] md:text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   onClick={() => setIsCategoryOpen((open) => !open)}
@@ -359,45 +388,61 @@ export default function PeriodicTableApp() {
                   </span>
                 </button>
 
-                {/* Dropdown menu */}
-                {isCategoryOpen && (
-                  <div className="absolute z-50 mt-1 w-36 md:w-44 rounded-md border border-gray-200 bg-white shadow-lg py-0.5">
-                    <button
-                      type="button"
-                      className="flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs text-gray-700 hover:bg-gray-50"
-                      onClick={() => {
-                        setActiveCategory(null);
-                        setActiveSeries(null);
-                        setIsCategoryOpen(false);
+                {/* Dropdown menu - rendered via portal */}
+                {isCategoryOpen && typeof document !== 'undefined' && createPortal(
+                  <>
+                    {/* Backdrop to close dropdown */}
+                    <div 
+                      className="fixed inset-0 z-[100]"
+                      onClick={() => setIsCategoryOpen(false)}
+                    />
+                    {/* Dropdown */}
+                    <div 
+                      className="fixed z-[101] w-36 md:w-44 rounded-md border border-gray-200 bg-white shadow-lg py-0.5"
+                      style={{
+                        top: `${dropdownPosition.top}px`,
+                        left: `${dropdownPosition.left}px`
                       }}
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      <span className="inline-block w-2.5 h-2.5 rounded-full bg-gray-200 border border-black/10" />
-                      <span>All groups</span>
-                    </button>
-                    <div className="h-px bg-gray-100 my-0.5" />
-                    {uniqueCategories.map((cat) => (
                       <button
-                        key={cat}
                         type="button"
-                        className={`flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs hover:bg-gray-50 ${
-                          activeCategory === cat ? 'font-semibold text-gray-900' : 'text-gray-700'
-                        }`}
+                        className="flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs text-gray-700 hover:bg-gray-50"
                         onClick={() => {
-                          setActiveCategory(cat);
+                          setActiveCategory(null);
                           setActiveSeries(null);
                           setIsCategoryOpen(false);
                         }}
                       >
-                        <span
-                          className={`
-                            inline-block w-2.5 h-2.5 rounded-full border border-black/10
-                            ${getCategoryBgClass(cat)}
-                          `}
-                        />
-                        <span>{categoryLabels[cat]}</span>
+                        <span className="inline-block w-2.5 h-2.5 rounded-full bg-gray-200 border border-black/10" />
+                        <span>All groups</span>
                       </button>
-                    ))}
-                  </div>
+                      <div className="h-px bg-gray-100 my-0.5" />
+                      {uniqueCategories.map((cat) => (
+                        <button
+                          key={cat}
+                          type="button"
+                          className={`flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs hover:bg-gray-50 ${
+                            activeCategory === cat ? 'font-semibold text-gray-900' : 'text-gray-700'
+                          }`}
+                          onClick={() => {
+                            setActiveCategory(cat);
+                            setActiveSeries(null);
+                            setIsCategoryOpen(false);
+                          }}
+                        >
+                          <span
+                            className={`
+                              inline-block w-2.5 h-2.5 rounded-full border border-black/10
+                              ${getCategoryBgClass(cat)}
+                            `}
+                          />
+                          <span>{categoryLabels[cat]}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </>,
+                  document.body
                 )}
               </div>
             </div>
