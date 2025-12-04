@@ -169,7 +169,7 @@ const getCategoryBgClass = (cat) => {
   return bgClass || '';
 };
 
-const ElementCard = ({ element, onClick, isDimmed }) => {
+const ElementCard = React.memo(({ element, onClick, isDimmed }) => {
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
   
   return (
@@ -197,7 +197,7 @@ const ElementCard = ({ element, onClick, isDimmed }) => {
       </span>
     </div>
   );
-};
+});
 
 const DetailModal = ({ element, onClose }) => {
   if (!element) return null;
@@ -331,7 +331,13 @@ export default function PeriodicTableApp() {
             <div className="bg-blue-600 p-1.5 rounded-lg text-white">
               <Atom size={22} />
             </div>
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900">
+            <h1 
+              className="text-xl md:text-2xl font-bold tracking-tight text-gray-900"
+              style={{ 
+                fontDisplay: 'swap',
+                contentVisibility: 'auto'
+              }}
+            >
               Periodic Table
             </h1>
             <div className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600">
