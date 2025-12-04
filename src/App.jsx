@@ -302,19 +302,46 @@ export default function PeriodicTableApp() {
       // Scroll to top
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
       
-      // Reset zoom level
-      if (typeof document !== 'undefined') {
-        // Try to reset zoom using body style (works in Chrome/Edge)
-        document.body.style.zoom = '1';
+      // Reset zoom level - works for both desktop and mobile
+      if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+        // For desktop browsers (Chrome/Edge/Safari)
+        if (document.body.style.zoom !== undefined) {
+          document.body.style.zoom = '1';
+        }
+        if (document.documentElement.style.zoom !== undefined) {
+          document.documentElement.style.zoom = '1';
+        }
         
-        // Also try to reset viewport scale for mobile devices
+        // For mobile devices - reset viewport scale
+        // This is the most reliable method for mobile browsers
         const viewport = document.querySelector('meta[name="viewport"]');
         if (viewport) {
-          viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-          // Reset after a brief moment to allow user scaling again
-          setTimeout(() => {
-            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
-          }, 100);
+          // Force a viewport reset by temporarily changing and then restoring
+          // This tricks the browser into resetting the scale
+          const resetViewport = () => {
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            
+            // Use double requestAnimationFrame to ensure the change takes effect
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                // Restore normal viewport but at scale 1.0
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                
+                // Clear any CSS transforms that might affect scaling
+                const root = document.documentElement;
+                const body = document.body;
+                root.style.transform = '';
+                root.style.transformOrigin = '';
+                body.style.transform = '';
+                body.style.transformOrigin = '';
+                
+                // Force reflow
+                void root.offsetHeight;
+              });
+            });
+          };
+          
+          resetViewport();
         }
       }
     }
