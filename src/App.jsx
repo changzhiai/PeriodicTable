@@ -295,6 +295,30 @@ export default function PeriodicTableApp() {
       };
     }
   }, [isCategoryOpen]);
+
+  // Reset scroll position and zoom when an element is selected
+  useEffect(() => {
+    if (selectedElement) {
+      // Scroll to top
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      
+      // Reset zoom level
+      if (typeof document !== 'undefined') {
+        // Try to reset zoom using body style (works in Chrome/Edge)
+        document.body.style.zoom = '1';
+        
+        // Also try to reset viewport scale for mobile devices
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+          viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+          // Reset after a brief moment to allow user scaling again
+          setTimeout(() => {
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+          }, 100);
+        }
+      }
+    }
+  }, [selectedElement]);
   
   // Filter logic
   const filteredElements = useMemo(() => {
