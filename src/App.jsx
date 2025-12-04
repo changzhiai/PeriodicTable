@@ -312,35 +312,47 @@ export default function PeriodicTableApp() {
           document.documentElement.style.zoom = '1';
         }
         
-        // For mobile devices - reset viewport scale
-        // This is the most reliable method for mobile browsers
+        // For mobile devices - aggressive viewport reset
         const viewport = document.querySelector('meta[name="viewport"]');
+        const root = document.documentElement;
+        const body = document.body;
+        
         if (viewport) {
-          // Force a viewport reset by temporarily changing and then restoring
-          // This tricks the browser into resetting the scale
+          // Store original content
+          const originalContent = viewport.getAttribute('content') || 'width=device-width, initial-scale=1.0';
+          
+          // Method: Remove and recreate viewport tag to force hard reset
+          // This sometimes works better than just changing attributes
           const resetViewport = () => {
-            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            // Step 1: Remove existing viewport
+            viewport.remove();
             
-            // Use double requestAnimationFrame to ensure the change takes effect
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                // Restore normal viewport but at scale 1.0
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
-                
-                // Clear any CSS transforms that might affect scaling
-                const root = document.documentElement;
-                const body = document.body;
-                root.style.transform = '';
-                root.style.transformOrigin = '';
-                body.style.transform = '';
-                body.style.transformOrigin = '';
-                
-                // Force reflow
-                void root.offsetHeight;
-              });
-            });
+            // Step 2: Create new viewport with reset scale
+            const newViewport = document.createElement('meta');
+            newViewport.name = 'viewport';
+            newViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+            document.head.insertBefore(newViewport, document.head.firstChild);
+            
+            // Step 3: Clear any CSS transforms
+            root.style.transform = '';
+            root.style.transformOrigin = '';
+            body.style.transform = '';
+            body.style.transformOrigin = '';
+            
+            // Step 4: Force multiple reflows
+            void root.offsetHeight;
+            void body.offsetHeight;
+            
+            // Step 5: After a delay, restore normal viewport settings
+            setTimeout(() => {
+              const currentViewport = document.querySelector('meta[name="viewport"]');
+              if (currentViewport) {
+                currentViewport.setAttribute('content', originalContent);
+              }
+            }, 100);
           };
           
+          // Execute reset
           resetViewport();
         }
       }
