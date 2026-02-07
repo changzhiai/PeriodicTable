@@ -138,7 +138,7 @@ const DetailModal = ({ element, onClose }) => {
         <div className="flex flex-col lg:flex-row flex-1 overflow-y-auto overflow-x-hidden min-h-0">
 
           {/* Left Panel: Data & Info (Previously Right) */}
-          <div className="w-full lg:w-7/12 flex flex-col border-b lg:border-b-0 lg:border-r border-gray-200">
+          <div className="w-full lg:w-7/12 flex flex-col">
             <div className="p-4 sm:p-6 space-y-6">
 
 
@@ -293,7 +293,7 @@ const DetailModal = ({ element, onClose }) => {
 
           {/* Right Panel: 3D Visuals (Previously Left) */}
           <div className="w-full lg:w-5/12 bg-gray-50 flex flex-col shrink-0">
-            <div className="p-4 border-b border-gray-200 bg-white lg:bg-transparent">
+            <div className="p-4 flex-1 bg-gray-50 border border-gray-200 border-t-0">
               <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 flex items-center gap-2">
                 <Atom size={14} />
                 Atomic Model (Bohr)
@@ -303,7 +303,7 @@ const DetailModal = ({ element, onClose }) => {
               </div>
             </div>
 
-            <div className="p-4 flex-1">
+            <div className="p-4 flex-1 bg-gray-50 border border-gray-200">
               <h4 className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 flex items-center gap-2">
                 <Cuboid size={14} />
                 Crystal Structure

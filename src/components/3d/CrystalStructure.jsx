@@ -262,6 +262,33 @@ const getStructureCoords = (type) => {
         if (t.includes('body')) {
             coords.push([0, 0, 0]);
         }
+    } else if (t.includes('tetrahedral') || t.includes('diamond')) {
+        // Diamond Cubic / Tetrahedral Packing
+        // FCC lattice + 4 interior atoms
+
+        // 1. Add FCC points (Corners + Face Centers)
+        const corners = [
+            [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
+            [-1, -1, 1], [1, -1, 1], [1, 1, 1], [-1, 1, 1]
+        ];
+        coords.push(...corners);
+
+        // Face centers
+        coords.push(
+            [0, -1, 0], [0, 1, 0], // Top/Bottom
+            [-1, 0, 0], [1, 0, 0], // Left/Right
+            [0, 0, -1], [0, 0, 1]  // Front/Back
+        );
+
+        // 2. Add the 4 tetrahedral void atoms (basis shift of 1/4, 1/4, 1/4)
+        // In -1..1 scale, 1/4 becomes -0.5, 3/4 becomes 0.5
+        coords.push(
+            [-0.5, -0.5, -0.5],
+            [0.5, 0.5, -0.5],
+            [-0.5, 0.5, 0.5],
+            [0.5, -0.5, 0.5]
+        );
+
     } else {
         // Fallback or other structures
         // Just show a single atom or something?
