@@ -46,4 +46,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return ApplicationDelegateProxy.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
     }
 
+
+
+
+
+
+}
+
+class ViewController: CAPBridgeViewController, UIScrollViewDelegate {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Ensure webView and scrollView are accessible
+        guard let webView = self.webView else { return }
+        
+        // Explicitly enable user interaction and scrolling
+        webView.isUserInteractionEnabled = true
+        webView.scrollView.isScrollEnabled = true
+        
+        // Set zoom scales
+        webView.scrollView.minimumZoomScale = 1.0
+        webView.scrollView.maximumZoomScale = 5.0
+        
+        // Important: Set the delegate to self to handle viewForZooming
+        // CAPBridgeViewController sets this too, but we need to override the zooming behavior
+        webView.scrollView.delegate = self
+    }
+    
+    // Delegate method required for zooming to work
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.webView
+    }
 }

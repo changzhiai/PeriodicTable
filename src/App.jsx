@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Search, Atom, X, FlaskConical, Cuboid, Volume2 } from 'lucide-react';
+import { Search, Atom, X, FlaskConical, Cuboid, Volume2, Maximize, Minimize } from 'lucide-react';
 import { Capacitor } from '@capacitor/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
+import { ScreenOrientation } from '@capacitor/screen-orientation';
 import { elements as rawElements } from './elementsData';
 import BohrModel from './components/3d/BohrModel';
 import CrystalStructure from './components/3d/CrystalStructure';
@@ -54,7 +55,7 @@ const getCategoryBgClass = (cat) => {
   return bgClass || '';
 };
 
-const ElementCard = React.memo(({ element, onClick, isDimmed }) => {
+const ElementCard = React.memo(({ element, onClick, isDimmed, isFullScreen }) => {
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
 
   return (
@@ -77,9 +78,12 @@ const ElementCard = React.memo(({ element, onClick, isDimmed }) => {
         {element.n}
       </span>
       <span className="text-sm sm:text-lg md:text-xl font-bold leading-none">{element.s}</span>
-      <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
-        {element.name}
-      </span>
+      {/* Hide name if Full Screen is active, otherwise show on larger screens */}
+      {!isFullScreen && (
+        <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
+          {element.name}
+        </span>
+      )}
     </div>
   );
 });
@@ -100,19 +104,67 @@ const formatLatticeAngles = (angles) => {
   }).join(', ');
 };
 
+// Helper to format electron configuration with HTML superscripts for better compatibility
+const formatElectronConfig = (config) => {
+  if (!config) return 'N/A';
+
+  const superscriptMap = {
+    '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4',
+    '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9'
+  };
+
+  const parts = config.split(/([⁰¹²³⁴⁵⁶⁷⁸⁹])/g);
+
+  return parts.map((part, index) => {
+    if (superscriptMap[part]) {
+      return <sup key={index}>{superscriptMap[part]}</sup>;
+    }
+    return part;
+  });
+};
+
 const DetailModal = ({ element, onClose }) => {
+  // Handle status bar visibility for landscape/short screens
+  useEffect(() => {
+    const handleResize = async () => {
+      if (Capacitor.isNativePlatform()) {
+        const isLandscapePhone = window.innerHeight < 500;
+        try {
+          if (isLandscapePhone) {
+            await StatusBar.hide();
+          } else {
+            await StatusBar.show();
+          }
+        } catch (e) {
+          console.warn('Status bar error:', e);
+        }
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      // Ensure status bar is shown when modal closes
+      if (Capacitor.isNativePlatform()) {
+        StatusBar.show().catch(() => { });
+      }
+    };
+  }, []);
+
   if (!element) return null;
 
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 safe-pt safe-pb safe-pl safe-pr" onClick={onClose}>
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-1 sm:p-4 safe-pt safe-pb safe-pl safe-pr [@media(max-height:500px)]:p-0" onClick={onClose}>
       <div
-        className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-lg md:max-w-2xl lg:max-w-6xl overflow-hidden animate-in fade-in zoom-in duration-200 h-full sm:h-[90vh] flex flex-col"
+        className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-lg md:max-w-2xl lg:max-w-6xl overflow-hidden animate-in fade-in zoom-in duration-200 h-full sm:h-[98vh] flex flex-col [@media(max-height:500px)]:overflow-y-auto [@media(max-height:500px)]:rounded-none"
         onClick={e => e.stopPropagation()}
       >
         {/* Full Width Header */}
-        <div className={`p-4 sm:p-6 ${colorClass} flex justify-between items-start shrink-0`}>
+        <div className={`py-1 px-4 sm:py-3 sm:px-6 ${colorClass} flex justify-between items-start shrink-0`}>
           <div>
             <div className="flex items-baseline space-x-2 sm:space-x-4">
               <h2 className="text-3xl sm:text-5xl font-bold tracking-tight">{element.s}</h2>
@@ -171,7 +223,7 @@ const DetailModal = ({ element, onClose }) => {
         </div>
 
         {/* Scrollable Content Body */}
-        <div className="flex flex-col lg:flex-row flex-1 overflow-y-auto overflow-x-hidden min-h-0">
+        <div className="flex flex-col lg:flex-row flex-1 overflow-y-auto overflow-x-hidden min-h-0 [@media(max-height:500px)]:overflow-visible [@media(max-height:500px)]:flex-none">
 
           {/* Left Panel: Data & Info (Previously Right) */}
           <div className="w-full lg:w-7/12 flex flex-col">
@@ -185,11 +237,11 @@ const DetailModal = ({ element, onClose }) => {
                   <tbody>
                     <tr className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                       <td className="py-2.5 px-3 sm:px-4 text-gray-500 w-1/3 sm:w-2/5">Full Electron Config</td>
-                      <td className="py-2.5 px-3 sm:px-4 text-gray-800 font-mono break-all">{element.electronConfiguration || 'N/A'}</td>
+                      <td className="py-2.5 px-3 sm:px-4 text-gray-800 font-mono break-all">{formatElectronConfig(element.electronConfiguration)}</td>
                     </tr>
                     <tr className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                       <td className="py-2.5 px-3 sm:px-4 text-gray-500">Electron Config</td>
-                      <td className="py-2.5 px-3 sm:px-4 text-gray-800 font-mono">{element.electronConfigurationSemantic || 'N/A'}</td>
+                      <td className="py-2.5 px-3 sm:px-4 text-gray-800 font-mono">{formatElectronConfig(element.electronConfigurationSemantic)}</td>
                     </tr>
                     <tr className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                       <td className="py-2.5 px-3 sm:px-4 text-gray-500">Atomic Number</td>
@@ -364,6 +416,38 @@ export default function PeriodicTableApp() {
   const dropdownButtonRef = useRef(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
 
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isLandscape, setIsLandscape] = useState(
+    typeof window !== 'undefined' ? window.matchMedia('(orientation: landscape)').matches : false
+  );
+
+  // Listen for orientation changes
+  useEffect(() => {
+    const mql = window.matchMedia('(orientation: landscape)');
+    const onChange = (e) => setIsLandscape(e.matches);
+    // Modern browsers use addEventListener, older check logic handled by reacting to 'change'
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
+
+  // Toggle Status Bar based on full screen state
+  useEffect(() => {
+    const updateStatusBar = async () => {
+      if (Capacitor.isNativePlatform()) {
+        try {
+          if (isFullScreen) {
+            await StatusBar.hide();
+          } else {
+            await StatusBar.show();
+          }
+        } catch (e) {
+          console.warn('Status bar toggle failed:', e);
+        }
+      }
+    };
+    updateStatusBar();
+  }, [isFullScreen]);
+
   // Configure status bar - Fix overlap issues
   useEffect(() => {
     const configureStatusBar = async () => {
@@ -379,6 +463,14 @@ export default function PeriodicTableApp() {
             await StatusBar.setOverlaysWebView({ overlay: false });
             await StatusBar.setBackgroundColor({ color: '#FFFFFF' }); // Match header
             document.body.classList.add('platform-android');
+          }
+
+          // Enable zoom on both iOS and Android
+          if (Capacitor.isNativePlatform()) {
+            const viewportMeta = document.querySelector('meta[name="viewport"]');
+            if (viewportMeta) {
+              viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover';
+            }
           }
         } catch (err) {
           console.warn('Status bar configuration failed:', err);
@@ -533,128 +625,130 @@ export default function PeriodicTableApp() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm safe-pt">
-        <div className="max-w-7xl mx-auto px-4 py-1 sm:py-2 md:py-2 flex flex-wrap items-center justify-between gap-2">
-          {/* Left: title + inline group dropdown */}
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="bg-blue-600 p-1.5 rounded-lg text-white">
-              <Atom size={22} />
-            </div>
-            <h1
-              className="text-xl md:text-2xl font-bold tracking-tight text-gray-900"
-              style={{
-                fontDisplay: 'swap',
-                contentVisibility: 'auto'
-              }}
-            >
-              Periodic Table
-            </h1>
-            <div className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600">
-              <div className="relative">
-                {/* Trigger */}
-                <button
-                  ref={dropdownButtonRef}
-                  type="button"
-                  className="flex items-center gap-1.5 rounded-full border border-gray-300 bg-white px-2 py-0.5 text-[10px] md:text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  onClick={() => setIsCategoryOpen((open) => !open)}
-                >
-                  <span
-                    className={`
+      {!isFullScreen && (
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm safe-pt">
+          <div className="max-w-7xl mx-auto px-4 py-1 sm:py-2 md:py-2 flex flex-wrap items-center justify-between gap-2">
+            {/* Left: title + inline group dropdown */}
+            <div className="flex items-center gap-3 flex-wrap">
+              <div className="bg-blue-600 p-1.5 rounded-lg text-white">
+                <Atom size={22} />
+              </div>
+              <h1
+                className="text-xl md:text-2xl font-bold tracking-tight text-gray-900"
+                style={{
+                  fontDisplay: 'swap',
+                  contentVisibility: 'auto'
+                }}
+              >
+                Periodic Table
+              </h1>
+              <div className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600">
+                <div className="relative">
+                  {/* Trigger */}
+                  <button
+                    ref={dropdownButtonRef}
+                    type="button"
+                    className="flex items-center gap-1.5 rounded-full border border-gray-300 bg-white px-2 py-0.5 text-[10px] md:text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onClick={() => setIsCategoryOpen((open) => !open)}
+                  >
+                    <span
+                      className={`
                       inline-block w-2.5 h-2.5 rounded-full border border-black/10
                       ${activeCategory ? getCategoryBgClass(activeCategory) : 'bg-gray-200'}
                     `}
-                  />
-                  <span className="truncate max-w-[6rem] md:max-w-[9rem]">
-                    {activeCategory ? categoryLabels[activeCategory] : 'All groups'}
-                  </span>
-                </button>
-
-                {/* Dropdown menu - rendered via portal */}
-                {isCategoryOpen && typeof document !== 'undefined' && createPortal(
-                  <>
-                    {/* Backdrop to close dropdown */}
-                    <div
-                      className="fixed inset-0 z-[100]"
-                      onClick={() => setIsCategoryOpen(false)}
                     />
-                    {/* Dropdown */}
-                    <div
-                      className="fixed z-[101] w-36 md:w-44 rounded-md border border-gray-200 bg-white shadow-lg py-0.5"
-                      style={{
-                        top: `${dropdownPosition.top}px`,
-                        left: `${dropdownPosition.left}px`
-                      }}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <button
-                        type="button"
-                        className="flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs text-gray-700 hover:bg-gray-50"
-                        onClick={() => {
-                          setActiveCategory(null);
-                          setActiveSeries(null);
-                          setIsCategoryOpen(false);
+                    <span className="truncate max-w-[6rem] md:max-w-[9rem]">
+                      {activeCategory ? categoryLabels[activeCategory] : 'All groups'}
+                    </span>
+                  </button>
+
+                  {/* Dropdown menu - rendered via portal */}
+                  {isCategoryOpen && typeof document !== 'undefined' && createPortal(
+                    <>
+                      {/* Backdrop to close dropdown */}
+                      <div
+                        className="fixed inset-0 z-[100]"
+                        onClick={() => setIsCategoryOpen(false)}
+                      />
+                      {/* Dropdown */}
+                      <div
+                        className="fixed z-[101] w-36 md:w-44 rounded-md border border-gray-200 bg-white shadow-lg py-0.5"
+                        style={{
+                          top: `${dropdownPosition.top}px`,
+                          left: `${dropdownPosition.left}px`
                         }}
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        <span className="inline-block w-2.5 h-2.5 rounded-full bg-gray-200 border border-black/10" />
-                        <span>All groups</span>
-                      </button>
-                      <div className="h-px bg-gray-100 my-0.5" />
-                      {uniqueCategories.map((cat) => (
                         <button
-                          key={cat}
                           type="button"
-                          className={`flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs hover:bg-gray-50 ${activeCategory === cat ? 'font-semibold text-gray-900' : 'text-gray-700'
-                            }`}
+                          className="flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs text-gray-700 hover:bg-gray-50"
                           onClick={() => {
-                            setActiveCategory(cat);
+                            setActiveCategory(null);
                             setActiveSeries(null);
                             setIsCategoryOpen(false);
                           }}
                         >
-                          <span
-                            className={`
+                          <span className="inline-block w-2.5 h-2.5 rounded-full bg-gray-200 border border-black/10" />
+                          <span>All groups</span>
+                        </button>
+                        <div className="h-px bg-gray-100 my-0.5" />
+                        {uniqueCategories.map((cat) => (
+                          <button
+                            key={cat}
+                            type="button"
+                            className={`flex w-full items-center gap-1.5 px-2 py-1 text-left text-[10px] md:text-xs hover:bg-gray-50 ${activeCategory === cat ? 'font-semibold text-gray-900' : 'text-gray-700'
+                              }`}
+                            onClick={() => {
+                              setActiveCategory(cat);
+                              setActiveSeries(null);
+                              setIsCategoryOpen(false);
+                            }}
+                          >
+                            <span
+                              className={`
                               inline-block w-2.5 h-2.5 rounded-full border border-black/10
                               ${getCategoryBgClass(cat)}
                             `}
-                          />
-                          <span>{categoryLabels[cat]}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </>,
-                  document.body
-                )}
+                            />
+                            <span>{categoryLabels[cat]}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </>,
+                    document.body
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Right: search box */}
-          <div className="relative w-full [@media(min-width:460px)]:w-60 md:w-72">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-            <input
-              type="text"
-              placeholder="Search elements"
-              className="w-full pl-10 pr-4 py-1 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                if (e.target.value) {
-                  setActiveSeries(null); // Deselect series when searching
-                  setActiveCategory(null); // Deselect category to avoid conflicting filters
-                }
-              }}
-            />
-            {searchTerm && (
-              <button
-                onClick={() => setSearchTerm('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-              >
-                <X size={14} />
-              </button>
-            )}
+            {/* Right: search box */}
+            <div className="relative w-full [@media(min-width:460px)]:w-60 md:w-72">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <input
+                type="text"
+                placeholder="Search elements"
+                className="w-full pl-10 pr-4 py-1 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                  if (e.target.value) {
+                    setActiveSeries(null); // Deselect series when searching
+                    setActiveCategory(null); // Deselect category to avoid conflicting filters
+                  }
+                }}
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <X size={14} />
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
 
       {/* Main Content */}
       <main className="flex-1 px-1 sm:px-3 pt-1 sm:pt-2 pb-1 sm:pb-2 md:px-6 md:pt-3 md:pb-3 overflow-x-auto">
@@ -845,8 +939,54 @@ export default function PeriodicTableApp() {
           }}>
             {/* Empty label column */}
             <div></div>
-            {/* Empty cells for columns 2-3 (groups 1-2) to align with main grid */}
-            <div></div>
+            {/* Full Screen Toggle Button (Group 1 - Vertically aligned with Fr) */}
+            <div
+              style={{
+                gridColumn: 2,
+                gridRow: 1,
+                zIndex: 20
+              }}
+              className="flex items-center justify-center p-0.5"
+            >
+              {/* Only show button if on Native Platform (Mobile App) AND in Landscape mode */}
+              {Capacitor.isNativePlatform() && isLandscape && (
+                <button
+                  onClick={async () => {
+                    const newFullScreen = !isFullScreen;
+                    setIsFullScreen(newFullScreen);
+
+                    if (Capacitor.isNativePlatform()) {
+                      try {
+                        if (newFullScreen) {
+                          await new Promise(resolve => setTimeout(resolve, 100));
+                          await ScreenOrientation.lock({ orientation: 'landscape' });
+                        } else {
+                          await ScreenOrientation.unlock();
+                          await ScreenOrientation.lock({ orientation: 'portrait' });
+                        }
+                      } catch (e) {
+                        // Automatic rotation is not supported on this device/version.
+                        // Fallback: Unlock orientation so the user can rotate manually.
+                        await ScreenOrientation.unlock();
+                      }
+                    }
+                  }}
+                  className={`
+                    w-full h-full min-h-[30px] sm:min-h-[40px] flex flex-col items-center justify-center rounded-md transition-all shadow-sm border
+                    ${isFullScreen
+                      ? 'bg-red-50 text-red-600 border-red-200 hover:bg-red-100'
+                      : 'bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100'
+                    }
+                  `}
+                  title={isFullScreen ? "Exit Full Screen" : "Full Screen"}
+                >
+                  {isFullScreen ? <Minimize size={18} /> :
+                    <Maximize size={18} />
+                  }
+                </button>
+              )}
+            </div>
+            {/* Empty cell for column 3 (group 2) */}
             <div></div>
             {elements.filter(el => el.n >= 89 && el.n <= 103).sort((a, b) => a.n - b.n).map((element) => {
               const isSearched = filteredElements.includes(element);
@@ -866,6 +1006,7 @@ export default function PeriodicTableApp() {
                 <ElementCard
                   key={element.n}
                   element={adjustedElement}
+                  isFullScreen={isFullScreen}
                   onClick={() => {
                     setSelectedElement(element);
                     setActiveSeries(null); // Clear series selection when clicking an element

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 /* Performance optimizations */
+
 * {
   font-display: swap;
 }

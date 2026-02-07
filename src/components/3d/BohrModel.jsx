@@ -1,6 +1,6 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere, Torus, Html } from '@react-three/drei';
+import { Sphere, Torus, Html, OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 const SHELL_DISTANCE = 1.2;
@@ -140,6 +140,7 @@ export default function BohrModel({ element }) {
             <Canvas camera={{ position: [0, 5, camDistance], fov: 45 }}>
                 <ambientLight intensity={0.5} />
                 <pointLight position={[10, 10, 10]} />
+                <OrbitControls enableZoom={true} enablePan={true} />
 
                 <Nucleus protonCount={element.n} />
 
