@@ -1,6 +1,7 @@
-// Sources:
+// References:
 // - https://en.wikipedia.org/wiki/Periodic_table
 // - https://github.com/Bowserinator/Periodic-Table-JSON
+// - https://github.com/sweaver2112/periodic-table-data-complete/blob/main/pTable.csv
 
 export const elements = [
   {

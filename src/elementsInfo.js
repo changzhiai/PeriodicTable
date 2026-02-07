@@ -1,4 +1,4 @@
-// Source: https://en.wikipedia.org/wiki/Periodic_table
+// References: https://en.wikipedia.org/wiki/Periodic_table
 
 export const aiSummaries = {
     "Hydrogen": `Hydrogen (H) is the lightest and most abundant element in the universe, existing as a colorless, odorless diatomic gas at standard conditions. It is highly flammable and plays a crucial role in energy, chemical manufacturing, and biological processes. Key details about Hydrogen (H) are as follows:
