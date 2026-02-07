@@ -6,4 +6,7 @@ export default defineConfig({
   plugins: [react()],
   // Base path for GitHub Pages: https://<user>.github.io/PeriodicTable/
   base: '/PeriodicTable/',
+  resolve: {
+    dedupe: ['react', 'react-dom'],
+  },
 })
