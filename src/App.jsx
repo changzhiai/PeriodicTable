@@ -82,6 +82,22 @@ const ElementCard = React.memo(({ element, onClick, isDimmed }) => {
   );
 });
 
+// Helper to format lattice angles (convert raw radians to multiples of π)
+const formatLatticeAngles = (angles) => {
+  if (!angles) return 'N/A';
+  // If it already uses π symbol or pi, return as is (but maybe clean up spaces)
+  if (angles.includes('π') || angles.toLowerCase().includes('pi')) return angles;
+
+  // Otherwise, assume raw radian numbers and convert to multiples of π
+  return angles.split(',').map(part => {
+    const val = parseFloat(part);
+    if (isNaN(val)) return part.trim();
+    const piMultiple = val / Math.PI;
+    // Format to 2 decimal places, e.g., 0.32π
+    return `${piMultiple.toFixed(2)}π`;
+  }).join(', ');
+};
+
 const DetailModal = ({ element, onClose }) => {
   if (!element) return null;
 
@@ -202,7 +218,7 @@ const DetailModal = ({ element, onClose }) => {
                     </tr>
                     <tr className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                       <td className="py-2.5 px-3 sm:px-4 text-gray-500">Lattice Angles</td>
-                      <td className="py-2.5 px-3 sm:px-4 text-gray-800 font-mono">{element.latticeAngles || 'N/A'}</td>
+                      <td className="py-2.5 px-3 sm:px-4 text-gray-800 font-mono">{formatLatticeAngles(element.latticeAngles)}</td>
                     </tr>
                     <tr className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                       <td className="py-2.5 px-3 sm:px-4 text-gray-500">Oxidation States</td>
