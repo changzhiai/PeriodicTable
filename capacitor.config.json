@@ -1,0 +1,12 @@
+{
+  "appId": "com.changzhiai.periodictable",
+  "appName": "Periodic Table",
+  "webDir": "dist",
+  "plugins": {
+    "StatusBar": {
+      "overlaysWebView": false,
+      "style": "DARK",
+      "backgroundColor": "#FFFFFF"
+    }
+  }
+}

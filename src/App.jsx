@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Search, Atom, X, FlaskConical, Cuboid, Volume2 } from 'lucide-react';
+import { Capacitor } from '@capacitor/core';
+import { StatusBar, Style } from '@capacitor/status-bar';
 import { elements as rawElements } from './elementsData';
 import BohrModel from './components/3d/BohrModel';
 import CrystalStructure from './components/3d/CrystalStructure';
@@ -104,9 +106,9 @@ const DetailModal = ({ element, onClose }) => {
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 safe-pt safe-pb safe-pl safe-pr" onClick={onClose}>
       <div
-        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-[calc(100vw-2rem)] sm:max-w-lg md:max-w-2xl lg:max-w-6xl overflow-hidden animate-in fade-in zoom-in duration-200 h-[calc(100dvh-2rem)] sm:h-[90vh] flex flex-col"
+        className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-lg md:max-w-2xl lg:max-w-6xl overflow-hidden animate-in fade-in zoom-in duration-200 h-full sm:h-[90vh] flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Full Width Header */}
@@ -362,6 +364,31 @@ export default function PeriodicTableApp() {
   const dropdownButtonRef = useRef(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
 
+  // Configure status bar - Fix overlap issues
+  useEffect(() => {
+    const configureStatusBar = async () => {
+      // Basic check if running natively
+      if (Capacitor.isNativePlatform()) {
+        try {
+          await StatusBar.setStyle({ style: Style.Light });
+
+          // On Android, we generally want to avoid overlaying the status bar 
+          // to prevent content from being hidden behind it.
+          // On iOS, we want it transparent but safe areas handled.
+          if (Capacitor.getPlatform() === 'android') {
+            await StatusBar.setOverlaysWebView({ overlay: false });
+            await StatusBar.setBackgroundColor({ color: '#FFFFFF' }); // Match header
+            document.body.classList.add('platform-android');
+          }
+        } catch (err) {
+          console.warn('Status bar configuration failed:', err);
+        }
+      }
+    };
+
+    configureStatusBar();
+  }, []);
+
   // Calculate dropdown position when it opens or window resizes/scrolls
   useEffect(() => {
     const updatePosition = () => {
@@ -506,7 +533,7 @@ export default function PeriodicTableApp() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans flex flex-col">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm safe-pt">
         <div className="max-w-7xl mx-auto px-4 py-1 sm:py-2 md:py-2 flex flex-wrap items-center justify-between gap-2">
           {/* Left: title + inline group dropdown */}
           <div className="flex items-center gap-3 flex-wrap">
