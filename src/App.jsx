@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Search, Atom, X, FlaskConical, Cuboid } from 'lucide-react';
+import { Search, Atom, X, FlaskConical, Cuboid, Volume2 } from 'lucide-react';
 import { elements as rawElements } from './elementsData';
 import BohrModel from './components/3d/BohrModel';
 import CrystalStructure from './components/3d/CrystalStructure';
@@ -116,7 +116,41 @@ const DetailModal = ({ element, onClose }) => {
               <h2 className="text-3xl sm:text-5xl font-bold tracking-tight">{element.s}</h2>
               <span className="text-lg sm:text-2xl opacity-75 font-mono">#{element.n}</span>
             </div>
-            <h3 className="text-xl sm:text-3xl font-medium mt-1">{element.name}</h3>
+            <div className="flex items-center gap-2 mt-1">
+              <h3 className="text-xl sm:text-3xl font-medium">{element.name}</h3>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // Cancel any current speech
+                  window.speechSynthesis.cancel();
+
+                  const utterance = new SpeechSynthesisUtterance(element.name);
+                  utterance.lang = 'en-US';
+
+                  // Style adjustments
+                  utterance.rate = 0.9; // Slightly slower for clarity
+                  utterance.pitch = 1;  // Normal pitch
+
+                  // Try to select a high-quality voice
+                  const voices = window.speechSynthesis.getVoices();
+                  const preferredVoice = voices.find(voice =>
+                    voice.name === 'Google US English' ||
+                    voice.name === 'Samantha' ||
+                    (voice.lang === 'en-US' && voice.localService)
+                  );
+
+                  if (preferredVoice) {
+                    utterance.voice = preferredVoice;
+                  }
+
+                  window.speechSynthesis.speak(utterance);
+                }}
+                className="p-1.5 hover:bg-black/5 rounded-full text-black/40 hover:text-black/80 transition-colors"
+                title="Pronounce"
+              >
+                <Volume2 size={20} />
+              </button>
+            </div>
 
             <div className="flex items-center space-x-2 text-sm opacity-90 font-medium mt-1">
               <FlaskConical size={14} />
