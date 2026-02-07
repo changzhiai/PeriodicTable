@@ -4,6 +4,7 @@ import { elements as rawElements } from '../elementsData';
 const MiniPeriodicTable = ({ activeElement }) => {
     return (
         <div
+            aria-hidden="true"
             className="grid gap-[1px] auto-rows-min select-none"
             style={{
                 gridTemplateColumns: 'repeat(18, 1fr)',

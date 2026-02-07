@@ -59,10 +59,12 @@ const ElementCard = React.memo(({ element, onClick, isDimmed, isFullScreen }) =>
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
 
   return (
-    <div
+    <button
+      type="button"
       onClick={() => onClick(element)}
+      aria-label={`View details for ${element.name}`}
       className={`
-        relative p-0.5 sm:p-1 flex flex-col items-center justify-between cursor-pointer 
+        relative ${isFullScreen ? 'p-[1px] sm:p-0.5' : 'p-0.5 sm:p-1'} flex flex-col items-center justify-between cursor-pointer 
         transition-all duration-200 border 
         ${colorClass} 
         ${isDimmed ? 'opacity-20 scale-95 grayscale' : 'opacity-100 hover:scale-110 hover:z-10 hover:shadow-lg'}
@@ -70,7 +72,7 @@ const ElementCard = React.memo(({ element, onClick, isDimmed, isFullScreen }) =>
       style={{
         gridColumn: element.x,
         gridRow: element.y,
-        aspectRatio: '1/1',
+        aspectRatio: isFullScreen ? '1.35/1' : '1/1', // Save vertical space in full screen
         minWidth: '0'
       }}
     >
@@ -84,7 +86,7 @@ const ElementCard = React.memo(({ element, onClick, isDimmed, isFullScreen }) =>
           {element.name}
         </span>
       )}
-    </div>
+    </button>
   );
 });
 
@@ -123,7 +125,7 @@ const formatElectronConfig = (config) => {
   });
 };
 
-const DetailModal = ({ element, onClose }) => {
+const DetailModal = ({ element, onClose, isLandscape }) => {
   // Handle status bar visibility for landscape/short screens
   useEffect(() => {
     const handleResize = async () => {
@@ -158,9 +160,9 @@ const DetailModal = ({ element, onClose }) => {
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-1 sm:p-4 safe-pt safe-pb safe-pl safe-pr [@media(max-height:500px)]:p-0" onClick={onClose}>
+    <div className={`fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center ${isLandscape ? 'p-0' : 'p-1 sm:p-4 safe-pt safe-pb safe-pl safe-pr'} [@media(max-height:500px)]:p-0`} onClick={onClose}>
       <div
-        className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-lg md:max-w-2xl lg:max-w-6xl overflow-hidden animate-in fade-in zoom-in duration-200 h-full sm:h-[98vh] flex flex-col [@media(max-height:500px)]:overflow-y-auto [@media(max-height:500px)]:rounded-none"
+        className={`relative bg-white shadow-2xl w-full max-w-lg md:max-w-2xl lg:max-w-6xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col [@media(max-height:500px)]:overflow-y-auto [@media(max-height:500px)]:rounded-none ${isLandscape ? 'h-full rounded-none' : 'rounded-xl sm:rounded-2xl h-full sm:h-[98vh]'}`}
         onClick={e => e.stopPropagation()}
       >
         {/* Full Width Header */}
@@ -216,7 +218,7 @@ const DetailModal = ({ element, onClose }) => {
             <div className="hidden sm:block pt-1 opacity-80">
               <MiniPeriodicTable activeElement={element} />
             </div>
-            <button onClick={onClose} className="p-2 bg-black/10 hover:bg-black/20 rounded-full transition-colors flex-shrink-0">
+            <button onClick={onClose} aria-label="Close details" className="p-2 bg-black/10 hover:bg-black/20 rounded-full transition-colors flex-shrink-0">
               <X size={20} />
             </button>
           </div>
@@ -429,6 +431,43 @@ export default function PeriodicTableApp() {
     mql.addEventListener('change', onChange);
     return () => mql.removeEventListener('change', onChange);
   }, []);
+
+  // Auto-exit full screen when rotating to portrait
+  useEffect(() => {
+    if (isFullScreen && !isLandscape) {
+      setIsFullScreen(false);
+      if (Capacitor.isNativePlatform()) {
+        ScreenOrientation.unlock().catch(() => { });
+      }
+    }
+  }, [isLandscape, isFullScreen]);
+
+  // SEO: Deep linking and Title management
+  useEffect(() => {
+    // 1. On mount, check URL for element query param
+    const params = new URLSearchParams(window.location.search);
+    const elementSymbol = params.get('element');
+    if (elementSymbol) {
+      const el = elements.find(e => e.s.toLowerCase() === elementSymbol.toLowerCase());
+      if (el) setSelectedElement(el);
+    }
+  }, [elements]); // Run once on mount (elements is stable/state)
+
+  // 2. Update URL and Document Title when selectedElement changes
+  useEffect(() => {
+    if (selectedElement) {
+      document.title = `${selectedElement.name} (${selectedElement.s}) - Periodic Table`;
+      const url = new URL(window.location);
+      url.searchParams.set('element', selectedElement.s);
+      // Use replaceState to update URL without adding to history stack (prevents back-button loops)
+      window.history.replaceState({}, '', url);
+    } else {
+      document.title = 'Interactive Periodic Table | Modern & Responsive';
+      const url = new URL(window.location);
+      url.searchParams.delete('element');
+      window.history.replaceState({}, '', url);
+    }
+  }, [selectedElement]);
 
   // Toggle Status Bar based on full screen state
   useEffect(() => {
@@ -751,7 +790,7 @@ export default function PeriodicTableApp() {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 px-1 sm:px-3 pt-1 sm:pt-2 pb-1 sm:pb-2 md:px-6 md:pt-3 md:pb-3 overflow-x-auto">
+      <main className={`flex-1 px-1 sm:px-3 md:px-6 overflow-x-auto ${isFullScreen ? 'pt-0 sm:pt-0.5 pb-[1px]' : 'pt-1 sm:pt-2 pb-1 sm:pb-2 md:pt-3 md:pb-3'}`}>
         <div className="w-full max-w-7xl mx-auto">
 
           {/* Group Number Labels - Top Row */}
@@ -814,6 +853,7 @@ export default function PeriodicTableApp() {
 
               return (
                 <ElementCard
+                  isFullScreen={isFullScreen}
                   key={element.n}
                   element={adjustedElement}
                   onClick={() => {
@@ -833,7 +873,7 @@ export default function PeriodicTableApp() {
                 setActiveSeries(newSeries);
                 if (newSeries) setActiveCategory(null); // Deselect category when series is selected
               }}
-              className={`relative border border-pink-400 bg-pink-200 text-pink-900 flex flex-col items-center justify-between p-0.5 sm:p-1 cursor-pointer transition-all duration-200 ${searchTerm || (activeCategory && activeCategory !== 'lanthanide') || activeSeries === 'actinides'
+              className={`relative border border-pink-400 bg-pink-200 text-pink-900 flex flex-col items-center justify-between ${isFullScreen ? 'p-[1px] sm:p-0.5' : 'p-0.5 sm:p-1'} cursor-pointer transition-all duration-200 ${searchTerm || (activeCategory && activeCategory !== 'lanthanide') || activeSeries === 'actinides'
                 ? 'opacity-20 scale-95 grayscale cursor-not-allowed'
                 : (activeSeries === 'lanthanides' || activeCategory === 'lanthanide')
                   ? 'ring-2 ring-offset-1 ring-pink-500 shadow-md transform scale-105 z-10'
@@ -842,7 +882,7 @@ export default function PeriodicTableApp() {
               style={{
                 gridColumn: '4', // Column 3 in the 18-column grid (after Ba at column 2)
                 gridRow: 6,
-                aspectRatio: '1/1',
+                aspectRatio: isFullScreen ? '1.35/1' : '1/1',
                 minWidth: '0'
               }}
             >
@@ -854,9 +894,11 @@ export default function PeriodicTableApp() {
                 Ln
               </span>
               {/* Full name, shown like element names (hidden on very small screens) */}
-              <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
-                Lanthanoids
-              </span>
+              {!isFullScreen && (
+                <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
+                  Lanthanoids
+                </span>
+              )}
             </div>
 
             {/* Placeholder cell between Ra (88) and Rf (104) in row 7 */}
@@ -867,7 +909,7 @@ export default function PeriodicTableApp() {
                 setActiveSeries(newSeries);
                 if (newSeries) setActiveCategory(null); // Deselect category when series is selected
               }}
-              className={`relative border border-pink-500 bg-pink-300 text-pink-900 flex flex-col items-center justify-between p-0.5 sm:p-1 cursor-pointer transition-all duration-200 ${searchTerm || (activeCategory && activeCategory !== 'actinide') || activeSeries === 'lanthanides'
+              className={`relative border border-pink-500 bg-pink-300 text-pink-900 flex flex-col items-center justify-between ${isFullScreen ? 'p-[1px] sm:p-0.5' : 'p-0.5 sm:p-1'} cursor-pointer transition-all duration-200 ${searchTerm || (activeCategory && activeCategory !== 'actinide') || activeSeries === 'lanthanides'
                 ? 'opacity-20 scale-95 grayscale cursor-not-allowed'
                 : (activeSeries === 'actinides' || activeCategory === 'actinide')
                   ? 'ring-2 ring-offset-1 ring-pink-500 shadow-md transform scale-105 z-10'
@@ -876,7 +918,7 @@ export default function PeriodicTableApp() {
               style={{
                 gridColumn: '4', // Column 3 in the 18-column grid (after Ra at column 2)
                 gridRow: 7,
-                aspectRatio: '1/1',
+                aspectRatio: isFullScreen ? '1.35/1' : '1/1',
                 minWidth: '0'
               }}
             >
@@ -888,9 +930,11 @@ export default function PeriodicTableApp() {
                 An
               </span>
               {/* Full name, shown like element names (hidden on very small screens) */}
-              <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
-                Actinoids
-              </span>
+              {!isFullScreen && (
+                <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
+                  Actinoids
+                </span>
+              )}
             </div>
           </div>
 
@@ -920,6 +964,7 @@ export default function PeriodicTableApp() {
 
               return (
                 <ElementCard
+                  isFullScreen={isFullScreen}
                   key={element.n}
                   element={adjustedElement}
                   onClick={() => {
@@ -946,10 +991,13 @@ export default function PeriodicTableApp() {
                 gridRow: 1,
                 zIndex: 20
               }}
-              className="flex items-center justify-center p-0.5"
+              className="relative"
             >
-              {/* Only show button if on Native Platform (Mobile App) AND in Landscape mode */}
-              {Capacitor.isNativePlatform() && isLandscape && (
+              {/* Only show button if:
+                  1. Native App in Landscape
+                  2. Web/Laptop in Landscape AND small height (simulating phone)
+              */}
+              {(Capacitor.isNativePlatform() || window.innerHeight < 600) && isLandscape && (
                 <button
                   onClick={async () => {
                     const newFullScreen = !isFullScreen;
@@ -962,7 +1010,6 @@ export default function PeriodicTableApp() {
                           await ScreenOrientation.lock({ orientation: 'landscape' });
                         } else {
                           await ScreenOrientation.unlock();
-                          await ScreenOrientation.lock({ orientation: 'portrait' });
                         }
                       } catch (e) {
                         // Automatic rotation is not supported on this device/version.
@@ -972,7 +1019,7 @@ export default function PeriodicTableApp() {
                     }
                   }}
                   className={`
-                    w-full h-full min-h-[30px] sm:min-h-[40px] flex flex-col items-center justify-center rounded-md transition-all shadow-sm border
+                    w-full h-full ${isFullScreen ? 'min-h-0' : 'min-h-[30px] sm:min-h-[40px]'} flex flex-col items-center justify-center rounded-md transition-all shadow-sm border
                     ${isFullScreen
                       ? 'bg-red-50 text-red-600 border-red-200 hover:bg-red-100'
                       : 'bg-blue-50 text-blue-600 border-blue-200 hover:bg-blue-100'
@@ -1023,6 +1070,7 @@ export default function PeriodicTableApp() {
       {/* Selected Element Modal */}
       <DetailModal
         element={selectedElement}
+        isLandscape={isLandscape}
         onClose={() => setSelectedElement(null)}
       />
 
