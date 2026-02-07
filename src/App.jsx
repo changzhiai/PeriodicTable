@@ -5,7 +5,7 @@ import { elements as rawElements } from './elementsData';
 import BohrModel from './components/3d/BohrModel';
 import CrystalStructure from './components/3d/CrystalStructure';
 import MiniPeriodicTable from './components/MiniPeriodicTable';
-import { aiSummaries } from './ai_summaries';
+import { aiSummaries } from './elementsInfo';
 
 // --- FULL ELEMENT DATASET ---
 // Compressed structure for the example, expanded in logic

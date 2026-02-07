@@ -7,7 +7,7 @@ export const elements = [
     "cat": "diatomic nonmetal",
     "x": 1,
     "y": 1,
-    "summary": "Hydrogen is the lightest element. It is a colorless, odorless, tasteless, toxic, nonmetallic, highly combustible diatomic gas.",
+    "summary": "Hydrogen (H) is the lightest and most abundant element in the universe, existing as a colorless, odorless diatomic gas at standard conditions. It is highly flammable and plays a crucial role in energy, chemical manufacturing, and biological processes.",
     "atomicMass": 1.008,
     "boilingPoint": 20.271,
     "density": 0.0899,
@@ -38,7 +38,7 @@ export const elements = [
     "cat": "noble gas",
     "x": 18,
     "y": 1,
-    "summary": "Helium is a colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas group in the periodic table.",
+    "summary": "Helium (He) is a colorless, odorless, tasteless noble gas and the second most abundant element in the universe, though rare on Earth. It is chemically inert and has the lowest boiling point of all elements.",
     "atomicMass": 4.0026022,
     "boilingPoint": 4.222,
     "density": 0.1785,
@@ -89,7 +89,8 @@ export const elements = [
     "block": "s-block",
     "appearance": "silvery-white",
     "specificHeat": 3570,
-    "thermalConductivity": 85
+    "thermalConductivity": 85,
+    "summary": "Lithium (Li) is the lightest metal and solid element, appearing as a soft, silvery-white alkali metal that is highly reactive with water and air. It is crucial for modern battery technology and has important pharmaceutical applications."
   },
   {
     "n": 4,
@@ -119,7 +120,8 @@ export const elements = [
     "block": "s-block",
     "appearance": "white-gray metallic",
     "specificHeat": 1820,
-    "thermalConductivity": 190
+    "thermalConductivity": 190,
+    "summary": "Beryllium (Be) is a rare, steel-gray alkaline earth metal that is lightweight, stiff, and has excellent thermal properties. It is toxic and requires careful handling but is valuable in specialized applications."
   },
   {
     "n": 5,
@@ -149,7 +151,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "black-brown",
     "specificHeat": 1030,
-    "thermalConductivity": 27
+    "thermalConductivity": 27,
+    "summary": "Boron (B) is a metalloid element that appears as a dark, amorphous powder or as extremely hard, black crystalline material. It is essential in many industrial applications and biological processes."
   },
   {
     "n": 6,
@@ -179,7 +182,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": 710,
-    "thermalConductivity": 140
+    "thermalConductivity": 140,
+    "summary": "Carbon (C) is a fundamental nonmetal element that exists in multiple allotropic forms and is the basis of all known life. It forms more compounds than any other element except hydrogen."
   },
   {
     "n": 7,
@@ -209,7 +213,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "colorless gas, liquid or solid",
     "specificHeat": 1040,
-    "thermalConductivity": 0.02583
+    "thermalConductivity": 0.02583,
+    "summary": "Nitrogen (N) is a colorless, odorless, tasteless diatomic gas that makes up about 78% of Earth's atmosphere. It is relatively inert due to the strong triple bond in N₂ molecules."
   },
   {
     "n": 8,
@@ -239,7 +244,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": 919,
-    "thermalConductivity": 0.02658
+    "thermalConductivity": 0.02658,
+    "summary": "Oxygen (O) is a colorless, odorless, tasteless diatomic gas that is essential for most life forms and is the third most abundant element in the universe. It is highly reactive and supports combustion."
   },
   {
     "n": 9,
@@ -269,7 +275,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": 824,
-    "thermalConductivity": 0.0277
+    "thermalConductivity": 0.0277,
+    "summary": "Fluorine (F) is a pale yellow-green, highly toxic and corrosive diatomic gas and the most electronegative and reactive of all elements. It reacts with almost all materials, including noble gases under certain conditions."
   },
   {
     "n": 10,
@@ -299,7 +306,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "colorless gas exhibiting an orange-red glow when placed in a high voltage electric field",
     "specificHeat": 1030,
-    "thermalConductivity": 0.0491
+    "thermalConductivity": 0.0491,
+    "summary": "Neon (Ne) is a colorless, odorless, tasteless noble gas that emits a distinctive reddish-orange glow when electrically excited. It is chemically inert and the second-lightest noble gas."
   },
   {
     "n": 11,
@@ -329,7 +337,8 @@ export const elements = [
     "block": "s-block",
     "appearance": "silvery white metallic",
     "specificHeat": 1230,
-    "thermalConductivity": 140
+    "thermalConductivity": 140,
+    "summary": "Sodium (Na) is a soft, silvery-white, highly reactive alkali metal that must be stored under oil to prevent oxidation. It is the sixth most abundant element on Earth and essential for life."
   },
   {
     "n": 12,
@@ -359,7 +368,8 @@ export const elements = [
     "block": "s-block",
     "appearance": "shiny grey solid",
     "specificHeat": 1020,
-    "thermalConductivity": 160
+    "thermalConductivity": 160,
+    "summary": "Magnesium (Mg) is a lightweight, silvery-white alkaline earth metal that is strong, moderately reactive, and the eighth most abundant element in Earth's crust. It burns with an intense white light."
   },
   {
     "n": 13,
@@ -419,7 +429,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "crystalline, reflective with bluish-tinged faces",
     "specificHeat": 710,
-    "thermalConductivity": 150
+    "thermalConductivity": 150,
+    "summary": "Silicon (Si) is a hard, brittle crystalline metalloid with a blue-gray metallic luster. It is the second most abundant element in Earth's crust and is the foundation of modern electronics and computer technology."
   },
   {
     "n": 15,
@@ -449,7 +460,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "colourless, waxy white, yellow, scarlet, red, violet, black",
     "specificHeat": 769.7,
-    "thermalConductivity": 0.236
+    "thermalConductivity": 0.236,
+    "summary": "Phosphorus (P) is a highly reactive nonmetal that exists in several allotropic forms, including white (waxy, toxic, spontaneously flammable), red (stable powder), and black (least reactive). It is essential for all life."
   },
   {
     "n": 16,
@@ -479,7 +491,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "lemon yellow sintered microcrystals",
     "specificHeat": 705,
-    "thermalConductivity": 0.205
+    "thermalConductivity": 0.205,
+    "summary": "Sulfur (S) is a bright yellow, brittle nonmetal that is essential for life and has been known since ancient times. It exists in multiple allotropic forms and is found both free in nature and in many minerals."
   },
   {
     "n": 17,
@@ -509,7 +522,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "pale yellow-green gas",
     "specificHeat": 478.2,
-    "thermalConductivity": 0.0089
+    "thermalConductivity": 0.0089,
+    "summary": "Chlorine (Cl) is a yellow-green, dense, toxic diatomic gas with a pungent, suffocating odor. It is highly reactive and is never found free in nature, but is common in compounds, especially salt (NaCl)."
   },
   {
     "n": 18,
@@ -539,7 +553,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "colorless gas exhibiting a lilac/violet glow when placed in a high voltage electric field",
     "specificHeat": 520.33,
-    "thermalConductivity": 0.01772
+    "thermalConductivity": 0.01772,
+    "summary": "Argon (Ar) is a colorless, odorless, tasteless noble gas that is the third most abundant gas in Earth's atmosphere (0.93%). It is chemically inert under normal conditions and is the most abundant noble gas on Earth."
   },
   {
     "n": 19,
@@ -569,7 +584,8 @@ export const elements = [
     "block": "s-block",
     "appearance": "silvery gray",
     "specificHeat": 757,
-    "thermalConductivity": 100
+    "thermalConductivity": 100,
+    "summary": "Potassium (K) is a soft, silvery-white alkali metal that is highly reactive and must be stored under oil. It is the seventh most abundant element in Earth's crust and is essential for all living organisms."
   },
   {
     "n": 20,
@@ -599,7 +615,8 @@ export const elements = [
     "block": "s-block",
     "appearance": null,
     "specificHeat": 631,
-    "thermalConductivity": 200
+    "thermalConductivity": 200,
+    "summary": "Calcium (Ca) is a soft, silvery-white alkaline earth metal that is highly reactive and the fifth most abundant element in Earth's crust. It is essential for life, particularly in bones and teeth."
   },
   {
     "n": 21,
@@ -629,7 +646,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery white",
     "specificHeat": 567,
-    "thermalConductivity": 16
+    "thermalConductivity": 16,
+    "summary": "Scandium (Sc) is a silvery-white transition metal that is relatively soft and lightweight. It is rare and expensive, despite being more abundant than many other rare metals."
   },
   {
     "n": 22,
@@ -659,7 +677,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery grey-white metallic",
     "specificHeat": 520,
-    "thermalConductivity": 22
+    "thermalConductivity": 22,
+    "summary": "Titanium (Ti) is a lustrous, strong, lightweight transition metal with exceptional corrosion resistance. It is the ninth most abundant element in Earth's crust and has the highest strength-to-density ratio of any metallic element."
   },
   {
     "n": 23,
@@ -689,7 +708,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "blue-silver-grey metal",
     "specificHeat": 489,
-    "thermalConductivity": 31
+    "thermalConductivity": 31,
+    "summary": "Vanadium (V) is a hard, silvery-gray transition metal that is ductile and resistant to corrosion. It is relatively abundant in Earth's crust and is primarily used in alloys and chemical applications."
   },
   {
     "n": 24,
@@ -719,7 +739,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery metallic",
     "specificHeat": 448,
-    "thermalConductivity": 94
+    "thermalConductivity": 94,
+    "summary": "Chromium (Cr) is a hard, lustrous, steel-gray transition metal that takes a high polish and is highly resistant to tarnishing and corrosion. It is the hardest metal element."
   },
   {
     "n": 25,
@@ -749,7 +770,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery metallic",
     "specificHeat": 479,
-    "thermalConductivity": 7.8
+    "thermalConductivity": 7.8,
+    "summary": "Manganese (Mn) is a hard, brittle, silvery-gray transition metal that is essential for steel production and has important biochemical roles. It is the twelfth most abundant element in Earth's crust."
   },
   {
     "n": 26,
@@ -779,7 +801,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "lustrous metallic with a grayish tinge",
     "specificHeat": 449,
-    "thermalConductivity": 80
+    "thermalConductivity": 80,
+    "summary": "Iron (Fe) is a lustrous, silvery-gray, ductile, and magnetic metal that is the fourth most abundant element in Earth's crust. It is the most widely used of all metals and is essential for nearly all living organisms."
   },
   {
     "n": 27,
@@ -809,7 +832,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "hard lustrous gray metal",
     "specificHeat": 421,
-    "thermalConductivity": 100
+    "thermalConductivity": 100,
+    "summary": "Cobalt (Co) is a hard, lustrous, silvery-blue transition metal that is ferromagnetic and maintains its magnetic properties at high temperatures. It is relatively rare but geopolitically significant."
   },
   {
     "n": 28,
@@ -839,7 +863,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "lustrous, metallic, and silver with a gold tinge",
     "specificHeat": 445,
-    "thermalConductivity": 91
+    "thermalConductivity": 91,
+    "summary": "Nickel (Ni) is a silvery-white, lustrous, hard, ductile transition metal that is highly resistant to corrosion and oxidation. It is ferromagnetic and is one of only four elements that are magnetic at room temperature."
   },
   {
     "n": 29,
@@ -869,7 +894,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "red-orange metallic luster",
     "specificHeat": 384.4,
-    "thermalConductivity": 400
+    "thermalConductivity": 400,
+    "summary": "Copper (Cu) is a soft, malleable, ductile, reddish-orange metal with very high thermal and electrical conductivity (second only to silver). It has been used by humans for over 10,000 years."
   },
   {
     "n": 30,
@@ -899,7 +925,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silver-gray",
     "specificHeat": 388,
-    "thermalConductivity": 120
+    "thermalConductivity": 120,
+    "summary": "Zinc (Zn) is a bluish-white, lustrous, moderately reactive metal that is brittle at room temperature but becomes malleable when heated. It is the 24th most abundant element in Earth's crust."
   },
   {
     "n": 31,
@@ -929,7 +956,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "silver-white",
     "specificHeat": 371,
-    "thermalConductivity": 29
+    "thermalConductivity": 29,
+    "summary": "Gallium (Ga) is a soft, silvery metal that is liquid near room temperature (melts at 29.76°C) and has the largest liquid range of any element. It is primarily used in electronics and optoelectronics."
   },
   {
     "n": 32,
@@ -959,7 +987,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "grayish-white",
     "specificHeat": 321.4,
-    "thermalConductivity": 60
+    "thermalConductivity": 60,
+    "summary": "Germanium (Ge) is a lustrous, hard, grayish-white metalloid with semiconductor properties. It was important in early electronics but has been largely replaced by silicon in many applications."
   },
   {
     "n": 33,
@@ -989,7 +1018,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "metallic grey",
     "specificHeat": 328,
-    "thermalConductivity": 50
+    "thermalConductivity": 50,
+    "summary": "Arsenic (As) is a steel-gray, brittle, crystalline metalloid that occurs in several allotropic forms. It is notorious for its toxicity but has important industrial and technological applications."
   },
   {
     "n": 34,
@@ -1019,7 +1049,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "black, red, and gray (not pictured) allotropes",
     "specificHeat": 321.2,
-    "thermalConductivity": 0.52
+    "thermalConductivity": 0.52,
+    "summary": "Selenium (Se) is a nonmetal that exists in several allotropic forms, including a gray metallic form (most stable) and a red amorphous powder. It has semiconductor properties and is essential for life in trace amounts."
   },
   {
     "n": 35,
@@ -1049,7 +1080,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": 947.3,
-    "thermalConductivity": 0.12
+    "thermalConductivity": 0.12,
+    "summary": "Bromine (Br) is a heavy, volatile, mobile, reddish-brown liquid at room temperature with a strong, disagreeable odor. It is one of only two elements that are liquid at standard conditions (the other being mercury)."
   },
   {
     "n": 36,
@@ -1079,7 +1111,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "colorless gas, exhibiting a whitish glow in a high electric field",
     "specificHeat": 248.05,
-    "thermalConductivity": 0.00943
+    "thermalConductivity": 0.00943,
+    "summary": "Krypton (Kr) is a colorless, odorless, tasteless noble gas that is chemically inert under normal conditions. It is present in trace amounts in Earth's atmosphere and emits a bright white light when electrically excited."
   },
   {
     "n": 37,
@@ -1109,7 +1142,8 @@ export const elements = [
     "block": "s-block",
     "appearance": "grey white",
     "specificHeat": 364,
-    "thermalConductivity": 58
+    "thermalConductivity": 58,
+    "summary": "Rubidium (Rb) is a very soft, silvery-white alkali metal that is highly reactive and pyrophoric (ignites spontaneously in air). It is the second most electropositive and alkaline element after cesium."
   },
   {
     "n": 38,
@@ -1139,7 +1173,8 @@ export const elements = [
     "block": "s-block",
     "appearance": null,
     "specificHeat": 300,
-    "thermalConductivity": 35
+    "thermalConductivity": 35,
+    "summary": "Strontium (Sr) is a soft, silvery-white alkaline earth metal that is highly reactive and never found free in nature. It burns in air and reacts vigorously with water."
   },
   {
     "n": 39,
@@ -1169,7 +1204,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery white",
     "specificHeat": 298,
-    "thermalConductivity": 17
+    "thermalConductivity": 17,
+    "summary": "Yttrium (Y) is a silvery-metallic transition metal that is relatively stable in air due to an oxide film. Despite its name and association with rare earths, it is actually more abundant than lead."
   },
   {
     "n": 40,
@@ -1199,7 +1235,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery white",
     "specificHeat": 278,
-    "thermalConductivity": 23
+    "thermalConductivity": 23,
+    "summary": "Zirconium (Zr) is a lustrous, grayish-white, strong, ductile transition metal that is highly resistant to corrosion. It is primarily used in nuclear applications and chemical processing."
   },
   {
     "n": 41,
@@ -1229,7 +1266,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "gray metallic, bluish when oxidized",
     "specificHeat": 265,
-    "thermalConductivity": 54
+    "thermalConductivity": 54,
+    "summary": "Niobium (Nb) is a soft, gray, ductile transition metal with excellent superconducting properties and high melting point. It is chemically similar to tantalum."
   },
   {
     "n": 42,
@@ -1259,7 +1297,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "gray metallic",
     "specificHeat": 251,
-    "thermalConductivity": 139
+    "thermalConductivity": 139,
+    "summary": "Molybdenum (Mo) is a silvery-gray, hard transition metal with one of the highest melting points of all elements. It is essential for life and important in industrial applications."
   },
   {
     "n": 43,
@@ -1289,7 +1328,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "shiny gray metal",
     "specificHeat": 63,
-    "thermalConductivity": 51
+    "thermalConductivity": 51,
+    "summary": "Technetium (Tc) is a silvery-gray radioactive metal that is the lightest element with no stable isotopes. All isotopes are radioactive, making it extremely rare in nature."
   },
   {
     "n": 44,
@@ -1319,7 +1359,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery white metallic",
     "specificHeat": 238,
-    "thermalConductivity": 120
+    "thermalConductivity": 120,
+    "summary": "Ruthenium (Ru) is a hard, silvery-white transition metal belonging to the platinum group metals (PGMs). It is rare, chemically resistant, and has catalytic properties."
   },
   {
     "n": 45,
@@ -1349,7 +1390,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery white metallic",
     "specificHeat": 240,
-    "thermalConductivity": 150
+    "thermalConductivity": 150,
+    "summary": "Rhodium (Rh) is a rare, silvery-white, hard, and highly reflective transition metal belonging to the platinum group. It is the most expensive precious metal and has exceptional catalytic properties."
   },
   {
     "n": 46,
@@ -1379,7 +1421,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery white",
     "specificHeat": 240,
-    "thermalConductivity": 72
+    "thermalConductivity": 72,
+    "summary": "Palladium (Pd) is a soft, silvery-white transition metal belonging to the platinum group. It has the lowest melting point and density of the platinum group metals and has remarkable hydrogen absorption properties."
   },
   {
     "n": 47,
@@ -1409,7 +1452,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "lustrous white metal",
     "specificHeat": 235,
-    "thermalConductivity": 430
+    "thermalConductivity": 430,
+    "summary": "Silver (Ag) is a lustrous, white, soft, ductile transition metal with the highest electrical and thermal conductivity of all metals. It has been valued throughout human history for currency, jewelry, and ornaments."
   },
   {
     "n": 48,
@@ -1439,7 +1483,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery bluish-gray metallic",
     "specificHeat": 230,
-    "thermalConductivity": 97
+    "thermalConductivity": 97,
+    "summary": "Cadmium (Cd) is a soft, bluish-white, toxic transition metal that is chemically similar to zinc. It is highly corrosive to many metals and has environmental health concerns."
   },
   {
     "n": 49,
@@ -1469,7 +1514,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "silvery lustrous gray",
     "specificHeat": 233,
-    "thermalConductivity": 82
+    "thermalConductivity": 82,
+    "summary": "Indium (In) is a soft, malleable, silvery-white post-transition metal that is extremely rare. It remains soft and ductile at very low temperatures and is used primarily in electronic displays."
   },
   {
     "n": 50,
@@ -1499,7 +1545,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "silvery-white (beta, β) or gray (alpha, α)",
     "specificHeat": 217,
-    "thermalConductivity": 67
+    "thermalConductivity": 67,
+    "summary": "Tin (Sn) is a soft, silvery-white, malleable post-transition metal that resists corrosion. It has been used by humans since the Bronze Age and is one of the earliest metals known."
   },
   {
     "n": 51,
@@ -1529,7 +1576,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "silvery lustrous gray",
     "specificHeat": 207,
-    "thermalConductivity": 24
+    "thermalConductivity": 24,
+    "summary": "Antimony (Sb) is a lustrous, silvery-gray metalloid that is brittle and has poor electrical and thermal conductivity. It has been used since ancient times and exists in multiple allotropic forms."
   },
   {
     "n": 52,
@@ -1559,7 +1607,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": 201,
-    "thermalConductivity": 3
+    "thermalConductivity": 3,
+    "summary": "Tellurium (Te) is a brittle, silvery-white metalloid that is extremely rare in Earth's crust (rarer than platinum). It is mildly toxic and imparts a garlic odor to the breath when ingested."
   },
   {
     "n": 53,
@@ -1589,7 +1638,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "lustrous metallic gray, violet as a gas",
     "specificHeat": 429,
-    "thermalConductivity": 0.449
+    "thermalConductivity": 0.449,
+    "summary": "Iodine (I) is a lustrous, purple-black non-metallic solid that sublimes readily to form a purple vapor. It is the heaviest stable halogen and essential for human health."
   },
   {
     "n": 54,
@@ -1619,7 +1669,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "colorless gas, exhibiting a blue glow when placed in a high voltage electric field",
     "specificHeat": 158.32,
-    "thermalConductivity": 0.00565
+    "thermalConductivity": 0.00565,
+    "summary": "Xenon (Xe) is a colorless, dense, odorless noble gas that is chemically inert under normal conditions. It is the rarest non-radioactive noble gas in Earth's atmosphere."
   },
   {
     "n": 55,
@@ -1649,7 +1700,8 @@ export const elements = [
     "block": "s-block",
     "appearance": "silvery gold",
     "specificHeat": 242,
-    "thermalConductivity": 36
+    "thermalConductivity": 36,
+    "summary": "Cesium (Cs) is a soft, silvery-gold alkali metal that is liquid near room temperature and extremely reactive. It is the most electropositive and alkaline element."
   },
   {
     "n": 56,
@@ -1679,7 +1731,8 @@ export const elements = [
     "block": "s-block",
     "appearance": null,
     "specificHeat": 205,
-    "thermalConductivity": 18
+    "thermalConductivity": 18,
+    "summary": "Barium (Ba) is a soft, silvery-white alkaline earth metal that is highly reactive and never found free in nature. It oxidizes rapidly in air and reacts vigorously with water."
   },
   {
     "n": 57,
@@ -2159,7 +2212,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "steel gray",
     "specificHeat": 144,
-    "thermalConductivity": 23
+    "thermalConductivity": 23,
+    "summary": "Hafnium (Hf) is a lustrous, silvery-gray, ductile transition metal, highly corrosion-resistant due to a protective oxide layer. Primarily used for control rods in nuclear reactors—due to its excellent neutron absorption—and in high-temperature superalloys for aerospace. It is found in zircon minerals and is produced as a byproduct of zirconium refining."
   },
   {
     "n": 73,
@@ -2189,7 +2243,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "gray blue",
     "specificHeat": 140,
-    "thermalConductivity": 57
+    "thermalConductivity": 57,
+    "summary": "Tantalum (Ta) is a hard, blue-gray, lustrous transition metal that is highly corrosion-resistant and has one of the highest melting points of all elements. It is ductile and can be drawn into fine wire."
   },
   {
     "n": 74,
@@ -2219,7 +2274,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "grayish white, lustrous",
     "specificHeat": 132,
-    "thermalConductivity": 170
+    "thermalConductivity": 170,
+    "summary": "Tungsten (W), also known as wolfram, is a rare, extremely hard, dense, and lustrous transition metal with the highest melting point of all elements. It is silvery-white to grayish in appearance and can be drawn into fine wires."
   },
   {
     "n": 75,
@@ -2249,7 +2305,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery-grayish",
     "specificHeat": 137,
-    "thermalConductivity": 48
+    "thermalConductivity": 48,
+    "summary": "Rhenium (Re) is a rare, silvery-white, lustrous transition metal, extremely dense, and one of the rarest elements in the Earth's crust. It has the third-highest melting point of all elements and is highly resistant to corrosion."
   },
   {
     "n": 76,
@@ -2279,7 +2336,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery, blue cast",
     "specificHeat": 130,
-    "thermalConductivity": 88
+    "thermalConductivity": 88,
+    "summary": "Osmium (Os) is a rare, lustrous, silvery-white transition metal, extremely dense, and one of the densest elements known. It is very hard, brittle, and has the highest melting point of the platinum group metals."
   },
   {
     "n": 77,
@@ -2309,7 +2367,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery white",
     "specificHeat": 131,
-    "thermalConductivity": 150
+    "thermalConductivity": 150,
+    "summary": "Iridium (Ir) is a very hard, brittle, silvery-white transition metal of the platinum group. It is the second-densest element (after osmium) and is the most corrosion-resistant metal known."
   },
   {
     "n": 78,
@@ -2339,7 +2398,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery white",
     "specificHeat": 133,
-    "thermalConductivity": 72
+    "thermalConductivity": 72,
+    "summary": "Platinum (Pt) is a dense, malleable, ductile, silvery-white transition metal that is highly unreactive. It is one of the rarest elements in Earth's crust and a prominent precious metal."
   },
   {
     "n": 79,
@@ -2369,7 +2429,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "metallic yellow",
     "specificHeat": 129.1,
-    "thermalConductivity": 320
+    "thermalConductivity": 320,
+    "summary": "Gold (Au) is a bright, slightly reddish yellow, dense, soft, malleable, and ductile metal. It is one of the least reactive chemical elements and is solid under standard conditions."
   },
   {
     "n": 80,
@@ -2399,7 +2460,8 @@ export const elements = [
     "block": "d-block",
     "appearance": "silvery",
     "specificHeat": 139.5,
-    "thermalConductivity": 8.3
+    "thermalConductivity": 8.3,
+    "summary": "Mercury (Hg) is a heavy, silvery d-block element and is the only metallic element that is liquid at standard conditions for temperature and pressure."
   },
   {
     "n": 81,
@@ -2429,7 +2491,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "silvery white",
     "specificHeat": 129,
-    "thermalConductivity": 46
+    "thermalConductivity": 46,
+    "summary": "Thallium (Tl) is a soft, gray post-transition metal that is not found free in nature. When isolated, it resembles tin, but discolors when exposed to air. It is highly toxic."
   },
   {
     "n": 82,
@@ -2459,7 +2522,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "metallic gray",
     "specificHeat": 127,
-    "thermalConductivity": 35
+    "thermalConductivity": 35,
+    "summary": "Lead (Pb) is a heavy, soft, malleable, bluish-gray post-transition metal. It has the highest atomic number of any stable element. It is dense, ductile, and poorly conductive."
   },
   {
     "n": 83,
@@ -2489,7 +2553,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "lustrous silver",
     "specificHeat": 122,
-    "thermalConductivity": 8
+    "thermalConductivity": 8,
+    "summary": "Bismuth (Bi) is a brittle, crystalline, silvery-white post-transition metal with a pinkish tinge. It is the most naturally diamagnetic element and has one of the lowest thermal conductivities among metals."
   },
   {
     "n": 84,
@@ -2519,7 +2584,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "silvery",
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Polonium (Po) is a radioactive, silvery-gray semi-metal or metal. It is extremely rare and highly volatile."
   },
   {
     "n": 85,
@@ -2549,7 +2615,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "unknown, probably metallic",
     "specificHeat": null,
-    "thermalConductivity": 2
+    "thermalConductivity": 2,
+    "summary": "Astatine (At) is a radioactive halogen and the rarest naturally occurring element in Earth's crust. It has no stable isotopes."
   },
   {
     "n": 86,
@@ -2579,7 +2646,8 @@ export const elements = [
     "block": "p-block",
     "appearance": "colorless gas, occasionally glows green or red in discharge tubes",
     "specificHeat": 93.65,
-    "thermalConductivity": 0.00361
+    "thermalConductivity": 0.00361,
+    "summary": "Radon (Rn) is a colorless, odorless, tasteless, radioactive noble gas. It is formed by the radioactive decay of radium."
   },
   {
     "n": 87,
@@ -2609,7 +2677,8 @@ export const elements = [
     "block": "s-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Francium (Fr) is a highly radioactive alkali metal with extremely short-lived isotopes. It is the second rarest naturally occurring element (after astatine)."
   },
   {
     "n": 88,
@@ -2639,7 +2708,8 @@ export const elements = [
     "block": "s-block",
     "appearance": "silvery white metallic",
     "specificHeat": 92,
-    "thermalConductivity": 19
+    "thermalConductivity": 19,
+    "summary": "Radium (Ra) is a highly radioactive alkaline earth metal that is silvery-white in appearance and glows in the dark. It is extremely rare and unstable, with no stable isotopes."
   },
   {
     "n": 89,
@@ -2669,7 +2739,8 @@ export const elements = [
     "block": "f-block",
     "appearance": null,
     "specificHeat": 120,
-    "thermalConductivity": 12
+    "thermalConductivity": 12,
+    "summary": "Actinium (Ac) is a highly radioactive, silvery-white metallic element. It is extremely rare and is the first element in the actinide series."
   },
   {
     "n": 90,
@@ -2699,7 +2770,8 @@ export const elements = [
     "block": "f-block",
     "appearance": "silvery, often with black tarnish",
     "specificHeat": 118,
-    "thermalConductivity": 54
+    "thermalConductivity": 54,
+    "summary": "Thorium (Th) is a weakly radioactive, silvery-white metallic element that is relatively abundant in Earth's crust. It is the most abundant naturally occurring actinide."
   },
   {
     "n": 91,
@@ -2729,7 +2801,8 @@ export const elements = [
     "block": "f-block",
     "appearance": "bright, silvery metallic luster",
     "specificHeat": 99.1,
-    "thermalConductivity": 47
+    "thermalConductivity": 47,
+    "summary": "Protactinium (Pa) is a highly radioactive, silvery-white metallic element that is extremely rare. It is toxic and requires special handling."
   },
   {
     "n": 92,
@@ -2759,7 +2832,8 @@ export const elements = [
     "block": "f-block",
     "appearance": null,
     "specificHeat": 116,
-    "thermalConductivity": 27
+    "thermalConductivity": 27,
+    "summary": "Uranium (U) is a weakly radioactive, silvery-gray metallic element that is relatively abundant in Earth's crust. It is the heaviest naturally occurring element."
   },
   {
     "n": 93,
@@ -2789,7 +2863,8 @@ export const elements = [
     "block": "f-block",
     "appearance": "silvery metallic",
     "specificHeat": null,
-    "thermalConductivity": 6
+    "thermalConductivity": 6,
+    "summary": "Neptunium (Np) is a silvery, radioactive actinide metal. It is the first transuranic element and is produced in nuclear reactors."
   },
   {
     "n": 94,
@@ -2819,7 +2894,8 @@ export const elements = [
     "block": "f-block",
     "appearance": "silvery white, tarnishing to dark gray in air",
     "specificHeat": null,
-    "thermalConductivity": 6
+    "thermalConductivity": 6,
+    "summary": "Plutonium (Pu) is a silvery-gray, radioactive actinide metal that tarnishes to a dull gray when oxidized. It is one of the most important transuranium elements."
   },
   {
     "n": 95,
@@ -2849,7 +2925,8 @@ export const elements = [
     "block": "f-block",
     "appearance": "silvery white",
     "specificHeat": null,
-    "thermalConductivity": 10
+    "thermalConductivity": 10,
+    "summary": "Americium (Am) is a silvery-white, radioactive actinide metal. It is commonly used in household smoke detectors."
   },
   {
     "n": 96,
@@ -2879,7 +2956,8 @@ export const elements = [
     "block": "f-block",
     "appearance": "silvery metallic, glows purple in the dark",
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Curium (Cm) is a hard, dense, silvery radioactive actinide metal that glows purple in the dark due to its intense radioactivity."
   },
   {
     "n": 97,
@@ -2909,7 +2987,8 @@ export const elements = [
     "block": "f-block",
     "appearance": "silvery",
     "specificHeat": null,
-    "thermalConductivity": 10
+    "thermalConductivity": 10,
+    "summary": "Berkelium (Bk) is a silvery, radioactive actinide metal. It is relatively rare even among synthetic elements."
   },
   {
     "n": 98,
@@ -2939,7 +3018,8 @@ export const elements = [
     "block": "f-block",
     "appearance": "silvery",
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Californium (Cf) is a silvery, radioactive actinide metal. It is one of the most useful synthetic elements due to its strong neutron emission."
   },
   {
     "n": 99,
@@ -2969,7 +3049,8 @@ export const elements = [
     "block": "f-block",
     "appearance": "silver-colored",
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Einsteinium (Es) is a silvery, radioactive actinide metal. It is extremely rare and difficult to study."
   },
   {
     "n": 100,
@@ -2999,7 +3080,8 @@ export const elements = [
     "block": "f-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Fermium (Fm) is a radioactive actinide metal. It is one of the heaviest elements that can be produced in significant quantities."
   },
   {
     "n": 101,
@@ -3029,7 +3111,8 @@ export const elements = [
     "block": "f-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Mendelevium (Md) is a radioactive actinide metal. It was the first element to be synthesized one atom at a time."
   },
   {
     "n": 102,
@@ -3059,7 +3142,8 @@ export const elements = [
     "block": "f-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Nobelium (No) is a radioactive actinide metal. It is extremely rare and short-lived."
   },
   {
     "n": 103,
@@ -3089,7 +3173,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Lawrencium (Lr) is a radioactive actinide metal and the last member of the actinide series."
   },
   {
     "n": 104,
@@ -3119,7 +3204,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Rutherfordium (Rf) is a synthetic, radioactive transactinide element. It is the first element in the 6d transition metal series."
   },
   {
     "n": 105,
@@ -3148,7 +3234,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Dubnium (Db) is a synthetic, radioactive transactinide element."
   },
   {
     "n": 106,
@@ -3177,7 +3264,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Seaborgium (Sg) is a synthetic, radioactive transactinide element."
   },
   {
     "n": 107,
@@ -3206,7 +3294,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Bohrium (Bh) is a synthetic, radioactive transactinide element."
   },
   {
     "n": 108,
@@ -3236,7 +3325,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Hassium (Hs) is a synthetic, radioactive transactinide element."
   },
   {
     "n": 109,
@@ -3265,7 +3355,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Meitnerium (Mt) is a synthetic, radioactive transactinide element."
   },
   {
     "n": 110,
@@ -3294,7 +3385,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Darmstadtium (Ds) is a synthetic, radioactive transactinide element."
   },
   {
     "n": 111,
@@ -3323,7 +3415,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Roentgenium (Rg) is a synthetic, radioactive transactinide element."
   },
   {
     "n": 112,
@@ -3352,7 +3445,8 @@ export const elements = [
     "block": "d-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Copernicium (Cn) is a synthetic, radioactive transactinide element."
   },
   {
     "n": 113,
@@ -3382,7 +3476,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Nihonium (Nh) is a synthetic, radioactive element."
   },
   {
     "n": 114,
@@ -3412,7 +3507,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Flerovium (Fl) is a synthetic, radioactive element."
   },
   {
     "n": 115,
@@ -3442,7 +3538,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Moscovium (Mc) is a synthetic, radioactive element."
   },
   {
     "n": 116,
@@ -3472,7 +3569,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Livermorium (Lv) is a synthetic, radioactive element."
   },
   {
     "n": 117,
@@ -3502,7 +3600,8 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Tennessine (Ts) is a synthetic, radioactive element and the second-heaviest known halogen."
   },
   {
     "n": 118,
@@ -3531,6 +3630,7 @@ export const elements = [
     "block": "p-block",
     "appearance": null,
     "specificHeat": null,
-    "thermalConductivity": null
+    "thermalConductivity": null,
+    "summary": "Oganesson (Og) is a synthetic, radioactive element and the heaviest known element."
   }
 ];
