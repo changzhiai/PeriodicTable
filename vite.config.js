@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: false,
+    reportCompressedSize: false,
     rollupOptions: {
       maxParallelFileReads: 2,
     },
