@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:low-mem": "NODE_OPTIONS='--max-old-space-size=768 --optimize_for_size' vite build",
     "build:mobile": "VITE_APP_TARGET=mobile vite build",
     "lint": "eslint .",
     "preview": "vite preview"

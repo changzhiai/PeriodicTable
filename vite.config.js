@@ -12,5 +12,8 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: false,
+    rollupOptions: {
+      maxParallelFileReads: 2,
+    },
   },
 }))
