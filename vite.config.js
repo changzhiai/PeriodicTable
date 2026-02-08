@@ -17,4 +17,9 @@ export default defineConfig(({ mode }) => ({
       maxParallelFileReads: 2,
     },
   },
+  preview: {
+    allowedHosts: ['periodictable.travel-tracker.org', 'localhost'],
+    port: 3004,
+    host: true,
+  },
 }))
