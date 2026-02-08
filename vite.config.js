@@ -10,4 +10,7 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     dedupe: ['react', 'react-dom'],
   },
+  build: {
+    sourcemap: false,
+  },
 }))
