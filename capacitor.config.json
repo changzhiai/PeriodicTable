@@ -8,6 +8,9 @@
   "android": {
     "allowZoom": true
   },
+  "ios": {
+    "allowZoom": true
+  },
   "plugins": {
     "StatusBar": {
       "overlaysWebView": false,
