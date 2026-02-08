@@ -2,6 +2,8 @@
   "name": "periodic-table",
   "private": true,
   "version": "0.0.0",
+  "author": "Periodic Table Team",
+  "creator": "Changzhi Ai",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -687,6 +687,9 @@ export default function PeriodicTableApp() {
                   <button
                     ref={dropdownButtonRef}
                     type="button"
+                    aria-label={`Filter by group: ${activeCategory ? categoryLabels[activeCategory] : 'All groups'}`}
+                    aria-haspopup="listbox"
+                    aria-expanded={isCategoryOpen}
                     className="flex items-center gap-1.5 rounded-full border border-gray-300 bg-white px-2 py-0.5 text-[10px] md:text-xs text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     onClick={() => setIsCategoryOpen((open) => !open)}
                   >
@@ -766,6 +769,7 @@ export default function PeriodicTableApp() {
               <input
                 type="text"
                 placeholder="Search elements"
+                aria-label="Search elements by name, symbol, or atomic number"
                 className="w-full pl-10 pr-4 py-1 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 transition-all"
                 value={searchTerm}
                 onChange={(e) => {
@@ -866,13 +870,15 @@ export default function PeriodicTableApp() {
             })}
 
             {/* Placeholder cell between Ba (56) and Hf (72) in row 6 */}
-            <div
+            <button
+              type="button"
               onClick={() => {
-                if (activeCategory && activeCategory !== 'lanthanide') return; // Don't allow clicking when other category is active
+                if (activeCategory && activeCategory !== 'lanthanide') return;
                 const newSeries = activeSeries === 'lanthanides' ? null : 'lanthanides';
                 setActiveSeries(newSeries);
-                if (newSeries) setActiveCategory(null); // Deselect category when series is selected
+                if (newSeries) setActiveCategory(null);
               }}
+              aria-label="Filter by Lanthanoids series"
               className={`relative border border-pink-400 bg-pink-200 text-pink-900 flex flex-col items-center justify-between ${isFullScreen ? 'p-[1px] sm:p-0.5' : 'p-0.5 sm:p-1'} cursor-pointer transition-all duration-200 ${searchTerm || (activeCategory && activeCategory !== 'lanthanide') || activeSeries === 'actinides'
                 ? 'opacity-20 scale-95 grayscale cursor-not-allowed'
                 : (activeSeries === 'lanthanides' || activeCategory === 'lanthanide')
@@ -880,7 +886,7 @@ export default function PeriodicTableApp() {
                   : 'hover:scale-110 hover:z-10 hover:shadow-lg'
                 }`}
               style={{
-                gridColumn: '4', // Column 3 in the 18-column grid (after Ba at column 2)
+                gridColumn: '4',
                 gridRow: 6,
                 aspectRatio: isFullScreen ? '1.35/1' : '1/1',
                 minWidth: '0'
@@ -889,26 +895,26 @@ export default function PeriodicTableApp() {
               <span className="self-center sm:self-start text-[8px] sm:text-[10px] font-bold opacity-70 leading-none whitespace-nowrap">
                 57-71
               </span>
-              {/* Symbol-like short label, always visible */}
               <span className="text-sm sm:text-lg md:text-xl font-bold leading-none">
                 Ln
               </span>
-              {/* Full name, shown like element names (hidden on very small screens) */}
               {!isFullScreen && (
                 <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
                   Lanthanoids
                 </span>
               )}
-            </div>
+            </button>
 
             {/* Placeholder cell between Ra (88) and Rf (104) in row 7 */}
-            <div
+            <button
+              type="button"
               onClick={() => {
-                if (activeCategory && activeCategory !== 'actinide') return; // Don't allow clicking when other category is active
+                if (activeCategory && activeCategory !== 'actinide') return;
                 const newSeries = activeSeries === 'actinides' ? null : 'actinides';
                 setActiveSeries(newSeries);
-                if (newSeries) setActiveCategory(null); // Deselect category when series is selected
+                if (newSeries) setActiveCategory(null);
               }}
+              aria-label="Filter by Actinoids series"
               className={`relative border border-pink-500 bg-pink-300 text-pink-900 flex flex-col items-center justify-between ${isFullScreen ? 'p-[1px] sm:p-0.5' : 'p-0.5 sm:p-1'} cursor-pointer transition-all duration-200 ${searchTerm || (activeCategory && activeCategory !== 'actinide') || activeSeries === 'lanthanides'
                 ? 'opacity-20 scale-95 grayscale cursor-not-allowed'
                 : (activeSeries === 'actinides' || activeCategory === 'actinide')
@@ -916,7 +922,7 @@ export default function PeriodicTableApp() {
                   : 'hover:scale-110 hover:z-10 hover:shadow-lg'
                 }`}
               style={{
-                gridColumn: '4', // Column 3 in the 18-column grid (after Ra at column 2)
+                gridColumn: '4',
                 gridRow: 7,
                 aspectRatio: isFullScreen ? '1.35/1' : '1/1',
                 minWidth: '0'
@@ -925,17 +931,15 @@ export default function PeriodicTableApp() {
               <span className="self-center sm:self-start text-[8px] sm:text-[10px] font-bold opacity-70 leading-none whitespace-nowrap">
                 89-103
               </span>
-              {/* Symbol-like short label, always visible */}
               <span className="text-sm sm:text-lg md:text-xl font-bold leading-none">
                 An
               </span>
-              {/* Full name, shown like element names (hidden on very small screens) */}
               {!isFullScreen && (
                 <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
                   Actinoids
                 </span>
               )}
-            </div>
+            </button>
           </div>
 
           {/* Lanthanides Row (57-71) - positioned below row 6 */}
