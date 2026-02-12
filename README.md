@@ -5,11 +5,11 @@
 An interactive **periodic table of elements** built with **React**, **Vite**, and **Tailwind CSS**.
 
 It supports:
-- **Color‑coded groups** (alkali metals, noble gases, nonmetals, lanthanoids, actinoids, etc.)
+- **Color‑coded groups** (alkali metals, noble gases, nonmetals, Lanthanides, Actinides, etc.)
 - **Filter by group** (using the colored chips above the table)
 - **Search by name, symbol, or atomic number**
 - Proper layout with **group numbers (1–18)** and **period numbers (1–7)**
-- **Lanthanoids (57–71)** and **Actinoids (89–103)** shown in separate rows, with clickable placeholders in the main table
+- **Lanthanides (57–71)** and **Actinides (89–103)** shown in separate rows, with clickable placeholders in the main table
 - A **detail modal** when you click any element
 
 ## Live Website

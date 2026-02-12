@@ -42,8 +42,8 @@ const categoryLabels = {
   'nonmetal': 'Nonmetals', // Combined category
   'post-transition metal': 'Post-transition metals',
   'transition metal': 'Transition metals',
-  'lanthanide': 'Lanthanoids',
-  'actinide': 'Actinoids',
+  'lanthanide': 'Lanthanides',
+  'actinide': 'Actinides',
   'unknown': 'Unknown'
 };
 
@@ -424,12 +424,34 @@ export default function PeriodicTableApp() {
   );
 
   // Listen for orientation changes
+  // Listen for orientation changes and reset viewport
   useEffect(() => {
     const mql = window.matchMedia('(orientation: landscape)');
-    const onChange = (e) => setIsLandscape(e.matches);
-    // Modern browsers use addEventListener, older check logic handled by reacting to 'change'
-    mql.addEventListener('change', onChange);
-    return () => mql.removeEventListener('change', onChange);
+
+    const handleOrientationChange = (e) => {
+      setIsLandscape(e.matches);
+
+      // Force viewport reset on orientation change to fix layout issues on iOS/Android
+      if (typeof document !== 'undefined') {
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+          // Slight delay to allow rotation animation to start/finish
+          setTimeout(() => {
+            // Briefly lock scale to 1.0 to force browser to reset zoom level
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+
+            // Re-enable pinch-to-zoom after a short delay
+            setTimeout(() => {
+              viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover');
+            }, 100);
+          }, 100);
+        }
+      }
+    };
+
+    // Modern browsers use addEventListener
+    mql.addEventListener('change', handleOrientationChange);
+    return () => mql.removeEventListener('change', handleOrientationChange);
   }, []);
 
   // Auto-exit full screen when rotating to portrait
@@ -586,7 +608,7 @@ export default function PeriodicTableApp() {
     // Define the desired order for "Filter by Group"
     // Alkali metals, Alkaline earth metals, Transition metals,
     // Post-transition metals, Metalloid, Reactive nonmetals,
-    // Nobel gases, Lanthanoids, Actinoids, and Unknown
+    // Nobel gases, Lanthanides, Actinides, and Unknown
     const categoryOrder = [
       'alkali metal',
       'alkaline earth metal',
@@ -741,7 +763,7 @@ export default function PeriodicTableApp() {
       )}
 
       {/* Main Content */}
-      <main className={`flex-1 px-1 sm:px-3 md:px-6 overflow-x-auto ${isFullScreen ? 'pt-0 sm:pt-0.5 pb-[1px]' : 'pt-1 sm:pt-2 pb-1 sm:pb-2 md:pt-3 md:pb-3'}`}>
+      <main className={`flex-1 px-1 sm:px-3 md:px-6 overflow-x-auto ${isFullScreen ? 'pt-0 sm:pt-0.5 pb-[1px]' : 'pt-1 sm:pt-1 pb-2 sm:pb-3 md:pt-3 md:pb-3'}`}>
         <div className="w-full max-w-7xl mx-auto">
 
           {/* Group Number Labels - Top Row */}
@@ -825,7 +847,7 @@ export default function PeriodicTableApp() {
                 setActiveSeries(newSeries);
                 if (newSeries) setActiveCategory(null);
               }}
-              aria-label="Filter by Lanthanoids series"
+              aria-label="Filter by Lanthanides series"
               className={`relative border border-pink-400 bg-pink-200 text-pink-900 flex flex-col items-center justify-between ${isFullScreen ? 'p-[1px] sm:p-0.5' : 'p-0.5 sm:p-1'} cursor-pointer transition-all duration-200 ${searchTerm || (activeCategory && activeCategory !== 'lanthanide') || activeSeries === 'actinides'
                 ? 'opacity-20 scale-95 grayscale cursor-not-allowed'
                 : (activeSeries === 'lanthanides' || activeCategory === 'lanthanide')
@@ -847,7 +869,7 @@ export default function PeriodicTableApp() {
               </span>
               {!isFullScreen && (
                 <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
-                  Lanthanoids
+                  Lanthanides
                 </span>
               )}
             </button>
@@ -861,7 +883,7 @@ export default function PeriodicTableApp() {
                 setActiveSeries(newSeries);
                 if (newSeries) setActiveCategory(null);
               }}
-              aria-label="Filter by Actinoids series"
+              aria-label="Filter by Actinides series"
               className={`relative border border-pink-500 bg-pink-300 text-pink-900 flex flex-col items-center justify-between ${isFullScreen ? 'p-[1px] sm:p-0.5' : 'p-0.5 sm:p-1'} cursor-pointer transition-all duration-200 ${searchTerm || (activeCategory && activeCategory !== 'actinide') || activeSeries === 'lanthanides'
                 ? 'opacity-20 scale-95 grayscale cursor-not-allowed'
                 : (activeSeries === 'actinides' || activeCategory === 'actinide')
@@ -883,7 +905,7 @@ export default function PeriodicTableApp() {
               </span>
               {!isFullScreen && (
                 <span className="text-[7px] sm:text-[9px] truncate w-full text-center leading-none opacity-80 hidden sm:block">
-                  Actinoids
+                  Actinides
                 </span>
               )}
             </button>
