@@ -6,7 +6,10 @@ export default defineConfig(({ mode }) => ({
   plugins: [react()],
   // Base path for GitHub Pages: https://<user>.github.io/PeriodicTable/
   // Use './' for mobile builds to support Capacitor's file:// protocol or local server
-  base: process.env.VITE_APP_TARGET === 'mobile' ? './' : '/PeriodicTable/',
+  // base: process.env.VITE_APP_TARGET === 'mobile' ? './' : '/PeriodicTable/',
+
+  // Base path for deployment (Use '/' for custom domains/AWS root, './' for mobile)
+  base: process.env.VITE_APP_TARGET === 'mobile' ? './' : '/',
   resolve: {
     dedupe: ['react', 'react-dom'],
   },

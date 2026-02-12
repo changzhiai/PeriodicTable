@@ -52,7 +52,7 @@ The static files are output to the `dist` folder.
 ## GitHub Pages Deployment
 
 Key settings:
-- `vite.config.js` has `base: '/PeriodicTable/'`.
+- `vite.config.js` has `base: '/'` for custom domains (set to `/PeriodicTable/` if deploying exclusively to GitHub Pages directory).
 - GitHub Actions workflow at `.github/workflows/deploy.yml`:
   - Builds the app on pushes to `main`
   - Publishes the `dist` folder to GitHub Pages
