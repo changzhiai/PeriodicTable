@@ -1,5 +1,5 @@
 ## Interactive Periodic Table
-[![Live Website](https://img.shields.io/badge/Live-Website-brightgreen)](https://changzhiai.github.io/PeriodicTable/)
+[![Live Website](https://img.shields.io/badge/Live-Website-brightgreen)](https://periodictable.travel-tracker.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 An interactive **periodic table of elements** built with **React**, **Vite**, and **Tailwind CSS**.
@@ -14,7 +14,7 @@ It supports:
 
 ## Live Website
 
-**👉 [View Live Application](https://changzhiai.github.io/PeriodicTable/)**
+**👉 [View Live Application](https://periodictable.travel-tracker.org/)**
 
 The application is automatically deployed via GitHub Actions on every push to the `main` branch.
 
