@@ -545,65 +545,12 @@ export default function PeriodicTableApp() {
     }
   }, [isCategoryOpen]);
 
-  // Reset scroll position and zoom when an element is selected
+  // Reset zoom level only (without scrolling or aggressive DOM manipulation)
   useEffect(() => {
     if (selectedElement) {
-      // Scroll to top
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-
-      // Reset zoom level - works for both desktop and mobile
-      if (typeof document !== 'undefined' && typeof window !== 'undefined') {
-        // For desktop browsers (Chrome/Edge/Safari)
-        if (document.body.style.zoom !== undefined) {
-          document.body.style.zoom = '1';
-        }
-        if (document.documentElement.style.zoom !== undefined) {
-          document.documentElement.style.zoom = '1';
-        }
-
-        // For mobile devices - aggressive viewport reset
-        const viewport = document.querySelector('meta[name="viewport"]');
-        const root = document.documentElement;
-        const body = document.body;
-
-        if (viewport) {
-          // Store original content
-          const originalContent = viewport.getAttribute('content') || 'width=device-width, initial-scale=1.0';
-
-          // Method: Remove and recreate viewport tag to force hard reset
-          // This sometimes works better than just changing attributes
-          const resetViewport = () => {
-            // Step 1: Remove existing viewport
-            viewport.remove();
-
-            // Step 2: Create new viewport with reset scale
-            const newViewport = document.createElement('meta');
-            newViewport.name = 'viewport';
-            newViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
-            document.head.insertBefore(newViewport, document.head.firstChild);
-
-            // Step 3: Clear any CSS transforms
-            root.style.transform = '';
-            root.style.transformOrigin = '';
-            body.style.transform = '';
-            body.style.transformOrigin = '';
-
-            // Step 4: Force multiple reflows
-            void root.offsetHeight;
-            void body.offsetHeight;
-
-            // Step 5: After a delay, restore normal viewport settings
-            setTimeout(() => {
-              const currentViewport = document.querySelector('meta[name="viewport"]');
-              if (currentViewport) {
-                currentViewport.setAttribute('content', originalContent);
-              }
-            }, 100);
-          };
-
-          // Execute reset
-          resetViewport();
-        }
+      // Only reset CSS zoom for desktop if needed, avoid scroll/viewport hacks
+      if (typeof document !== 'undefined' && document.body.style.zoom) {
+        document.body.style.zoom = '1';
       }
     }
   }, [selectedElement]);
