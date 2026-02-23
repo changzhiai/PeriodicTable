@@ -78,6 +78,13 @@ Instead of serving files directly, Nginx will forward requests to the running ap
             proxy_set_header Connection 'upgrade';
             proxy_set_header Host $host;
             proxy_cache_bypass $http_upgrade;
+            
+            # Support for Clean URLs and SPA routing
+            # 1. Try the exact URI
+            # 2. Try adding .html (e.g. /privacy -> /privacy.html)
+            # 3. Try it as a directory
+            # 4. Fallback to index.html for React routing
+            try_files $uri $uri.html $uri/ /index.html;
         }
     }
     ```

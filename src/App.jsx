@@ -466,30 +466,73 @@ export default function PeriodicTableApp() {
 
   // SEO: Deep linking and Title management
   useEffect(() => {
-    // 1. On mount, check URL for element query param
+    // 1. On mount, check URL for routing (Path based or Search based fallback)
     const params = new URLSearchParams(window.location.search);
-    const elementSymbol = params.get('element');
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+
+    // -- ELEMENT ROUTING --
+    let elementSymbol = params.get('element');
+    // Check path for /element/{Symbol}
+    if (!elementSymbol && pathSegments[0] === 'element' && pathSegments[1]) {
+      elementSymbol = pathSegments[1];
+    }
+
     if (elementSymbol) {
       const el = elements.find(e => e.s.toLowerCase() === elementSymbol.toLowerCase());
       if (el) setSelectedElement(el);
     }
-  }, [elements]); // Run once on mount (elements is stable/state)
 
-  // 2. Update URL and Document Title when selectedElement changes
+    // -- CATEGORY ROUTING --
+    let categoryParam = params.get('category');
+    // Check path for /category/{Category}
+    if (!categoryParam && pathSegments[0] === 'category' && pathSegments[1]) {
+      categoryParam = pathSegments[1];
+    }
+
+    if (categoryParam) {
+      const internalCat = categoryParam.replace(/-/g, ' ');
+      if (categoryLabels[internalCat]) {
+        setActiveCategory(internalCat);
+      } else if (categoryParam === 'nonmetal') {
+        setActiveCategory('nonmetal');
+      }
+    }
+
+    // -- SERIES ROUTING --
+    let seriesParam = params.get('series');
+    // Check path for /series/{Series}
+    if (!seriesParam && pathSegments[0] === 'series' && pathSegments[1]) {
+      seriesParam = pathSegments[1];
+    }
+
+    if (seriesParam === 'lanthanides' || seriesParam === 'actinides') {
+      setActiveSeries(seriesParam);
+    }
+  }, [elements]);
+
+  // 2. Update URL and Document Title when filters or selectedElement change
   useEffect(() => {
+    let newPath = '/';
+
     if (selectedElement) {
       document.title = `${selectedElement.name} (${selectedElement.s}) - Periodic Table`;
-      const url = new URL(window.location);
-      url.searchParams.set('element', selectedElement.s);
-      // Use replaceState to update URL without adding to history stack (prevents back-button loops)
-      window.history.replaceState({}, '', url);
+      newPath = `/element/${selectedElement.s}`;
     } else {
-      document.title = 'Interactive Periodic Table | Modern & Responsive';
-      const url = new URL(window.location);
-      url.searchParams.delete('element');
-      window.history.replaceState({}, '', url);
+      if (activeCategory) {
+        document.title = `${categoryLabels[activeCategory] || 'Filter'} - Periodic Table`;
+        newPath = `/category/${activeCategory.replace(/ /g, '-')}`;
+      } else if (activeSeries) {
+        document.title = `${activeSeries.charAt(0).toUpperCase() + activeSeries.slice(1)} - Periodic Table`;
+        newPath = `/series/${activeSeries}`;
+      } else {
+        document.title = 'Interactive Periodic Table | Modern & Responsive';
+        newPath = '/';
+      }
     }
-  }, [selectedElement]);
+
+    // Use replaceState to update URL with clean paths
+    window.history.replaceState({}, '', newPath);
+  }, [selectedElement, activeCategory, activeSeries]);
 
   // Toggle Status Bar based on full screen state
   useEffect(() => {
