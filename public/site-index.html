@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Index - Periodic Table: Interactive 3D</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 40px 20px; background-color: #f4f7f6; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
+        h1 { color: #1a1a1a; margin-top: 0; }
+        h2 { border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-top: 40px; color: #2d3748; }
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-top: 20px; }
+        .element-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; margin-top: 20px; }
+        a { color: #2563eb; text-decoration: none; padding: 8px 12px; border-radius: 6px; background: #f8fafc; border: 1px solid #e2e8f0; display: inline-block; transition: all 0.2s; text-align: center; }
+        a:hover { background: #2563eb; color: white; border-color: #2563eb; transform: translateY(-2px); }
+        .element-link { font-weight: bold; font-size: 1.1em; }
+        .home-link { margin-bottom: 20px; display: inline-block; color: #4a5568; }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-link">← Back to Periodic Table</a>
+    <div class="card">
+        <h1>Site Directory</h1>
+        <p>A comprehensive map of all interactive views and educational content within the Periodic Table application.</p>
+        
+        <h2>Static Pages</h2>
+        <div class="link-grid">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/about">About</a>
+            <a href="/how-it-works">How it Works</a>
+            <a href="/glossary">Glossary</a>
+            <a href="/history">History</a>
+        </div>
+
+        <h2>Elements by Category</h2>
+        <div class="link-grid">
+            <a href="/category/alkali-metal">Alkali Metals</a>
+            <a href="/category/alkaline-earth-metal">Alkaline Earth Metals</a>
+            <a href="/category/transition-metal">Transition Metals</a>
+            <a href="/category/post-transition-metal">Post-Transition Metals</a>
+            <a href="/category/metalloid">Metalloids</a>
+            <a href="/category/nonmetal">Nonmetals</a>
+            <a href="/category/noble-gas">Noble Gases</a>
+            <a href="/category/lanthanide">Lanthanides</a>
+            <a href="/category/actinide">Actinides</a>
+        </div>
+
+        <h2>Direct Element Links</h2>
+        <div class="element-grid">
+            <a href="/element/H" class="element-link">H</a>
+            <a href="/element/He" class="element-link">He</a>
+            <a href="/element/Li" class="element-link">Li</a>
+            <a href="/element/Be" class="element-link">Be</a>
+            <a href="/element/B" class="element-link">B</a>
+            <a href="/element/C" class="element-link">C</a>
+            <a href="/element/N" class="element-link">N</a>
+            <a href="/element/O" class="element-link">O</a>
+            <a href="/element/F" class="element-link">F</a>
+            <a href="/element/Ne" class="element-link">Ne</a>
+            <a href="/element/Na" class="element-link">Na</a>
+            <a href="/element/Mg" class="element-link">Mg</a>
+            <a href="/element/Al" class="element-link">Al</a>
+            <a href="/element/Si" class="element-link">Si</a>
+            <a href="/element/P" class="element-link">P</a>
+            <a href="/element/S" class="element-link">S</a>
+            <a href="/element/Cl" class="element-link">Cl</a>
+            <a href="/element/Ar" class="element-link">Ar</a>
+            <a href="/element/K" class="element-link">K</a>
+            <a href="/element/Ca" class="element-link">Ca</a>
+            <a href="/element/Sc" class="element-link">Sc</a>
+            <a href="/element/Ti" class="element-link">Ti</a>
+            <a href="/element/V" class="element-link">V</a>
+            <a href="/element/Cr" class="element-link">Cr</a>
+            <a href="/element/Mn" class="element-link">Mn</a>
+            <a href="/element/Fe" class="element-link">Fe</a>
+            <a href="/element/Co" class="element-link">Co</a>
+            <a href="/element/Ni" class="element-link">Ni</a>
+            <a href="/element/Cu" class="element-link">Cu</a>
+            <a href="/element/Zn" class="element-link">Zn</a>
+            <a href="/element/Ga" class="element-link">Ga</a>
+            <a href="/element/Ge" class="element-link">Ge</a>
+            <a href="/element/As" class="element-link">As</a>
+            <a href="/element/Se" class="element-link">Se</a>
+            <a href="/element/Br" class="element-link">Br</a>
+            <a href="/element/Kr" class="element-link">Kr</a>
+            <a href="/element/Rb" class="element-link">Rb</a>
+            <a href="/element/Sr" class="element-link">Sr</a>
+            <a href="/element/Y" class="element-link">Y</a>
+            <a href="/element/Zr" class="element-link">Zr</a>
+            <a href="/element/Nb" class="element-link">Nb</a>
+            <a href="/element/Mo" class="element-link">Mo</a>
+            <a href="/element/Tc" class="element-link">Tc</a>
+            <a href="/element/Ru" class="element-link">Ru</a>
+            <a href="/element/Rh" class="element-link">Rh</a>
+            <a href="/element/Pd" class="element-link">Pd</a>
+            <a href="/element/Ag" class="element-link">Ag</a>
+            <a href="/element/Cd" class="element-link">Cd</a>
+            <a href="/element/In" class="element-link">In</a>
+            <a href="/element/Sn" class="element-link">Sn</a>
+            <a href="/element/Sb" class="element-link">Sb</a>
+            <a href="/element/Te" class="element-link">Te</a>
+            <a href="/element/I" class="element-link">I</a>
+            <a href="/element/Xe" class="element-link">Xe</a>
+            <a href="/element/Cs" class="element-link">Cs</a>
+            <a href="/element/Ba" class="element-link">Ba</a>
+            <a href="/element/La" class="element-link">La</a>
+            <a href="/element/Ce" class="element-link">Ce</a>
+            <a href="/element/Pr" class="element-link">Pr</a>
+            <a href="/element/Nd" class="element-link">Nd</a>
+            <a href="/element/Pm" class="element-link">Pm</a>
+            <a href="/element/Sm" class="element-link">Sm</a>
+            <a href="/element/Eu" class="element-link">Eu</a>
+            <a href="/element/Gd" class="element-link">Gd</a>
+            <a href="/element/Tb" class="element-link">Tb</a>
+            <a href="/element/Dy" class="element-link">Dy</a>
+            <a href="/element/Ho" class="element-link">Ho</a>
+            <a href="/element/Er" class="element-link">Er</a>
+            <a href="/element/Tm" class="element-link">Tm</a>
+            <a href="/element/Yb" class="element-link">Yb</a>
+            <a href="/element/Lu" class="element-link">Lu</a>
+            <a href="/element/Hf" class="element-link">Hf</a>
+            <a href="/element/Ta" class="element-link">Ta</a>
+            <a href="/element/W" class="element-link">W</a>
+            <a href="/element/Re" class="element-link">Re</a>
+            <a href="/element/Os" class="element-link">Os</a>
+            <a href="/element/Ir" class="element-link">Ir</a>
+            <a href="/element/Pt" class="element-link">Pt</a>
+            <a href="/element/Au" class="element-link">Au</a>
+            <a href="/element/Hg" class="element-link">Hg</a>
+            <a href="/element/Tl" class="element-link">Tl</a>
+            <a href="/element/Pb" class="element-link">Pb</a>
+            <a href="/element/Bi" class="element-link">Bi</a>
+            <a href="/element/Po" class="element-link">Po</a>
+            <a href="/element/At" class="element-link">At</a>
+            <a href="/element/Rn" class="element-link">Rn</a>
+            <a href="/element/Fr" class="element-link">Fr</a>
+            <a href="/element/Ra" class="element-link">Ra</a>
+            <a href="/element/Ac" class="element-link">Ac</a>
+            <a href="/element/Th" class="element-link">Th</a>
+            <a href="/element/Pa" class="element-link">Pa</a>
+            <a href="/element/U" class="element-link">U</a>
+            <a href="/element/Np" class="element-link">Np</a>
+            <a href="/element/Pu" class="element-link">Pu</a>
+            <a href="/element/Am" class="element-link">Am</a>
+            <a href="/element/Cm" class="element-link">Cm</a>
+            <a href="/element/Bk" class="element-link">Bk</a>
+            <a href="/element/Cf" class="element-link">Cf</a>
+            <a href="/element/Es" class="element-link">Es</a>
+            <a href="/element/Fm" class="element-link">Fm</a>
+            <a href="/element/Md" class="element-link">Md</a>
+            <a href="/element/No" class="element-link">No</a>
+            <a href="/element/Lr" class="element-link">Lr</a>
+            <a href="/element/Rf" class="element-link">Rf</a>
+            <a href="/element/Db" class="element-link">Db</a>
+            <a href="/element/Sg" class="element-link">Sg</a>
+            <a href="/element/Bh" class="element-link">Bh</a>
+            <a href="/element/Hs" class="element-link">Hs</a>
+            <a href="/element/Mt" class="element-link">Mt</a>
+            <a href="/element/Ds" class="element-link">Ds</a>
+            <a href="/element/Rg" class="element-link">Rg</a>
+            <a href="/element/Cn" class="element-link">Cn</a>
+            <a href="/element/Nh" class="element-link">Nh</a>
+            <a href="/element/Fl" class="element-link">Fl</a>
+            <a href="/element/Mc" class="element-link">Mc</a>
+            <a href="/element/Lv" class="element-link">Lv</a>
+            <a href="/element/Ts" class="element-link">Ts</a>
+            <a href="/element/Og" class="element-link">Og</a>
+        </div>
+    </div>
+    <div style="text-align: center; color: #718096; font-size: 0.9em; margin-top: 40px;">
+        &copy; 2026 Periodic Table: Interactive 3D Educational Tool
+    </div>
+</body>
+</html>

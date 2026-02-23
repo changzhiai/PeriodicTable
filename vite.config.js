@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
       name: 'rewrite-static-html',
       configureServer(server) {
         server.middlewares.use((req, res, next) => {
-          const cleanPaths = ['/privacy', '/about', '/how-it-works', '/glossary', '/history'];
+          const cleanPaths = ['/privacy', '/about', '/how-it-works', '/glossary', '/history', '/site-index'];
           if (cleanPaths.includes(req.url)) {
             req.url += '.html';
           }
@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => ({
       },
       configurePreviewServer(server) {
         server.middlewares.use((req, res, next) => {
-          const cleanPaths = ['/privacy', '/about', '/how-it-works', '/glossary', '/history'];
+          const cleanPaths = ['/privacy', '/about', '/how-it-works', '/glossary', '/history', '/site-index'];
           if (cleanPaths.includes(req.url)) {
             req.url += '.html';
           }

@@ -94,154 +94,141 @@
 <body>
   <div id="root"></div>
 
-  <!-- Static Site Index for SEO (Visible before React hydration) -->
-  <footer
-    style="margin-top: 50px; padding: 20px; font-size: 0.8em; border-top: 1px solid #eee; color: #666; font-family: sans-serif;">
-    <nav aria-label="Quick Links">
-      <strong>Quick Links:</strong>
-      <a href="/privacy" style="color: #666; margin-right: 10px; text-decoration: none;">Privacy Policy</a>
-      <a href="/about" style="color: #666; margin-right: 10px; text-decoration: none;">About</a>
-      <a href="/how-it-works" style="color: #666; margin-right: 10px; text-decoration: none;">How it Works</a>
-      <a href="/glossary" style="color: #666; margin-right: 10px; text-decoration: none;">Glossary</a>
-      <a href="/history" style="color: #666; margin-right: 10px; text-decoration: none;">History</a>
-    </nav>
-    <nav aria-label="Element Categories" style="margin-top: 10px;">
-      <strong>Categories:</strong>
-      <a href="/category/alkali-metal" style="color: #666; margin-right: 10px; text-decoration: none;">Alkali Metals</a>
-      <a href="/category/alkaline-earth-metal" style="color: #666; margin-right: 10px; text-decoration: none;">Alkaline
-        Earth Metals</a>
-      <a href="/category/transition-metal" style="color: #666; margin-right: 10px; text-decoration: none;">Transition
-        Metals</a>
-      <a href="/category/post-transition-metal"
-        style="color: #666; margin-right: 10px; text-decoration: none;">Post-Transition Metals</a>
-      <a href="/category/metalloid" style="color: #666; margin-right: 10px; text-decoration: none;">Metalloids</a>
-      <a href="/category/nonmetal" style="color: #666; margin-right: 10px; text-decoration: none;">Nonmetals</a>
-      <a href="/category/noble-gas" style="color: #666; margin-right: 10px; text-decoration: none;">Noble Gases</a>
-      <a href="/category/lanthanide" style="color: #666; margin-right: 10px; text-decoration: none;">Lanthanides</a>
-      <a href="/category/actinide" style="color: #666; margin-right: 10px; text-decoration: none;">Actinides</a>
-    </nav>
-    <div style="margin-top: 10px; opacity: 0.5;">
-      <strong>All Elements:</strong>
-      <a href="/element/H" style="color: #666; margin-right: 5px; text-decoration: none;">H</a>
-      <a href="/element/He" style="color: #666; margin-right: 5px; text-decoration: none;">He</a>
-      <a href="/element/Li" style="color: #666; margin-right: 5px; text-decoration: none;">Li</a>
-      <a href="/element/Be" style="color: #666; margin-right: 5px; text-decoration: none;">Be</a>
-      <a href="/element/B" style="color: #666; margin-right: 5px; text-decoration: none;">B</a>
-      <a href="/element/C" style="color: #666; margin-right: 5px; text-decoration: none;">C</a>
-      <a href="/element/N" style="color: #666; margin-right: 5px; text-decoration: none;">N</a>
-      <a href="/element/O" style="color: #666; margin-right: 5px; text-decoration: none;">O</a>
-      <a href="/element/F" style="color: #666; margin-right: 5px; text-decoration: none;">F</a>
-      <a href="/element/Ne" style="color: #666; margin-right: 5px; text-decoration: none;">Ne</a>
-      <a href="/element/Na" style="color: #666; margin-right: 5px; text-decoration: none;">Na</a>
-      <a href="/element/Mg" style="color: #666; margin-right: 5px; text-decoration: none;">Mg</a>
-      <a href="/element/Al" style="color: #666; margin-right: 5px; text-decoration: none;">Al</a>
-      <a href="/element/Si" style="color: #666; margin-right: 5px; text-decoration: none;">Si</a>
-      <a href="/element/P" style="color: #666; margin-right: 5px; text-decoration: none;">P</a>
-      <a href="/element/S" style="color: #666; margin-right: 5px; text-decoration: none;">S</a>
-      <a href="/element/Cl" style="color: #666; margin-right: 5px; text-decoration: none;">Cl</a>
-      <a href="/element/Ar" style="color: #666; margin-right: 5px; text-decoration: none;">Ar</a>
-      <a href="/element/K" style="color: #666; margin-right: 5px; text-decoration: none;">K</a>
-      <a href="/element/Ca" style="color: #666; margin-right: 5px; text-decoration: none;">Ca</a>
-      <a href="/element/Sc" style="color: #666; margin-right: 5px; text-decoration: none;">Sc</a>
-      <a href="/element/Ti" style="color: #666; margin-right: 5px; text-decoration: none;">Ti</a>
-      <a href="/element/V" style="color: #666; margin-right: 5px; text-decoration: none;">V</a>
-      <a href="/element/Cr" style="color: #666; margin-right: 5px; text-decoration: none;">Cr</a>
-      <a href="/element/Mn" style="color: #666; margin-right: 5px; text-decoration: none;">Mn</a>
-      <a href="/element/Fe" style="color: #666; margin-right: 5px; text-decoration: none;">Fe</a>
-      <a href="/element/Co" style="color: #666; margin-right: 5px; text-decoration: none;">Co</a>
-      <a href="/element/Ni" style="color: #666; margin-right: 5px; text-decoration: none;">Ni</a>
-      <a href="/element/Cu" style="color: #666; margin-right: 5px; text-decoration: none;">Cu</a>
-      <a href="/element/Zn" style="color: #666; margin-right: 5px; text-decoration: none;">Zn</a>
-      <a href="/element/Ga" style="color: #666; margin-right: 5px; text-decoration: none;">Ga</a>
-      <a href="/element/Ge" style="color: #666; margin-right: 5px; text-decoration: none;">Ge</a>
-      <a href="/element/As" style="color: #666; margin-right: 5px; text-decoration: none;">As</a>
-      <a href="/element/Se" style="color: #666; margin-right: 5px; text-decoration: none;">Se</a>
-      <a href="/element/Br" style="color: #666; margin-right: 5px; text-decoration: none;">Br</a>
-      <a href="/element/Kr" style="color: #666; margin-right: 5px; text-decoration: none;">Kr</a>
-      <a href="/element/Rb" style="color: #666; margin-right: 5px; text-decoration: none;">Rb</a>
-      <a href="/element/Sr" style="color: #666; margin-right: 5px; text-decoration: none;">Sr</a>
-      <a href="/element/Y" style="color: #666; margin-right: 5px; text-decoration: none;">Y</a>
-      <a href="/element/Zr" style="color: #666; margin-right: 5px; text-decoration: none;">Zr</a>
-      <a href="/element/Nb" style="color: #666; margin-right: 5px; text-decoration: none;">Nb</a>
-      <a href="/element/Mo" style="color: #666; margin-right: 5px; text-decoration: none;">Mo</a>
-      <a href="/element/Tc" style="color: #666; margin-right: 5px; text-decoration: none;">Tc</a>
-      <a href="/element/Ru" style="color: #666; margin-right: 5px; text-decoration: none;">Ru</a>
-      <a href="/element/Rh" style="color: #666; margin-right: 5px; text-decoration: none;">Rh</a>
-      <a href="/element/Pd" style="color: #666; margin-right: 5px; text-decoration: none;">Pd</a>
-      <a href="/element/Ag" style="color: #666; margin-right: 5px; text-decoration: none;">Ag</a>
-      <a href="/element/Cd" style="color: #666; margin-right: 5px; text-decoration: none;">Cd</a>
-      <a href="/element/In" style="color: #666; margin-right: 5px; text-decoration: none;">In</a>
-      <a href="/element/Sn" style="color: #666; margin-right: 5px; text-decoration: none;">Sn</a>
-      <a href="/element/Sb" style="color: #666; margin-right: 5px; text-decoration: none;">Sb</a>
-      <a href="/element/Te" style="color: #666; margin-right: 5px; text-decoration: none;">Te</a>
-      <a href="/element/I" style="color: #666; margin-right: 5px; text-decoration: none;">I</a>
-      <a href="/element/Xe" style="color: #666; margin-right: 5px; text-decoration: none;">Xe</a>
-      <a href="/element/Cs" style="color: #666; margin-right: 5px; text-decoration: none;">Cs</a>
-      <a href="/element/Ba" style="color: #666; margin-right: 5px; text-decoration: none;">Ba</a>
-      <a href="/element/La" style="color: #666; margin-right: 5px; text-decoration: none;">La</a>
-      <a href="/element/Ce" style="color: #666; margin-right: 5px; text-decoration: none;">Ce</a>
-      <a href="/element/Pr" style="color: #666; margin-right: 5px; text-decoration: none;">Pr</a>
-      <a href="/element/Nd" style="color: #666; margin-right: 5px; text-decoration: none;">Nd</a>
-      <a href="/element/Pm" style="color: #666; margin-right: 5px; text-decoration: none;">Pm</a>
-      <a href="/element/Sm" style="color: #666; margin-right: 5px; text-decoration: none;">Sm</a>
-      <a href="/element/Eu" style="color: #666; margin-right: 5px; text-decoration: none;">Eu</a>
-      <a href="/element/Gd" style="color: #666; margin-right: 5px; text-decoration: none;">Gd</a>
-      <a href="/element/Tb" style="color: #666; margin-right: 5px; text-decoration: none;">Tb</a>
-      <a href="/element/Dy" style="color: #666; margin-right: 5px; text-decoration: none;">Dy</a>
-      <a href="/element/Ho" style="color: #666; margin-right: 5px; text-decoration: none;">Ho</a>
-      <a href="/element/Er" style="color: #666; margin-right: 5px; text-decoration: none;">Er</a>
-      <a href="/element/Tm" style="color: #666; margin-right: 5px; text-decoration: none;">Tm</a>
-      <a href="/element/Yb" style="color: #666; margin-right: 5px; text-decoration: none;">Yb</a>
-      <a href="/element/Lu" style="color: #666; margin-right: 5px; text-decoration: none;">Lu</a>
-      <a href="/element/Hf" style="color: #666; margin-right: 5px; text-decoration: none;">Hf</a>
-      <a href="/element/Ta" style="color: #666; margin-right: 5px; text-decoration: none;">Ta</a>
-      <a href="/element/W" style="color: #666; margin-right: 5px; text-decoration: none;">W</a>
-      <a href="/element/Re" style="color: #666; margin-right: 5px; text-decoration: none;">Re</a>
-      <a href="/element/Os" style="color: #666; margin-right: 5px; text-decoration: none;">Os</a>
-      <a href="/element/Ir" style="color: #666; margin-right: 5px; text-decoration: none;">Ir</a>
-      <a href="/element/Pt" style="color: #666; margin-right: 5px; text-decoration: none;">Pt</a>
-      <a href="/element/Au" style="color: #666; margin-right: 5px; text-decoration: none;">Au</a>
-      <a href="/element/Hg" style="color: #666; margin-right: 5px; text-decoration: none;">Hg</a>
-      <a href="/element/Tl" style="color: #666; margin-right: 5px; text-decoration: none;">Tl</a>
-      <a href="/element/Pb" style="color: #666; margin-right: 5px; text-decoration: none;">Pb</a>
-      <a href="/element/Bi" style="color: #666; margin-right: 5px; text-decoration: none;">Bi</a>
-      <a href="/element/Po" style="color: #666; margin-right: 5px; text-decoration: none;">Po</a>
-      <a href="/element/At" style="color: #666; margin-right: 5px; text-decoration: none;">At</a>
-      <a href="/element/Rn" style="color: #666; margin-right: 5px; text-decoration: none;">Rn</a>
-      <a href="/element/Fr" style="color: #666; margin-right: 5px; text-decoration: none;">Fr</a>
-      <a href="/element/Ra" style="color: #666; margin-right: 5px; text-decoration: none;">Ra</a>
-      <a href="/element/Ac" style="color: #666; margin-right: 5px; text-decoration: none;">Ac</a>
-      <a href="/element/Th" style="color: #666; margin-right: 5px; text-decoration: none;">Th</a>
-      <a href="/element/Pa" style="color: #666; margin-right: 5px; text-decoration: none;">Pa</a>
-      <a href="/element/U" style="color: #666; margin-right: 5px; text-decoration: none;">U</a>
-      <a href="/element/Np" style="color: #666; margin-right: 5px; text-decoration: none;">Np</a>
-      <a href="/element/Pu" style="color: #666; margin-right: 5px; text-decoration: none;">Pu</a>
-      <a href="/element/Am" style="color: #666; margin-right: 5px; text-decoration: none;">Am</a>
-      <a href="/element/Cm" style="color: #666; margin-right: 5px; text-decoration: none;">Cm</a>
-      <a href="/element/Bk" style="color: #666; margin-right: 5px; text-decoration: none;">Bk</a>
-      <a href="/element/Cf" style="color: #666; margin-right: 5px; text-decoration: none;">Cf</a>
-      <a href="/element/Es" style="color: #666; margin-right: 5px; text-decoration: none;">Es</a>
-      <a href="/element/Fm" style="color: #666; margin-right: 5px; text-decoration: none;">Fm</a>
-      <a href="/element/Md" style="color: #666; margin-right: 5px; text-decoration: none;">Md</a>
-      <a href="/element/No" style="color: #666; margin-right: 5px; text-decoration: none;">No</a>
-      <a href="/element/Lr" style="color: #666; margin-right: 5px; text-decoration: none;">Lr</a>
-      <a href="/element/Rf" style="color: #666; margin-right: 5px; text-decoration: none;">Rf</a>
-      <a href="/element/Db" style="color: #666; margin-right: 5px; text-decoration: none;">Db</a>
-      <a href="/element/Sg" style="color: #666; margin-right: 5px; text-decoration: none;">Sg</a>
-      <a href="/element/Bh" style="color: #666; margin-right: 5px; text-decoration: none;">Bh</a>
-      <a href="/element/Hs" style="color: #666; margin-right: 5px; text-decoration: none;">Hs</a>
-      <a href="/element/Mt" style="color: #666; margin-right: 5px; text-decoration: none;">Mt</a>
-      <a href="/element/Ds" style="color: #666; margin-right: 5px; text-decoration: none;">Ds</a>
-      <a href="/element/Rg" style="color: #666; margin-right: 5px; text-decoration: none;">Rg</a>
-      <a href="/element/Cn" style="color: #666; margin-right: 5px; text-decoration: none;">Cn</a>
-      <a href="/element/Nh" style="color: #666; margin-right: 5px; text-decoration: none;">Nh</a>
-      <a href="/element/Fl" style="color: #666; margin-right: 5px; text-decoration: none;">Fl</a>
-      <a href="/element/Mc" style="color: #666; margin-right: 5px; text-decoration: none;">Mc</a>
-      <a href="/element/Lv" style="color: #666; margin-right: 5px; text-decoration: none;">Lv</a>
-      <a href="/element/Ts" style="color: #666; margin-right: 5px; text-decoration: none;">Ts</a>
-      <a href="/element/Og" style="color: #666; margin-right: 5px; text-decoration: none;">Og</a>
-    </div>
-  </footer>
+  <!-- Hidden Site Index for SEO Crawlers -->
+  <div id="site-index" style="display: none;" aria-hidden="true">
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/about">About</a>
+    <a href="/how-it-works">How it Works</a>
+    <a href="/glossary">Glossary</a>
+    <a href="/history">History</a>
+    <a href="/category/alkali-metal">Alkali Metals</a>
+    <a href="/category/alkaline-earth-metal">Alkaline Earth Metals</a>
+    <a href="/category/transition-metal">Transition Metals</a>
+    <a href="/category/post-transition-metal">Post-Transition Metals</a>
+    <a href="/category/metalloid">Metalloids</a>
+    <a href="/category/nonmetal">Nonmetals</a>
+    <a href="/category/noble-gas">Noble Gases</a>
+    <a href="/category/lanthanide">Lanthanides</a>
+    <a href="/category/actinide">Actinides</a>
+    <a href="/element/H">H</a>
+    <a href="/element/He">He</a>
+    <a href="/element/Li">Li</a>
+    <a href="/element/Be">Be</a>
+    <a href="/element/B">B</a>
+    <a href="/element/C">C</a>
+    <a href="/element/N">N</a>
+    <a href="/element/O">O</a>
+    <a href="/element/F">F</a>
+    <a href="/element/Ne">Ne</a>
+    <a href="/element/Na">Na</a>
+    <a href="/element/Mg">Mg</a>
+    <a href="/element/Al">Al</a>
+    <a href="/element/Si">Si</a>
+    <a href="/element/P">P</a>
+    <a href="/element/S">S</a>
+    <a href="/element/Cl">Cl</a>
+    <a href="/element/Ar">Ar</a>
+    <a href="/element/K">K</a>
+    <a href="/element/Ca">Ca</a>
+    <a href="/element/Sc">Sc</a>
+    <a href="/element/Ti">Ti</a>
+    <a href="/element/V">V</a>
+    <a href="/element/Cr">Cr</a>
+    <a href="/element/Mn">Mn</a>
+    <a href="/element/Fe">Fe</a>
+    <a href="/element/Co">Co</a>
+    <a href="/element/Ni">Ni</a>
+    <a href="/element/Cu">Cu</a>
+    <a href="/element/Zn">Zn</a>
+    <a href="/element/Ga">Ga</a>
+    <a href="/element/Ge">Ge</a>
+    <a href="/element/As">As</a>
+    <a href="/element/Se">Se</a>
+    <a href="/element/Br">Br</a>
+    <a href="/element/Kr">Kr</a>
+    <a href="/element/Rb">Rb</a>
+    <a href="/element/Sr">Sr</a>
+    <a href="/element/Y">Y</a>
+    <a href="/element/Zr">Zr</a>
+    <a href="/element/Nb">Nb</a>
+    <a href="/element/Mo">Mo</a>
+    <a href="/element/Tc">Tc</a>
+    <a href="/element/Ru">Ru</a>
+    <a href="/element/Rh">Rh</a>
+    <a href="/element/Pd">Pd</a>
+    <a href="/element/Ag">Ag</a>
+    <a href="/element/Cd">Cd</a>
+    <a href="/element/In">In</a>
+    <a href="/element/Sn">Sn</a>
+    <a href="/element/Sb">Sb</a>
+    <a href="/element/Te">Te</a>
+    <a href="/element/I">I</a>
+    <a href="/element/Xe">Xe</a>
+    <a href="/element/Cs">Cs</a>
+    <a href="/element/Ba">Ba</a>
+    <a href="/element/La">La</a>
+    <a href="/element/Ce">Ce</a>
+    <a href="/element/Pr">Pr</a>
+    <a href="/element/Nd">Nd</a>
+    <a href="/element/Pm">Pm</a>
+    <a href="/element/Sm">Sm</a>
+    <a href="/element/Eu">Eu</a>
+    <a href="/element/Gd">Gd</a>
+    <a href="/element/Tb">Tb</a>
+    <a href="/element/Dy">Dy</a>
+    <a href="/element/Ho">Ho</a>
+    <a href="/element/Er">Er</a>
+    <a href="/element/Tm">Tm</a>
+    <a href="/element/Yb">Yb</a>
+    <a href="/element/Lu">Lu</a>
+    <a href="/element/Hf">Hf</a>
+    <a href="/element/Ta">Ta</a>
+    <a href="/element/W">W</a>
+    <a href="/element/Re">Re</a>
+    <a href="/element/Os">Os</a>
+    <a href="/element/Ir">Ir</a>
+    <a href="/element/Pt">Pt</a>
+    <a href="/element/Au">Au</a>
+    <a href="/element/Hg">Hg</a>
+    <a href="/element/Tl">Tl</a>
+    <a href="/element/Pb">Pb</a>
+    <a href="/element/Bi">Bi</a>
+    <a href="/element/Po">Po</a>
+    <a href="/element/At">At</a>
+    <a href="/element/Rn">Rn</a>
+    <a href="/element/Fr">Fr</a>
+    <a href="/element/Ra">Ra</a>
+    <a href="/element/Ac">Ac</a>
+    <a href="/element/Th">Th</a>
+    <a href="/element/Pa">Pa</a>
+    <a href="/element/U">U</a>
+    <a href="/element/Np">Np</a>
+    <a href="/element/Pu">Pu</a>
+    <a href="/element/Am">Am</a>
+    <a href="/element/Cm">Cm</a>
+    <a href="/element/Bk">Bk</a>
+    <a href="/element/Cf">Cf</a>
+    <a href="/element/Es">Es</a>
+    <a href="/element/Fm">Fm</a>
+    <a href="/element/Md">Md</a>
+    <a href="/element/No">No</a>
+    <a href="/element/Lr">Lr</a>
+    <a href="/element/Rf">Rf</a>
+    <a href="/element/Db">Db</a>
+    <a href="/element/Sg">Sg</a>
+    <a href="/element/Bh">Bh</a>
+    <a href="/element/Hs">Hs</a>
+    <a href="/element/Mt">Mt</a>
+    <a href="/element/Ds">Ds</a>
+    <a href="/element/Rg">Rg</a>
+    <a href="/element/Cn">Cn</a>
+    <a href="/element/Nh">Nh</a>
+    <a href="/element/Fl">Fl</a>
+    <a href="/element/Mc">Mc</a>
+    <a href="/element/Lv">Lv</a>
+    <a href="/element/Ts">Ts</a>
+    <a href="/element/Og">Og</a>
+  </div>
 
   <script>
     // Ensure viewport allows scaling after initial load
