@@ -84,7 +84,7 @@ Instead of serving files directly, Nginx will forward requests to the running ap
             # 2. Try adding .html (e.g. /privacy -> /privacy.html)
             # 3. Try it as a directory
             # 4. Fallback to index.html for React routing
-            try_files $uri $uri.html $uri/ /index.html;
+            # try_files $uri $uri.html $uri/ /index.html;
         }
     }
     ```
