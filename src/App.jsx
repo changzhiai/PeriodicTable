@@ -4,6 +4,7 @@ import { Search, Atom, X, FlaskConical, Cuboid, Volume2, Maximize, Minimize } fr
 import { Capacitor } from '@capacitor/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
+import { TextToSpeech } from '@capacitor-community/text-to-speech';
 import { elements as rawElements } from './elementsData';
 import BohrModel from './components/3d/BohrModel';
 import CrystalStructure from './components/3d/CrystalStructure';
@@ -155,6 +156,42 @@ const DetailModal = ({ element, onClose, isLandscape }) => {
     };
   }, []);
 
+  // Pre-load and monitor voices for speech synthesis (crucial for Android/Webview)
+  useEffect(() => {
+    const handleVoicesChanged = () => {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.getVoices();
+      }
+    };
+
+    // 1. Warm up Web Speech API
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged);
+    }
+
+    // 2. Warm up Native TextToSpeech engine
+    if (Capacitor.isNativePlatform()) {
+      TextToSpeech.getSupportedVoices().catch(() => {});
+      // Fire a silent speak to wake up the engine completely
+      TextToSpeech.speak({ text: ' ', volume: 0, rate: 1.0 }).catch(() => {});
+    }
+
+    // Fallback: trigger background voice loading
+    const initialTimer = setTimeout(() => {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.getVoices();
+      }
+    }, 100);
+
+    return () => {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged);
+      }
+      clearTimeout(initialTimer);
+    };
+  }, []);
+
   if (!element) return null;
 
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
@@ -177,29 +214,53 @@ const DetailModal = ({ element, onClose, isLandscape }) => {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
+
+                  // Use native TTS if on a native platform
+                  if (Capacitor.isNativePlatform()) {
+                    console.log(`TTS triggered for: ${element.name}`);
+                    // Fire immediately without stop() or await to minimize intent latency
+                    TextToSpeech.speak({
+                      text: element.name,
+                      lang: 'en-US', // Keep lang but ensure it's simple
+                      rate: 1.0,
+                      pitch: 1.0,
+                      volume: 1.0,
+                      category: 'ambient',
+                    }).catch(err => console.error('Native TTS error:', err));
+                    return;
+                  }
+
+                  if (!window.speechSynthesis) return;
+
                   // Cancel any current speech
                   window.speechSynthesis.cancel();
 
-                  const utterance = new SpeechSynthesisUtterance(element.name);
-                  utterance.lang = 'en-US';
+                  // Android/Webview fix: small timeout after cancel before speaking again
+                  setTimeout(() => {
+                    const utterance = new SpeechSynthesisUtterance(element.name);
+                    utterance.lang = 'en-US';
 
-                  // Style adjustments
-                  utterance.rate = 0.9; // Slightly slower for clarity
-                  utterance.pitch = 1;  // Normal pitch
+                    // Style adjustments
+                    utterance.rate = 0.9; // Slightly slower for clarity
+                    utterance.pitch = 1;  // Normal pitch
 
-                  // Try to select a high-quality voice
-                  const voices = window.speechSynthesis.getVoices();
-                  const preferredVoice = voices.find(voice =>
-                    voice.name === 'Google US English' ||
-                    voice.name === 'Samantha' ||
-                    (voice.lang === 'en-US' && voice.localService)
-                  );
+                    // Try to select a high-quality voice
+                    const voices = window.speechSynthesis.getVoices();
+                    
+                    // Priority list for voices
+                    const preferredVoice = voices.find(voice => 
+                      voice.name === 'Google US English' || 
+                      voice.name === 'Samantha' || 
+                      (voice.lang === 'en-US' && voice.localService) ||
+                      (voice.lang.startsWith('en') && voice.name.toLowerCase().includes('google'))
+                    ) || voices.find(voice => voice.lang.startsWith('en'));
 
-                  if (preferredVoice) {
-                    utterance.voice = preferredVoice;
-                  }
+                    if (preferredVoice) {
+                      utterance.voice = preferredVoice;
+                    }
 
-                  window.speechSynthesis.speak(utterance);
+                    window.speechSynthesis.speak(utterance);
+                  }, 50);
                 }}
                 className="p-1.5 hover:bg-black/5 rounded-full text-black/40 hover:text-black/80 transition-colors"
                 title="Pronounce"
