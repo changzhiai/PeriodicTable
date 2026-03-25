@@ -27,7 +27,7 @@ You can access the website at [https://periodictable.travel-tracker.org/](https:
 
 You can scan the QR code to download the iOS and Android app as follows:
 
-![Download App](docs/pictures/download_app.png)
+![Download App](docs/pictures/Download_app.png)
 
 
 ## Main Page
