@@ -16,6 +16,11 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://periodictable.travel-tracker.org/download</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://periodictable.travel-tracker.org/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -77,6 +82,21 @@
   </url>
   <url>
     <loc>https://periodictable.travel-tracker.org/category/actinide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://periodictable.travel-tracker.org/category/unknown</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://periodictable.travel-tracker.org/series/lanthanides</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://periodictable.travel-tracker.org/series/actinides</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

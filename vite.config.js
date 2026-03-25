@@ -4,28 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [
-    react(),
-    {
-      name: 'rewrite-static-html',
-      configureServer(server) {
-        server.middlewares.use((req, res, next) => {
-          const cleanPaths = ['/privacy', '/about', '/how-it-works', '/glossary', '/history', '/site-index'];
-          if (cleanPaths.includes(req.url)) {
-            req.url += '.html';
-          }
-          next();
-        });
-      },
-      configurePreviewServer(server) {
-        server.middlewares.use((req, res, next) => {
-          const cleanPaths = ['/privacy', '/about', '/how-it-works', '/glossary', '/history', '/site-index'];
-          if (cleanPaths.includes(req.url)) {
-            req.url += '.html';
-          }
-          next();
-        });
-      }
-    }
+    react()
   ],
   // Base path for GitHub Pages: https://<user>.github.io/PeriodicTable/
   // Use './' for mobile builds to support Capacitor's file:// protocol or local server

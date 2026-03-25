@@ -2,7 +2,11 @@
 [![Live Website](https://img.shields.io/badge/Live-Website-brightgreen)](https://periodictable.travel-tracker.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-An interactive **periodic table of elements** built with **React**, **Vite**, and **Tailwind CSS**.
+
+<img src="public/logo.png" width="200">
+
+An modern and interactive **Periodic Table of Elements** with comprehensive information, including physical properties, electron configurations, 3D electron shell models, 3D atomic models, and more. Unlock the building blocks of the universe with the most modern, comprehensive, and interactive Periodic Table on the web, iOS, and Android platforms. Designed for students, educators, and science enthusiasts, this app transforms a static chart into a dynamic educational powerhouse. From high-school chemistry to professional research, this is the only reference tool you will ever need.
+
 
 It supports:
 - **Color‑coded groups** (alkali metals, noble gases, nonmetals, Lanthanides, Actinides, etc.)
@@ -12,59 +16,37 @@ It supports:
 - **Lanthanides (57–71)** and **Actinides (89–103)** shown in separate rows, with clickable placeholders in the main table
 - A **detail modal** when you click any element
 
-## Live Website
+## Access
 
-**👉 [View Live Application](https://periodictable.travel-tracker.org/)**
+### 1. Web
 
-The application is automatically deployed via GitHub Actions on every push to the `main` branch.
+You can access the website at [https://periodictable.travel-tracker.org/](https://periodictable.travel-tracker.org/)
 
+### 2. Mobile
 
-## Screenshot
+You can scan the QR code to download the iOS and Android app as follows:
 
-![Periodic Table Screenshot](./public/periodic_table.png)
-
-
-## Getting Started
-
-### 1. Install dependencies
-
-```bash
-npm install
-```
-
-### 2. Run the dev server
-
-```bash
-npm run dev
-```
-
-Then open the URL Vite prints in the terminal (usually `http://localhost:5173`).
-
-### 3. Build for production
-
-```bash
-npm run build
-```
-
-The static files are output to the `dist` folder.
+![Download App](docs/pictures/download_app.png)
 
 
-## GitHub Pages Deployment
+## Main Page
 
-Key settings:
-- `vite.config.js` has `base: '/'` for custom domains (set to `/PeriodicTable/` if deploying exclusively to GitHub Pages directory).
-- GitHub Actions workflow at `.github/workflows/deploy.yml`:
-  - Builds the app on pushes to `main`
-  - Publishes the `dist` folder to GitHub Pages
+![Main Page](docs/pictures/periodic_table.png)
 
+## Features
 
-## Tech Stack
-
-- **React** (functional components, hooks)
-- **Vite** (bundler/dev server)
-- **Tailwind CSS v4** for styling
-- **lucide-react** for icons
-
+- **Scientific Precision**: Detailed data for all 118 elements including physical properties, atomic structure, chemical behavior, and thermodynamics.
+- **Deep-Dive Summaries**: Real-world uses, discovery history, manufacturing processes, and health/safety info for every element.
+- **Stunning Interactive Visuals**:
+    - **3D Atomic Models**: Explore atomic orbital structures in an interactive 3D space.
+    - **Color-Coded Taxonomy**: Easily identify Alkali Metals, Noble Gases, Transition Metals, and more.
+- **Advanced Study Tools**:
+    - **Audio Pronunciation**: Master chemistry vocabulary with built-in Web Speech technology.
+    - **Powerful Search & Filtering**: Find elements instantly by name, symbol, atomic number, or chemical category.
+- **Modern Premium Design**:
+    - **Ultra-Responsive UI**: Optimized layouts for mobile, tablet (iPad), and desktop.
+    - **Glassmorphic Aesthetics**: Modern, clean design using Tailwind CSS for professional look and feel.
+    - **All Platform Support**: Seamless experience across Web, iOS, and Android.
 
 ## Contact
 

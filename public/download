@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Download App - Periodic Table: Interactive 3D</title>
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: {
+        preflight: false,
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .safe-pt {
+      padding-top: env(safe-area-inset-top);
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #666;
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    .back-button {
+      color: #2563eb;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      display: inline-block;
+      font-weight: 600;
+      transition: all 0.2s;
+      margin-top: 15px;
+    }
+
+    .back-button:hover {
+      background: #f9fafb;
+      border-color: #2563eb;
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+  <div id="global-header"></div>
+
+  <main class="flex-1 flex flex-col items-center justify-center p-4 sm:p-8">
+    <div class="max-w-4xl w-full text-center space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <div class="space-y-4">
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900">
+          Periodic Table <span class="text-blue-600">Everywhere</span>
+        </h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          Take the universe with you. Experience the world's most interactive periodic table
+          as a native app on your mobile device.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
+        <!-- iOS Card -->
+        <div
+          class="bg-white rounded-[32px] p-10 shadow-xl border border-gray-100 flex flex-col items-center space-y-8 hover:shadow-2xl transition-shadow group">
+          <div class="w-52 h-52 p-6 bg-purple-50 rounded-[28px] flex items-center justify-center">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=7c3aed&data=https%3A%2F%2Fapps.apple.com%2Fus%2Fapp%2Fperiodic-table-interactive-3d%2Fid6758905875"
+              alt="iOS App QR Code" class="w-full h-full mix-blend-multiply" />
+          </div>
+          <div class="text-center space-y-1">
+            <p class="text-sm font-bold text-purple-600 uppercase tracking-[0.2em]">iOS Version</p>
+            <p class="text-xs text-gray-400">Scan to view on the App Store</p>
+          </div>
+          <a href="https://apps.apple.com/us/app/periodic-table-interactive-3d/id6758905875" target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-4 bg-[#7c3aed] text-white px-8 py-4 rounded-[20px] w-full max-w-[280px] hover:scale-[1.02] active:scale-95 transition-all shadow-xl no-underline">
+            <i data-lucide="apple" class="w-8 h-8"></i>
+            <div class="text-left flex flex-col">
+              <span class="text-[10px] uppercase font-bold tracking-widest leading-none mb-1 opacity-90">Download on
+                the</span>
+              <span class="text-xl font-bold leading-none">App Store</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Android Card -->
+        <div
+          class="bg-white rounded-[32px] p-10 shadow-xl border border-gray-100 flex flex-col items-center space-y-8 hover:shadow-2xl transition-shadow group">
+          <div class="w-52 h-52 p-6 bg-green-50 rounded-[28px] flex items-center justify-center">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=16a34a&data=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.changzhiai.periodictable%26pcampaignid%3Dweb_share"
+              alt="Android App QR Code" class="w-full h-full mix-blend-multiply" />
+          </div>
+          <div class="text-center space-y-1">
+            <p class="text-sm font-bold text-green-600 uppercase tracking-[0.2em]">Android Version</p>
+            <p class="text-xs text-gray-400">Scan to view on Google Play</p>
+          </div>
+          <a href="https://play.google.com/store/apps/details?id=com.changzhiai.periodictable&pcampaignid=web_share"
+            target="_blank" rel="noopener noreferrer"
+            class="flex items-center justify-center gap-4 bg-[#16a34a] text-white px-8 py-4 rounded-[20px] w-full max-w-[280px] hover:scale-[1.02] active:scale-95 transition-all shadow-xl no-underline">
+            <div class="w-8 h-8 flex items-center justify-center">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full">
+                <path d="M5 3.5v17l14-8.5L5 3.5z" />
+              </svg>
+            </div>
+            <div class="text-left flex flex-col">
+              <span class="text-[10px] uppercase font-bold tracking-widest leading-none mb-1 opacity-95">Get it
+                on</span>
+              <span class="text-xl font-bold leading-none">Google Play</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16 max-w-3xl mx-auto text-left">
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 shrink-0">
+            <i data-lucide="scan"></i>
+          </div>
+          <h4 class="text-xl font-bold text-gray-900">How to Scan</h4>
+        </div>
+        <p class="text-gray-600 leading-relaxed text-justify">
+          Open your smartphone's camera app and point it at the QR code for your device.
+          Tap the link that appears to visit the store page.
+        </p>
+      </div>
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 shrink-0">
+            <i data-lucide="flask-conical"></i>
+          </div>
+          <h4 class="text-xl font-bold text-gray-900">Offline Access</h4>
+        </div>
+        <p class="text-gray-600 leading-relaxed text-justify">
+          Study the periodic table anywhere, even without an internet connection. Perfect for students and chemists.
+        </p>
+      </div>
+    </div>
+    </div>
+  </main>
+
+  <div class="footer">
+    &copy; 2026 Periodic Table Team. All rights reserved.
+    <br>
+    <a href="/" class="back-button">Back to Home</a>
+  </div>
+
+  <script src="/components/header.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+
+</html>

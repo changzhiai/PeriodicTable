@@ -4,6 +4,7 @@ import { Search, Atom, X, FlaskConical, Cuboid, Volume2, Maximize, Minimize } fr
 import { Capacitor } from '@capacitor/core';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
+import { TextToSpeech } from '@capacitor-community/text-to-speech';
 import { elements as rawElements } from './elementsData';
 import BohrModel from './components/3d/BohrModel';
 import CrystalStructure from './components/3d/CrystalStructure';
@@ -155,6 +156,42 @@ const DetailModal = ({ element, onClose, isLandscape }) => {
     };
   }, []);
 
+  // Pre-load and monitor voices for speech synthesis (crucial for Android/Webview)
+  useEffect(() => {
+    const handleVoicesChanged = () => {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.getVoices();
+      }
+    };
+
+    // 1. Warm up Web Speech API
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged);
+    }
+
+    // 2. Warm up Native TextToSpeech engine
+    if (Capacitor.isNativePlatform()) {
+      TextToSpeech.getSupportedVoices().catch(() => {});
+      // Fire a silent speak to wake up the engine completely
+      TextToSpeech.speak({ text: ' ', volume: 0, rate: 1.0 }).catch(() => {});
+    }
+
+    // Fallback: trigger background voice loading
+    const initialTimer = setTimeout(() => {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.getVoices();
+      }
+    }, 100);
+
+    return () => {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        window.speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged);
+      }
+      clearTimeout(initialTimer);
+    };
+  }, []);
+
   if (!element) return null;
 
   const colorClass = categoryColors[element.cat] || 'bg-gray-200';
@@ -177,29 +214,53 @@ const DetailModal = ({ element, onClose, isLandscape }) => {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
+
+                  // Use native TTS if on a native platform
+                  if (Capacitor.isNativePlatform()) {
+                    console.log(`TTS triggered for: ${element.name}`);
+                    // Fire immediately without stop() or await to minimize intent latency
+                    TextToSpeech.speak({
+                      text: element.name,
+                      lang: 'en-US', // Keep lang but ensure it's simple
+                      rate: 1.0,
+                      pitch: 1.0,
+                      volume: 1.0,
+                      category: 'ambient',
+                    }).catch(err => console.error('Native TTS error:', err));
+                    return;
+                  }
+
+                  if (!window.speechSynthesis) return;
+
                   // Cancel any current speech
                   window.speechSynthesis.cancel();
 
-                  const utterance = new SpeechSynthesisUtterance(element.name);
-                  utterance.lang = 'en-US';
+                  // Android/Webview fix: small timeout after cancel before speaking again
+                  setTimeout(() => {
+                    const utterance = new SpeechSynthesisUtterance(element.name);
+                    utterance.lang = 'en-US';
 
-                  // Style adjustments
-                  utterance.rate = 0.9; // Slightly slower for clarity
-                  utterance.pitch = 1;  // Normal pitch
+                    // Style adjustments
+                    utterance.rate = 0.9; // Slightly slower for clarity
+                    utterance.pitch = 1;  // Normal pitch
 
-                  // Try to select a high-quality voice
-                  const voices = window.speechSynthesis.getVoices();
-                  const preferredVoice = voices.find(voice =>
-                    voice.name === 'Google US English' ||
-                    voice.name === 'Samantha' ||
-                    (voice.lang === 'en-US' && voice.localService)
-                  );
+                    // Try to select a high-quality voice
+                    const voices = window.speechSynthesis.getVoices();
+                    
+                    // Priority list for voices
+                    const preferredVoice = voices.find(voice => 
+                      voice.name === 'Google US English' || 
+                      voice.name === 'Samantha' || 
+                      (voice.lang === 'en-US' && voice.localService) ||
+                      (voice.lang.startsWith('en') && voice.name.toLowerCase().includes('google'))
+                    ) || voices.find(voice => voice.lang.startsWith('en'));
 
-                  if (preferredVoice) {
-                    utterance.voice = preferredVoice;
-                  }
+                    if (preferredVoice) {
+                      utterance.voice = preferredVoice;
+                    }
 
-                  window.speechSynthesis.speak(utterance);
+                    window.speechSynthesis.speak(utterance);
+                  }, 50);
                 }}
                 className="p-1.5 hover:bg-black/5 rounded-full text-black/40 hover:text-black/80 transition-colors"
                 title="Pronounce"
@@ -681,18 +742,31 @@ export default function PeriodicTableApp() {
           <div className="max-w-7xl mx-auto px-4 py-1 sm:py-2 md:py-2 flex flex-wrap items-center justify-between gap-2">
             {/* Left: title + inline group dropdown */}
             <div className="flex items-center gap-3 flex-wrap">
-              <div className="bg-blue-600 p-1.5 rounded-lg text-white">
-                <Atom size={22} />
-              </div>
-              <h1
-                className="text-xl md:text-2xl font-bold tracking-tight text-gray-900"
-                style={{
-                  fontDisplay: 'swap',
-                  contentVisibility: 'auto'
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedElement(null);
+                  setActiveCategory(null);
+                  setActiveSeries(null);
+                  setSearchTerm('');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
+                className="flex items-center gap-3 group"
               >
-                Periodic Table
-              </h1>
+                <div className="bg-blue-600 p-1.5 rounded-lg text-white group-hover:bg-blue-700 transition-colors">
+                  <Atom size={22} />
+                </div>
+                <h1
+                  className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 group-hover:text-blue-600 transition-colors"
+                  style={{
+                    fontDisplay: 'swap',
+                    contentVisibility: 'auto'
+                  }}
+                >
+                  Periodic Table
+                </h1>
+              </a>
               <div className="flex items-center gap-1 text-[10px] md:text-xs text-gray-600">
                 <div className="relative">
                   {/* Trigger */}
@@ -806,7 +880,7 @@ export default function PeriodicTableApp() {
       )}
 
       {/* Main Content */}
-      <main className={`flex-1 px-1 sm:px-3 md:px-6 overflow-x-auto ${isFullScreen ? 'pt-0 sm:pt-0.5 pb-[1px]' : 'pt-1 sm:pt-1 pb-2 sm:pb-3 md:pt-3 md:pb-3'}`}>
+      <main className={`flex-1 min-h-screen px-1 sm:px-3 md:px-6 overflow-x-auto ${isFullScreen ? 'pt-0 sm:pt-0.5 pb-[1px]' : 'pt-1 sm:pt-1 pb-2 sm:pb-3 md:pt-3 md:pb-3'}`}>
         <div className="w-full max-w-7xl mx-auto">
 
           {/* Group Number Labels - Top Row */}
@@ -1090,7 +1164,64 @@ export default function PeriodicTableApp() {
         onClose={() => setSelectedElement(null)}
       />
 
-      {/* Footer intentionally left empty per user request */}
+      {/* Footer - Only for Laptop/Desktop Mode */}
+      <footer className="hidden lg:block [@media(max-height:600px)]:hidden bg-white border-t border-gray-100 py-12 mt-auto">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div className="col-span-1 md:col-span-2 space-y-4">
+              <a
+                href="/"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedElement(null);
+                  setActiveCategory(null);
+                  setActiveSeries(null);
+                  setSearchTerm('');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="flex items-center gap-3 group"
+              >
+                <div className="bg-blue-600 p-2 rounded-xl text-white shadow-lg shadow-blue-200 group-hover:bg-blue-700 transition-all">
+                  <Atom size={24} />
+                </div>
+                <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 group-hover:from-blue-700 group-hover:to-indigo-700 transition-all">
+                  Periodic Table
+                </span>
+              </a>
+              <p className="text-gray-500 max-w-sm leading-relaxed">
+                A modern, interactive periodic table exploring the building blocks of our universe with 3D models and detailed chemical properties.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-sm font-bold uppercase tracking-wider text-gray-900">Project</h4>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="/about" className="hover:text-blue-600 hover:translate-x-1 transition-all inline-block">About Project</a></li>
+                <li><a href="/how-it-works" className="hover:text-blue-600 hover:translate-x-1 transition-all inline-block">How it Works</a></li>
+                <li><a href="/download" className="hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Download App</a></li>
+                <li><a href="/site-index" className="hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Site Directory</a></li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-sm font-bold uppercase tracking-wider text-gray-900">Resources</h4>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="/history" className="hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Evolution History</a></li>
+                <li><a href="/glossary" className="hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Glossary</a></li>
+                <li><a href="/privacy" className="hover:text-blue-600 hover:translate-x-1 transition-all inline-block">Privacy Policy</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div className="mt-12 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400 font-medium">
+            <p>© {new Date().getFullYear()} Periodic Table Team. Crafted with precision for curious minds.</p>
+            <div className="flex gap-6">
+              <span className="hover:text-gray-600 transition-colors cursor-default">v1.0.2</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
