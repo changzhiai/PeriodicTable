@@ -3,7 +3,8 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 
-<img src="public/logo.png" width="200">
+<img src="public/logo_s.jpg" width="200">
+
 
 An modern and interactive **Periodic Table of Elements** with comprehensive information, including physical properties, electron configurations, 3D electron shell models, 3D atomic models, and more. Unlock the building blocks of the universe with the most modern, comprehensive, and interactive Periodic Table on the web, iOS, and Android platforms. Designed for students, educators, and science enthusiasts, this app transforms a static chart into a dynamic educational powerhouse. From high-school chemistry to professional research, this is the only reference tool you will ever need.
 
