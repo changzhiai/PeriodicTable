@@ -110,7 +110,7 @@ sudo certbot --nginx -d periodictable.travel-tracker.org
 cd ~/periodic-table
 git pull
 npm install
-npm run build
+npm run build:low-mem
 pm2 restart periodic-table
 ```
 
@@ -139,5 +139,5 @@ If swap isn't enough, constrain Node.js memory usage so it triggers garbage coll
 
 ```bash
 export NODE_OPTIONS="--max-old-space-size=2048"
-npm run build
+npm run build:low-mem
 ```
