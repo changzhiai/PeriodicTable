@@ -65,6 +65,8 @@ Key settings:
 - **Tailwind CSS v4** for styling
 - **lucide-react** for icons
 
+## Key words
+Periodic-Table, interactive table, 3D visualizations, element properties, pronunciation, electron config
 
 ## Contact
 
