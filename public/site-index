@@ -4,7 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Directory - Periodic Table: Interactive 3D</title>
+    <title>Site Directory - Interactive Periodic Table | All 118 Elements</title>
+    <meta name="description" content="Complete site directory for the Interactive Periodic Table. Links to all 118 element pages, categories, series, glossary, history, and more." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://periodictable.travel-tracker.org/site-index" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://periodictable.travel-tracker.org/site-index" />
+    <meta property="og:title" content="Site Directory - Interactive Periodic Table" />
+    <meta property="og:description" content="Complete directory with links to all 118 elements, categories, and educational content." />
+    <meta property="og:image" content="https://periodictable.travel-tracker.org/logo.png" />
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>

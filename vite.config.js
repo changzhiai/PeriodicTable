@@ -20,6 +20,11 @@ export default defineConfig(({ mode }) => ({
     reportCompressedSize: false,
     rollupOptions: {
       maxParallelFileReads: 2,
+      output: {
+        manualChunks: {
+          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+        },
+      },
     },
   },
   preview: {

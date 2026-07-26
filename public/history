@@ -4,7 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>History - Periodic Table: Interactive 3D</title>
+    <title>History of the Periodic Table - From Mendeleev to Modern</title>
+    <meta name="description" content="Explore the history of the periodic table from Dmitri Mendeleev's 1869 arrangement to the modern 118-element table. Key milestones, discoveries, and scientists who shaped chemistry." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://periodictable.travel-tracker.org/history" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://periodictable.travel-tracker.org/history" />
+    <meta property="og:title" content="History of the Periodic Table" />
+    <meta property="og:description" content="From Mendeleev's 1869 arrangement to the modern 118-element table. Key milestones and discoveries." />
+    <meta property="og:image" content="https://periodictable.travel-tracker.org/logo.png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="History of the Periodic Table" />
+    <meta property="twitter:description" content="From Mendeleev to modern: the evolution of how we organize chemical elements." />
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>

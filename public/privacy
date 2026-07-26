@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Privacy - Periodic Table: Interactive 3D</title>
+    <title>Privacy Policy - Interactive Periodic Table</title>
+    <meta name="description" content="Privacy policy for the Interactive Periodic Table. No user data is collected or stored. The app runs entirely in the browser with no tracking." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://periodictable.travel-tracker.org/privacy" />
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>

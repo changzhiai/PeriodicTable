@@ -4,7 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>About - Periodic Table: Interactive 3D</title>
+    <title>About - Interactive Periodic Table</title>
+    <meta name="description" content="Learn about the Interactive Periodic Table project. A free, modern educational tool with 3D visualizations, element data, and text-to-speech for chemistry learning." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://periodictable.travel-tracker.org/about" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://periodictable.travel-tracker.org/about" />
+    <meta property="og:title" content="About - Interactive Periodic Table" />
+    <meta property="og:description" content="Learn about the Interactive Periodic Table project. A free, modern educational tool with 3D visualizations, element data, and text-to-speech." />
+    <meta property="og:image" content="https://periodictable.travel-tracker.org/logo.png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="About - Interactive Periodic Table" />
+    <meta property="twitter:description" content="Learn about the Interactive Periodic Table project. A free, modern educational tool with 3D visualizations." />
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>

@@ -4,7 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Download App - Periodic Table: Interactive 3D</title>
+  <title>Download App - Interactive Periodic Table for iOS & Android</title>
+  <meta name="description" content="Download the Interactive Periodic Table app for iOS and Android. Free chemistry reference with 3D Bohr models, crystal structures, and offline access to all 118 elements." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://periodictable.travel-tracker.org/download" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://periodictable.travel-tracker.org/download" />
+  <meta property="og:title" content="Download App - Interactive Periodic Table" />
+  <meta property="og:description" content="Download the free Interactive Periodic Table app for iOS and Android with 3D visualizations and offline access." />
+  <meta property="og:image" content="https://periodictable.travel-tracker.org/logo.png" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="Download App - Interactive Periodic Table" />
+  <meta property="twitter:description" content="Download the free Interactive Periodic Table app for iOS and Android." />
   <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
