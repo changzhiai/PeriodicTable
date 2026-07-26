@@ -4,7 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Glossary - Periodic Table: Interactive 3D</title>
+    <title>Chemistry Glossary - Interactive Periodic Table</title>
+    <meta name="description" content="Chemistry glossary with definitions of key terms: atomic number, electron configuration, electronegativity, ionization energy, isotopes, valence electrons, and more." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://periodictable.travel-tracker.org/glossary" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://periodictable.travel-tracker.org/glossary" />
+    <meta property="og:title" content="Chemistry Glossary - Interactive Periodic Table" />
+    <meta property="og:description" content="Chemistry glossary with definitions of key terms: atomic number, electron configuration, electronegativity, ionization energy, and more." />
+    <meta property="og:image" content="https://periodictable.travel-tracker.org/logo.png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Chemistry Glossary - Interactive Periodic Table" />
+    <meta property="twitter:description" content="Chemistry glossary with definitions of key terms for students and educators." />
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>

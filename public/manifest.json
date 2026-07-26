@@ -1,11 +1,12 @@
 {
-    "name": "Interactive Periodic Table",
+    "name": "Interactive Periodic Table of Elements",
     "short_name": "Periodic Table",
-    "description": "A modern, interactive periodic table of elements with detailed information and 3D visualizations.",
+    "description": "Free interactive periodic table with all 118 elements, 3D Bohr model visualizations, crystal structures, electron configurations, text-to-speech, and detailed atomic properties for chemistry education.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#ffffff",
+    "categories": ["education", "science"],
     "icons": [
         {
             "src": "/logo.png",

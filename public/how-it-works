@@ -4,7 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>How it Works - Periodic Table: Interactive 3D</title>
+    <title>How It Works - Interactive Periodic Table Guide</title>
+    <meta name="description" content="Learn how to use the Interactive Periodic Table: search elements, filter by category, view 3D Bohr models, explore crystal structures, and hear pronunciations." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://periodictable.travel-tracker.org/how-it-works" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://periodictable.travel-tracker.org/how-it-works" />
+    <meta property="og:title" content="How It Works - Interactive Periodic Table" />
+    <meta property="og:description" content="Guide to using the Interactive Periodic Table: search, filter, 3D models, and more." />
+    <meta property="og:image" content="https://periodictable.travel-tracker.org/logo.png" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="How It Works - Interactive Periodic Table" />
+    <meta property="twitter:description" content="Guide to searching elements, viewing 3D models, and using interactive features." />
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>

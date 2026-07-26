@@ -6,8 +6,8 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
 import { elements as rawElements } from './elementsData';
-import BohrModel from './components/3d/BohrModel';
-import CrystalStructure from './components/3d/CrystalStructure';
+const BohrModel = React.lazy(() => import('./components/3d/BohrModel'));
+const CrystalStructure = React.lazy(() => import('./components/3d/CrystalStructure'));
 import MiniPeriodicTable from './components/MiniPeriodicTable';
 import { aiSummaries } from './elementsInfo';
 
@@ -450,7 +450,9 @@ const DetailModal = ({ element, onClose, isLandscape }) => {
                 Atomic Model (Bohr)
               </h4>
               <div className="aspect-square w-full rounded-xl overflow-hidden shadow-inner border border-gray-200 bg-gray-900">
-                <BohrModel element={element} />
+                <React.Suspense fallback={<div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">Loading 3D model...</div>}>
+                  <BohrModel element={element} />
+                </React.Suspense>
               </div>
             </div>
 
@@ -460,7 +462,9 @@ const DetailModal = ({ element, onClose, isLandscape }) => {
                 Crystal Structure
               </h4>
               <div className="aspect-square w-full rounded-xl overflow-hidden shadow-inner border border-gray-200 bg-gray-100">
-                <CrystalStructure element={element} />
+                <React.Suspense fallback={<div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">Loading 3D model...</div>}>
+                  <CrystalStructure element={element} />
+                </React.Suspense>
               </div>
             </div>
           </div>
@@ -571,29 +575,109 @@ export default function PeriodicTableApp() {
     }
   }, [elements]);
 
-  // 2. Update URL and Document Title when filters or selectedElement change
+  // 2. Update URL, Document Title, Meta Description, Canonical, OG, and JSON-LD when filters or selectedElement change
   useEffect(() => {
+    const BASE_URL = 'https://periodictable.travel-tracker.org';
     let newPath = '/';
+    let title = 'Interactive Periodic Table | Modern & Responsive';
+    let description = 'Explore the elements with this modern, interactive Periodic Table. Detailed properties, electron configurations, 3D visualizations, pronunciation, and responsive design for all devices.';
 
     if (selectedElement) {
-      document.title = `${selectedElement.name} (${selectedElement.s}) - Periodic Table`;
+      title = `${selectedElement.name} (${selectedElement.s}) - Atomic Number ${selectedElement.n}, Properties & Electron Configuration`;
+      description = `${selectedElement.name} (${selectedElement.s}): atomic number ${selectedElement.n}, atomic mass ${selectedElement.m}. Electron configuration, electronegativity, melting point, boiling point, density, 3D Bohr model, and crystal structure.`;
       newPath = `/element/${selectedElement.s}`;
-    } else {
-      if (activeCategory) {
-        document.title = `${categoryLabels[activeCategory] || 'Filter'} - Periodic Table`;
-        newPath = `/category/${activeCategory.replace(/ /g, '-')}`;
-      } else if (activeSeries) {
-        document.title = `${activeSeries.charAt(0).toUpperCase() + activeSeries.slice(1)} - Periodic Table`;
-        newPath = `/series/${activeSeries}`;
-      } else {
-        document.title = 'Interactive Periodic Table | Modern & Responsive';
-        newPath = '/';
+    } else if (activeCategory) {
+      const label = categoryLabels[activeCategory] || 'Filter';
+      title = `${label} - Complete List, Properties & Electron Configurations`;
+      description = `Explore all ${label} in the periodic table. Properties, electron configurations, and 3D visualizations. Free interactive reference for students and teachers.`;
+      newPath = `/category/${activeCategory.replace(/ /g, '-')}`;
+    } else if (activeSeries) {
+      const label = activeSeries.charAt(0).toUpperCase() + activeSeries.slice(1);
+      title = `${label} Series - Complete List & Properties`;
+      description = `Explore the ${label} series: detailed properties, electron configurations, 3D Bohr models, and crystal structures. Free chemistry reference.`;
+      newPath = `/series/${activeSeries}`;
+    }
+
+    const fullUrl = `${BASE_URL}${newPath}`;
+
+    document.title = title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', description);
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', title);
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', description);
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', fullUrl);
+    const twitterUrl = document.querySelector('meta[property="twitter:url"]');
+    if (twitterUrl) twitterUrl.setAttribute('content', fullUrl);
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) canonical.setAttribute('href', fullUrl);
+
+    // Per-element JSON-LD structured data
+    let jsonLdEl = document.getElementById('dynamic-jsonld');
+    if (selectedElement) {
+      const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "DefinedTerm",
+        "name": selectedElement.name,
+        "alternateName": selectedElement.s,
+        "description": description,
+        "url": fullUrl,
+        "inDefinedTermSet": {
+          "@type": "DefinedTermSet",
+          "name": "Periodic Table of Elements",
+          "url": BASE_URL
+        },
+        "additionalProperty": [
+          { "@type": "PropertyValue", "name": "Atomic Number", "value": selectedElement.n },
+          { "@type": "PropertyValue", "name": "Symbol", "value": selectedElement.s },
+          { "@type": "PropertyValue", "name": "Atomic Mass", "value": selectedElement.m },
+          { "@type": "PropertyValue", "name": "Category", "value": selectedElement.cat },
+          ...(selectedElement.ec ? [{ "@type": "PropertyValue", "name": "Electron Configuration", "value": selectedElement.ec }] : []),
+          ...(selectedElement.d ? [{ "@type": "PropertyValue", "name": "Density (g/cm³)", "value": selectedElement.d }] : []),
+          ...(selectedElement.mp ? [{ "@type": "PropertyValue", "name": "Melting Point (°C)", "value": selectedElement.mp }] : []),
+          ...(selectedElement.bp ? [{ "@type": "PropertyValue", "name": "Boiling Point (°C)", "value": selectedElement.bp }] : []),
+          ...(selectedElement.en ? [{ "@type": "PropertyValue", "name": "Electronegativity", "value": selectedElement.en }] : [])
+        ]
+      };
+      if (!jsonLdEl) {
+        jsonLdEl = document.createElement('script');
+        jsonLdEl.id = 'dynamic-jsonld';
+        jsonLdEl.type = 'application/ld+json';
+        document.head.appendChild(jsonLdEl);
       }
+      jsonLdEl.textContent = JSON.stringify(jsonLd);
+    } else if (activeCategory) {
+      const categoryElements = elements.filter(el => el.cat === activeCategory);
+      const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": `${categoryLabels[activeCategory]} - Periodic Table`,
+        "description": description,
+        "url": fullUrl,
+        "numberOfItems": categoryElements.length,
+        "itemListElement": categoryElements.map((el, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "name": `${el.name} (${el.s})`,
+          "url": `${BASE_URL}/element/${el.s}`
+        }))
+      };
+      if (!jsonLdEl) {
+        jsonLdEl = document.createElement('script');
+        jsonLdEl.id = 'dynamic-jsonld';
+        jsonLdEl.type = 'application/ld+json';
+        document.head.appendChild(jsonLdEl);
+      }
+      jsonLdEl.textContent = JSON.stringify(jsonLd);
+    } else {
+      if (jsonLdEl) jsonLdEl.remove();
     }
 
     // Use replaceState to update URL with clean paths
     window.history.replaceState({}, '', newPath);
-  }, [selectedElement, activeCategory, activeSeries]);
+  }, [selectedElement, activeCategory, activeSeries, elements]);
 
   // Toggle Status Bar based on full screen state
   useEffect(() => {
