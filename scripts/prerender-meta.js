@@ -150,8 +150,8 @@ function generatePage(path, title, description, jsonLd) {
 
 // Generate element pages
 for (const el of elements) {
-  const title = `${el.name} (${el.s}) - Element ${el.n} | Periodic Table`;
-  const description = `Learn about ${el.name} (${el.s}), atomic number ${el.n}, atomic mass ${el.m}. View electron configuration, 3D Bohr model, crystal structure, and detailed properties.`;
+  const title = `${el.name} (${el.s}) - Atomic Number ${el.n}, Properties & Electron Configuration`;
+  const description = `${el.name} (${el.s}): atomic number ${el.n}, atomic mass ${el.m} u. Electron configuration, electronegativity, melting point, boiling point, density, 3D Bohr model, and crystal structure. Free interactive reference for students and researchers.`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "DefinedTerm",
@@ -185,8 +185,8 @@ for (const cat of categories) {
   const internalCat = cat.replace(/-/g, ' ');
   const label = categoryLabels[internalCat] || cat;
   const catElements = elements.filter(el => el.cat === internalCat);
-  const title = `${label} - Periodic Table`;
-  const description = `Explore all ${catElements.length} ${label} in the periodic table. View properties, electron configurations, and 3D visualizations.`;
+  const title = `${label} - Complete List, Properties & Electron Configurations`;
+  const description = `All ${catElements.length} ${label} in the periodic table: ${catElements.slice(0, 5).map(e => e.name).join(', ')}${catElements.length > 5 ? ', and more' : ''}. Properties, electron configurations, 3D models. Free reference for chemistry students and teachers.`;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",

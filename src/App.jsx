@@ -583,18 +583,18 @@ export default function PeriodicTableApp() {
     let description = 'Explore the elements with this modern, interactive Periodic Table. Detailed properties, electron configurations, 3D visualizations, pronunciation, and responsive design for all devices.';
 
     if (selectedElement) {
-      title = `${selectedElement.name} (${selectedElement.s}) - Periodic Table`;
-      description = `Learn about ${selectedElement.name} (${selectedElement.s}), element ${selectedElement.n}. View atomic properties, electron configuration, 3D Bohr model, crystal structure, and more.`;
+      title = `${selectedElement.name} (${selectedElement.s}) - Atomic Number ${selectedElement.n}, Properties & Electron Configuration`;
+      description = `${selectedElement.name} (${selectedElement.s}): atomic number ${selectedElement.n}, atomic mass ${selectedElement.m}. Electron configuration, electronegativity, melting point, boiling point, density, 3D Bohr model, and crystal structure.`;
       newPath = `/element/${selectedElement.s}`;
     } else if (activeCategory) {
       const label = categoryLabels[activeCategory] || 'Filter';
-      title = `${label} - Periodic Table`;
-      description = `Explore ${label} in the periodic table. View properties, electron configurations, and 3D visualizations for all elements in this category.`;
+      title = `${label} - Complete List, Properties & Electron Configurations`;
+      description = `Explore all ${label} in the periodic table. Properties, electron configurations, and 3D visualizations. Free interactive reference for students and teachers.`;
       newPath = `/category/${activeCategory.replace(/ /g, '-')}`;
     } else if (activeSeries) {
       const label = activeSeries.charAt(0).toUpperCase() + activeSeries.slice(1);
-      title = `${label} - Periodic Table`;
-      description = `Explore the ${label} series in the periodic table. View detailed properties and 3D visualizations for all elements in this series.`;
+      title = `${label} Series - Complete List & Properties`;
+      description = `Explore the ${label} series: detailed properties, electron configurations, 3D Bohr models, and crystal structures. Free chemistry reference.`;
       newPath = `/series/${activeSeries}`;
     }
 
