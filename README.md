@@ -52,3 +52,7 @@ You can scan the QR code to download the iOS and Android app as follows:
 ## Contact
 
 If you have questions or suggestions about this project, please contact: changzhiai@gmail.com
+
+## Key Words
+
+Interactive periodic table, periodic table of elements, chemistry app, element properties, electron configuration, 3D Bohr model, atomic structure visualization, crystal structure, element categories, alkali metals, noble gases, transition metals, lanthanides, actinides, atomic number, atomic mass, electronegativity, ionization energy, melting point, boiling point, density, element pronunciation, text to speech, chemistry education, science learning tool, responsive periodic table, PWA, iOS periodic table app, Android periodic table app, free chemistry tool, student chemistry reference

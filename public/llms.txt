@@ -1,0 +1,94 @@
+# Interactive Periodic Table
+
+> A modern, interactive periodic table of elements featuring detailed properties, 3D Bohr model visualizations, crystal structure renderings, text-to-speech pronunciation, and responsive design for all devices. Free and open for education.
+
+## Pages
+
+- [Home](https://periodictable.travel-tracker.org/): Interactive periodic table grid with all 118 elements, search, and category filtering
+- [About](https://periodictable.travel-tracker.org/about): About the project and its mission
+- [How It Works](https://periodictable.travel-tracker.org/how-it-works): Guide on using the interactive features
+- [Glossary](https://periodictable.travel-tracker.org/glossary): Chemistry terms and definitions
+- [History](https://periodictable.travel-tracker.org/history): Evolution of the periodic table through history
+- [Download](https://periodictable.travel-tracker.org/download): Download native mobile apps for iOS and Android
+- [Site Directory](https://periodictable.travel-tracker.org/site-index): Complete listing of all pages and elements
+
+## Element Pages
+
+Each of the 118 elements has a dedicated page at `/element/{symbol}` (e.g., `/element/H` for Hydrogen) containing:
+- Atomic number, symbol, name, and atomic mass
+- Physical properties: density, melting point, boiling point, state of matter
+- Chemical properties: electronegativity, ionization energy, electron affinity
+- Electron configuration and shell distribution
+- Interactive 3D Bohr model visualization
+- 3D crystal structure rendering
+- Element category and period/group position
+- AI-generated educational summary
+- Text-to-speech pronunciation
+
+## Category Pages
+
+- [Alkali Metals](https://periodictable.travel-tracker.org/category/alkali-metal)
+- [Alkaline Earth Metals](https://periodictable.travel-tracker.org/category/alkaline-earth-metal)
+- [Transition Metals](https://periodictable.travel-tracker.org/category/transition-metal)
+- [Post-Transition Metals](https://periodictable.travel-tracker.org/category/post-transition-metal)
+- [Metalloids](https://periodictable.travel-tracker.org/category/metalloid)
+- [Nonmetals](https://periodictable.travel-tracker.org/category/nonmetal)
+- [Noble Gases](https://periodictable.travel-tracker.org/category/noble-gas)
+- [Lanthanides](https://periodictable.travel-tracker.org/category/lanthanide)
+- [Actinides](https://periodictable.travel-tracker.org/category/actinide)
+
+## Features
+
+- All 118 elements with comprehensive data
+- Color-coded element categories for quick identification
+- Interactive 3D Bohr model electron shell visualization (React Three Fiber)
+- 3D crystal structure rendering for each element
+- Text-to-speech pronunciation of element names
+- Real-time search and filtering by name, symbol, or atomic number
+- Category-based filtering and highlighting
+- Full-screen mode for classroom/presentation use
+- Responsive design: works on desktop, tablet, and mobile
+- Progressive Web App (PWA) with offline support
+- Native mobile apps via Capacitor (iOS & Android)
+- Dark/light theme support
+- No registration required, completely free
+
+## Technical Stack
+
+- React 19 with Vite
+- Three.js / React Three Fiber for 3D visualizations
+- Tailwind CSS for responsive styling
+- Capacitor for native mobile deployment
+- PM2 for production hosting
+
+## FAQ
+
+Q: Is this periodic table free to use?
+A: Yes, the Interactive Periodic Table is completely free with no registration required.
+
+Q: Can I use this for teaching or classroom presentations?
+A: Absolutely. The full-screen mode is designed for projectors and classroom display. All content is educational.
+
+Q: What information is available for each element?
+A: Each element page includes atomic number, mass, electron configuration, physical properties (density, melting/boiling points), chemical properties (electronegativity, ionization energy), 3D Bohr model, crystal structure, and an educational summary.
+
+Q: Does it work on mobile devices?
+A: Yes. The web app is fully responsive and also available as native iOS and Android apps.
+
+Q: What are the 3D visualizations?
+A: Each element features an interactive 3D Bohr model showing electron shells and a 3D crystal structure rendering powered by Three.js.
+
+Q: Can I hear element pronunciations?
+A: Yes, the text-to-speech feature pronounces element names. This works on both web and mobile.
+
+Q: Is my data stored or tracked?
+A: No user data is collected or stored. The app runs entirely in the browser.
+
+Q: How many elements are included?
+A: All 118 confirmed elements from Hydrogen (H, atomic number 1) through Oganesson (Og, atomic number 118).
+
+## Links
+
+- Website: https://periodictable.travel-tracker.org/
+- GitHub: https://github.com/changzhiai/periodic-table
+- Contact: changzhi.ai@gmail.com

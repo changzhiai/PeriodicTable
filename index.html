@@ -6,6 +6,7 @@
   <link rel="icon" type="image/png" href="/logo.png" />
   <link rel="apple-touch-icon" href="/logo.png" />
   <link rel="manifest" href="/manifest.json" />
+  <link rel="llms-txt" href="/llms.txt" />
 
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover" />
@@ -28,7 +29,10 @@
   <meta property="og:title" content="Interactive Periodic Table | Modern & Responsive" />
   <meta property="og:description"
     content="Explore the elements with this modern, interactive Periodic Table. Detailed properties, electron configurations, 3D visualizations, pronunciation, and responsive design for all devices." />
-  <meta property="og:image" content="/periodic_table.png" />
+  <meta property="og:image" content="https://periodictable.travel-tracker.org/periodic_table.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Interactive Periodic Table" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
@@ -36,10 +40,14 @@
   <meta property="twitter:title" content="Interactive Periodic Table | Modern & Responsive" />
   <meta property="twitter:description"
     content="Explore the elements with this modern, interactive Periodic Table. Detailed properties, electron configurations, 3D visualizations, pronunciation, and responsive design for all devices." />
-  <meta property="twitter:image" content="/periodic_table.png" />
+  <meta property="twitter:image" content="https://periodictable.travel-tracker.org/periodic_table.png" />
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#ffffff" />
+
+  <!-- Preconnect Hints for Performance -->
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+  <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
   <style>
     /* Critical CSS for LCP optimization */
@@ -64,7 +72,7 @@
     }
   </style>
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data: WebApplication -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -89,10 +97,204 @@
       }
     }
   </script>
+
+  <!-- JSON-LD Structured Data: FAQPage -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the Interactive Periodic Table?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Interactive Periodic Table is a free, modern web application that displays all 118 elements with detailed properties, 3D Bohr model visualizations, crystal structure renderings, and text-to-speech pronunciation. It works on desktop, tablet, and mobile devices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What information is available for each element?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each element page includes atomic number, atomic mass, electron configuration, physical properties (density, melting and boiling points, state of matter), chemical properties (electronegativity, ionization energy, electron affinity), an interactive 3D Bohr model, 3D crystal structure, and an AI-generated educational summary."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this periodic table for teaching?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Interactive Periodic Table includes a full-screen mode designed for projectors and classroom presentations. All content is educational and completely free to use without registration."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work on mobile devices?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The web app is fully responsive and also available as native iOS and Android apps that can be downloaded from the app stores."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the 3D visualizations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each element features an interactive 3D Bohr model showing electron shells orbiting the nucleus, and a 3D crystal structure rendering showing the element's atomic arrangement. Both are powered by Three.js and React Three Fiber."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this periodic table free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the Interactive Periodic Table is completely free with no registration, no ads, and no data collection required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many elements are included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All 118 confirmed elements from Hydrogen (H, atomic number 1) through Oganesson (Og, atomic number 118) are included with full data and visualizations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I hear how element names are pronounced?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The text-to-speech feature allows you to hear the correct pronunciation of any element name. This works on both the web version and native mobile apps."
+          }
+        }
+      ]
+    }
+  </script>
+
+  <!-- JSON-LD Structured Data: HowTo -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Use the Interactive Periodic Table",
+      "description": "Learn how to explore elements, view 3D models, and use the interactive features of the periodic table.",
+      "totalTime": "PT2M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Browse or Search Elements",
+          "text": "Use the periodic table grid to browse elements visually, or type in the search bar to find elements by name, symbol, or atomic number."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Filter by Category",
+          "text": "Click on category labels (Alkali Metals, Noble Gases, Transition Metals, etc.) to highlight and filter elements by their chemical classification."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "View Element Details",
+          "text": "Click any element to open its detail panel showing atomic properties, electron configuration, 3D Bohr model, and crystal structure visualization."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Interact with 3D Models",
+          "text": "Rotate and zoom the 3D Bohr model and crystal structure visualizations by dragging or pinching. Use the speaker icon to hear the element name pronounced."
+        }
+      ]
+    }
+  </script>
+
+  <!-- JSON-LD Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://periodictable.travel-tracker.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Download App",
+          "item": "https://periodictable.travel-tracker.org/download"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "About",
+          "item": "https://periodictable.travel-tracker.org/about"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Privacy Policy",
+          "item": "https://periodictable.travel-tracker.org/privacy"
+        }
+      ]
+    }
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
+
+  <!-- Noscript fallback for crawlers and non-JS browsers -->
+  <noscript>
+    <div style="max-width: 900px; margin: 0 auto; padding: 2rem; font-family: system-ui, sans-serif;">
+      <h1>Interactive Periodic Table of Elements</h1>
+      <p>Explore all 118 elements with detailed properties, 3D visualizations, and educational content. Free, modern, and works on any device.</p>
+
+      <h2>Features</h2>
+      <ul>
+        <li>All 118 elements with comprehensive atomic data</li>
+        <li>Interactive 3D Bohr model electron shell visualization</li>
+        <li>3D crystal structure rendering for each element</li>
+        <li>Text-to-speech pronunciation of element names</li>
+        <li>Search and filter by name, symbol, or atomic number</li>
+        <li>Color-coded element categories</li>
+        <li>Full-screen mode for classroom presentations</li>
+        <li>Responsive design for desktop, tablet, and mobile</li>
+        <li>Available as iOS and Android native apps</li>
+      </ul>
+
+      <h2>How to Use</h2>
+      <ol>
+        <li>Browse elements on the periodic table grid or use the search bar</li>
+        <li>Filter by category: Alkali Metals, Noble Gases, Transition Metals, and more</li>
+        <li>Click any element to see its full detail panel with properties and 3D models</li>
+        <li>Use full-screen mode for classroom or presentation display</li>
+      </ol>
+
+      <h2>Element Categories</h2>
+      <ul>
+        <li><a href="/category/alkali-metal">Alkali Metals</a> - Li, Na, K, Rb, Cs, Fr</li>
+        <li><a href="/category/alkaline-earth-metal">Alkaline Earth Metals</a> - Be, Mg, Ca, Sr, Ba, Ra</li>
+        <li><a href="/category/transition-metal">Transition Metals</a> - Fe, Cu, Zn, Ag, Au, and more</li>
+        <li><a href="/category/post-transition-metal">Post-Transition Metals</a> - Al, Ga, In, Sn, Tl, Pb, Bi</li>
+        <li><a href="/category/metalloid">Metalloids</a> - B, Si, Ge, As, Sb, Te</li>
+        <li><a href="/category/nonmetal">Nonmetals</a> - H, C, N, O, P, S, Se</li>
+        <li><a href="/category/noble-gas">Noble Gases</a> - He, Ne, Ar, Kr, Xe, Rn, Og</li>
+        <li><a href="/category/lanthanide">Lanthanides</a> - La through Lu</li>
+        <li><a href="/category/actinide">Actinides</a> - Ac through Lr</li>
+      </ul>
+
+      <h2>Pages</h2>
+      <nav>
+        <a href="/about">About</a> |
+        <a href="/how-it-works">How It Works</a> |
+        <a href="/glossary">Chemistry Glossary</a> |
+        <a href="/history">History of the Periodic Table</a> |
+        <a href="/download">Download Mobile App</a> |
+        <a href="/site-index">Site Directory</a> |
+        <a href="/privacy">Privacy Policy</a>
+      </nav>
+    </div>
+  </noscript>
 
   <!-- Hidden Site Index for SEO Crawlers -->
   <div id="site-index" style="display: none;" aria-hidden="true">

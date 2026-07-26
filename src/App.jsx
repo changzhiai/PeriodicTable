@@ -571,25 +571,35 @@ export default function PeriodicTableApp() {
     }
   }, [elements]);
 
-  // 2. Update URL and Document Title when filters or selectedElement change
+  // 2. Update URL, Document Title, and Meta Description when filters or selectedElement change
   useEffect(() => {
     let newPath = '/';
+    let title = 'Interactive Periodic Table | Modern & Responsive';
+    let description = 'Explore the elements with this modern, interactive Periodic Table. Detailed properties, electron configurations, 3D visualizations, pronunciation, and responsive design for all devices.';
 
     if (selectedElement) {
-      document.title = `${selectedElement.name} (${selectedElement.s}) - Periodic Table`;
+      title = `${selectedElement.name} (${selectedElement.s}) - Periodic Table`;
+      description = `Learn about ${selectedElement.name} (${selectedElement.s}), element ${selectedElement.n}. View atomic properties, electron configuration, 3D Bohr model, crystal structure, and more.`;
       newPath = `/element/${selectedElement.s}`;
-    } else {
-      if (activeCategory) {
-        document.title = `${categoryLabels[activeCategory] || 'Filter'} - Periodic Table`;
-        newPath = `/category/${activeCategory.replace(/ /g, '-')}`;
-      } else if (activeSeries) {
-        document.title = `${activeSeries.charAt(0).toUpperCase() + activeSeries.slice(1)} - Periodic Table`;
-        newPath = `/series/${activeSeries}`;
-      } else {
-        document.title = 'Interactive Periodic Table | Modern & Responsive';
-        newPath = '/';
-      }
+    } else if (activeCategory) {
+      const label = categoryLabels[activeCategory] || 'Filter';
+      title = `${label} - Periodic Table`;
+      description = `Explore ${label} in the periodic table. View properties, electron configurations, and 3D visualizations for all elements in this category.`;
+      newPath = `/category/${activeCategory.replace(/ /g, '-')}`;
+    } else if (activeSeries) {
+      const label = activeSeries.charAt(0).toUpperCase() + activeSeries.slice(1);
+      title = `${label} - Periodic Table`;
+      description = `Explore the ${label} series in the periodic table. View detailed properties and 3D visualizations for all elements in this series.`;
+      newPath = `/series/${activeSeries}`;
     }
+
+    document.title = title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', description);
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', title);
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', description);
 
     // Use replaceState to update URL with clean paths
     window.history.replaceState({}, '', newPath);
