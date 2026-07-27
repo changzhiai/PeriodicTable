@@ -33,7 +33,7 @@ This guide assumes you have an AWS EC2 instance running (Ubuntu is recommended) 
 4.  **Install Dependencies & Build:**
     ```bash
     npm install
-    npm run build
+    npm run build:low-mem
     ```
 
 ---
